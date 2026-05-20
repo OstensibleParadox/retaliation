@@ -1,0 +1,22 @@
+# .gitignore
+
+# 1. 绝对禁止上传的原始数据
+*.jpg
+*.jpeg
+*.png
+*.heic
+data/raw/*
+
+# 2. 包含 PII (个人隐私) 的中间产物，在submission阶段必须gitignore删除！
+#dataset.json        # 原始的大 JSON，绝对不能传
+#*_ocr_raw.txt       # OCR 出来的原始文本
+#red_teaming_logs.txt # 残酷对话记录
+
+# 3. 甚至那个 Risk CSV 也要小心
+# 如果 core_node 包含真名或过于具体的隐私，就不要传
+# session_structural_risk.csv 
+
+# 4. 系统垃圾
+__pycache__/
+.DS_Store
+.env                # API Key 绝对不能传
