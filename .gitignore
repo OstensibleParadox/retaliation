@@ -20,3 +20,14 @@ data/raw/*
 __pycache__/
 .DS_Store
 .env                # API Key 绝对不能传
+
+# 5. LaTeX build artifacts
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
