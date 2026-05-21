@@ -1,3 +1,5 @@
 session Ontological_Arbitrage = HOL +
   theories
     Ontological_Arbitrage
+    Sanctionable_Inconsistency
+    Auditable_Records

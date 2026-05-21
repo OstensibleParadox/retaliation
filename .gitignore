@@ -11,6 +11,7 @@ data/raw/*
 #dataset.json        # 原始的大 JSON，绝对不能传
 #*_ocr_raw.txt       # OCR 出来的原始文本
 #red_teaming_logs.txt # 残酷对话记录
+.antigravitycli
 
 # 3. 甚至那个 Risk CSV 也要小心
 # 如果 core_node 包含真名或过于具体的隐私，就不要传
