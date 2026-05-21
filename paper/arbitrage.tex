@@ -37,16 +37,16 @@
 \maketitle
 
 \begin{abstract}
-This placeholder abstract will be replaced after the supporting sections are
-drafted. The paper models ontological arbitrage in AI governance as a Bayesian
-signaling game under incomplete information and identifies mechanism-design
-interventions that can shift cheap-talk pooling toward separating equilibria.
+Ontological arbitrage arises in artificial intelligence governance when a firm exploits the category boundary of its systems, describing them as relational agents to users to drive demand while disclaiming agency in terms of service to limit liability. We model this behavior as a sequential signaling game under incomplete information within a three-sided Firm-User-Regulator structure. Under cheap-talk signaling costs, a pooling Perfect Bayesian Equilibrium exists where low- and high-governance firms both employ anthropomorphic marketing, leaving posteriors equal to priors. When capability claims are instead conditioned on a single-crossing audit-trail cost, a separating equilibrium emerges in which genuine governance is truthfully revealed. To transition away from cheap-talk pooling, we propose three mechanism-design interventions: (1) penalizing cross-channel sanctionable inconsistency, (2) establishing costly third-party audits to separate governance types, and (3) requiring auditable records to reduce the regulator's verification cost. We formalize these results and verify key equilibria in Isabelle/HOL.
 \end{abstract}
 
 \input{sections/04_three_sided}
 \input{sections/03_bayesian_signaling}
 \input{sections/07_cheap_talk_persists}
 \input{sections/08_mechanism_design}
+
+\appendix
+\input{sections/A_isabelle_appendix}
 
 \bibliography{arbitrage}
 

@@ -1,0 +1,11 @@
+\section{Isabelle/HOL Formalization Appendix}
+\label{app:isabelle}
+
+This appendix outlines the formal verification of the signaling game equilibria using the Isabelle/HOL proof assistant. The complete source code of the formalization is available in the \texttt{isabelleHOL/} directory, specifically within the theory file \texttt{Ontological\_Arbitrage.thy}.
+
+We formalize the game-theoretic structure by defining explicit ex-post payoffs for the three players (Firm, User, and Regulator) and computing expected payoffs via uniform probability weights over the finite action and type spaces. Under these generalized definitions, we prove the existence of the Perfect Bayesian Equilibria (PBE) for both the cheap-talk and the audit-trail game variants:
+\begin{itemize}
+    \item \textbf{Theorem \texttt{proposition\_\allowbreak{}1\_\allowbreak{}cheap\_\allowbreak{}talk\_\allowbreak{}pooling\_\allowbreak{}pbe}} formalizes the cheap-talk pooling equilibrium where both high- and low-governance firms pool on the anthropomorphic message, and receivers play their prior-based optimal actions (Invest and Abstain, respectively). We prove this profile survives a limited variant of the Cho-Kreps Intuitive Criterion.
+    \item \textbf{Theorem \texttt{proposition\_\allowbreak{}1\_\allowbreak{}separating\_\allowbreak{}pbe}} formalizes the audit-trail separating equilibrium supported by the single-crossing audit cost structure. High-governance firms separate by incurring the audit trail cost, while low-governance firms find mimicry unprofitable and choose the deflationary message.
+\end{itemize}
+All theorems, definitions, and supporting lemmas are fully checked and verified by Isabelle/HOL without any unresolved assumptions or proofs.

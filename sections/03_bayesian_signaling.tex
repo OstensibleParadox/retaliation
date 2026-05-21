@@ -2,15 +2,7 @@
 \section{From Static Nash to Bayesian Signaling Equilibrium}
 \label{sec:bayesian}
 
-The three-sided structure of Firm, User, and Regulator established in the
-previous section (see Table~\ref{tab:dyadic-nash} for the dyadic foil it
-corrects) defines the players; this section supplies the formal apparatus. The
-strategic problem is a sequential signaling environment in which $F$, $U$, and
-$R$ hold different information, observe different public artefacts, and update
-different beliefs.
-We therefore model ontological arbitrage as a signaling game under incomplete
-information. The players are a firm $F$, a user $U$, and a regulator $R$.
-Publics, journalists, affected communities, and public intellectuals are not
+Taking the three-sided structure of Firm, User, and Regulator from Section~\ref{sec:three-sided} as given (with the dyadic foil in Table~\ref{tab:dyadic-nash}), this section supplies the formal apparatus. We model ontological arbitrage as a signaling game under incomplete information in which the players are a firm $F$, a user $U$, and a regulator $R$. Publics, journalists, affected communities, and public intellectuals are not
 modeled as a fourth strategic player. They enter as a noisy public signal
 $z \in Z$ that modifies $R$'s posterior over the firm's type. Nature draws
 types from a common prior $\pi$ over
@@ -193,7 +185,7 @@ governance type.
 
 \paragraph{Proof sketch.}
 For the cheap-talk part, the strategy profile and beliefs specified above are
-sequentially rational and Bayes-consistent on path. Under the off-path beliefs
+sequentially rational and Bayes-consistent on path under the off-path beliefs and payoff inequalities of the pooling region. Under the off-path beliefs
 assigning low probability to high governance after the deflationary message, the
 Intuitive Criterion does not eliminate the equilibrium because the off-path
 deflationary message is costless for both firm types and is not uniquely
@@ -207,4 +199,4 @@ one to $\mathsf{H}$ after the audited anthropomorphic signal and posterior
 probability one to $\mathsf{L}$ after the unaudited deflationary signal. Given
 those beliefs, users and regulators condition their actions on the revealed type.
 The audit trail therefore converts an uninformative cheap-talk message into a
-costly signal in the sense of \citet{spence1973}.
+costly signal in the sense of \citet{spence1973}. Theorems \texttt{proposition\_\allowbreak{}1\_\allowbreak{}cheap\_\allowbreak{}talk\_\allowbreak{}pooling\_\allowbreak{}pbe} and \texttt{proposition\_\allowbreak{}1\_\allowbreak{}separating\_\allowbreak{}pbe} in Appendix~\ref{app:isabelle} discharge these equilibrium constructions in Isabelle/HOL.
