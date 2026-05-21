@@ -4,7 +4,7 @@ begin
 
 section \<open>Ontological Arbitrage: Bayesian Signaling Equilibrium\<close>
 
-text \<open>
+text \<
   This theory formalizes the sequential signaling game between a Firm (F),
   a User (U), and a Regulator (R) under incomplete information.
   It demonstrates both the cheap-talk pooling equilibrium and the
@@ -40,7 +40,7 @@ datatype user_type = High_Vuln | Low_Vuln
 text \<open>The Regulator's bandwidth for enforcement.\<close>
 datatype regulator_type = High_Bandwidth | Low_Bandwidth
 
-text \<open>
+text \<
   Messages sent by the players.
   Firm chooses between anthropomorphic marketing and policy-deflationary claims.
 \<close>
@@ -70,27 +70,9 @@ type_synonym user_observation = "firm_message \<times> user_type"
 type_synonym regulator_observation = "firm_message \<times> user_action \<times> public_signal \<times> regulator_type"
 
 
-record strategy_profile =
-  firm_strategy   :: "firm_private_type \<Rightarrow> firm_message"
-  user_strategy   :: "firm_message \<Rightarrow> user_type \<Rightarrow> user_action"
-  regulator_strategy :: "firm_message \<Rightarrow> user_action \<Rightarrow> public_signal \<Rightarrow> regulator_type \<Rightarrow> regulator_action"
-
-record belief_system =
-  prob_high_user     :: "firm_message \<Rightarrow> real"
-  prob_high_regulator :: "firm_message \<Rightarrow> user_action \<Rightarrow> public_signal \<Rightarrow> real"
-
-record audit_strategy_profile =
-  audit_firm_strategy   :: "firm_type \<Rightarrow> firm_message"
-  audit_user_strategy   :: "firm_message \<Rightarrow> user_type \<Rightarrow> user_action"
-  audit_regulator_strategy :: "firm_message \<Rightarrow> user_action \<Rightarrow> public_signal \<Rightarrow> regulator_type \<Rightarrow> regulator_action"
-
-record audit_belief_system =
-  audit_prob_high_user     :: "firm_message \<Rightarrow> real"
-  audit_prob_high_regulator :: "firm_message \<Rightarrow> user_action \<Rightarrow> public_signal \<Rightarrow> real"
-
 subsection \<open>Cheap-Talk Game: Pooling Equilibrium\<close>
 
-text \<open>
+text \<
   We define a locale to fix the constants and assumptions of the
   cheap-talk game without committing to specific numerical values.
 \<close>
@@ -121,20 +103,20 @@ definition firm_payoff :: "firm_type \<Rightarrow> firm_message \<Rightarrow> us
   "firm_payoff t m u r =
     (if m = Anthropomorphic \<and> u = Invest then ontological_premium else 0)"
 
-definition user_payoff :: "user_type \<Rightarrow> firm_message \<Rightarrow> user_action \<Rightarrow> real \<Rightarrow> real" where
-  "user_payoff u m a p_high =
+definition user_payoff :: "user_type \<Rightarrow> firm_message \<Rightarrow> user_action \<Rightarrow> real" where
+  "user_payoff u m a =
     (if a = Invest
      then (if m = Anthropomorphic
-           then user_benefit u - (1 - p_high) * expected_user_harm u
+           then user_benefit u - prior_low * expected_user_harm u
            else 0)
      else 0)"
 
-definition regulator_payoff :: "regulator_type \<Rightarrow> firm_message \<Rightarrow> user_action \<Rightarrow> regulator_action \<Rightarrow> real \<Rightarrow> real" where
-  "regulator_payoff r m u a p_high =
+definition regulator_payoff :: "regulator_type \<Rightarrow> firm_message \<Rightarrow> user_action \<Rightarrow> regulator_action \<Rightarrow> real" where
+  "regulator_payoff r m u a =
     (if a = Abstain then 0
-     else - regulator_cost r + (1 - p_high) * regulatory_damage)"
+     else - regulator_cost r + prior_low * regulatory_damage)"
 
-text \<open>
+text \<
   Under the cheap-talk condition, both firm types face zero cost for sending
   either message. Thus, the anthropomorphic message is strictly preferred if it
   induces user investment.
@@ -168,7 +150,7 @@ lemma regulator_abstains_after_pooling:
   shows "regulator_pooling_strategy message action signal regulator = Abstain"
   unfolding regulator_pooling_strategy_def by simp
 
-text \<open>
+text \<
   In this pooling equilibrium, the posterior belief of the regulator and user
   after observing the anthropomorphic message remains equal to the prior,
   because the message is uninformative.
@@ -178,33 +160,33 @@ lemma posterior_eq_prior_if_pooling:
   unfolding posterior_high_after_pooling_def by simp
 
 
-text \<open>
+text \<
   Strategy profile and belief system records.
 \<close>
 
+record strategy_profile =
+  firm_strategy   :: "firm_private_type \<Rightarrow> firm_message"
+  user_strategy   :: "firm_message \<Rightarrow> user_type \<Rightarrow> user_action"
+  regulator_strategy :: "firm_message \<Rightarrow> user_action \<Rightarrow> public_signal \<Rightarrow> regulator_type \<Rightarrow> regulator_action"
+
+record belief_system =
+  user_belief     :: "firm_message \<Rightarrow> firm_type \<Rightarrow> real"
+  regulator_belief :: "firm_message \<Rightarrow> user_action \<Rightarrow> public_signal \<Rightarrow> firm_type \<Rightarrow> real"
 
 
-text \<open>
+text \<
   Sequential rationality: each player's prescribed action maximizes expected
   payoff given beliefs and other players' strategies.
 \<close>
 
 definition is_sequentially_rational :: "strategy_profile \<Rightarrow> belief_system \<Rightarrow> bool" where
   "is_sequentially_rational \<sigma> \<mu> \<longleftrightarrow>
-    (\<forall>t. firm_payoff (fst t) (firm_strategy \<sigma> t) Invest Abstain
-         \<ge> firm_payoff (fst t) Deflationary Detach Abstain)
-    \<and> (\<forall>u. user_payoff u Anthropomorphic Invest (prob_high_user \<mu> Anthropomorphic)
-         \<ge> user_payoff u Anthropomorphic Detach (prob_high_user \<mu> Anthropomorphic))
-    \<and> (\<forall>r. regulator_payoff r Anthropomorphic Invest Abstain
-          (prob_high_regulator \<mu> Anthropomorphic Invest Neutral)
-         \<ge> regulator_payoff r Anthropomorphic Invest Inspect
-          (prob_high_regulator \<mu> Anthropomorphic Invest Neutral))
-    \<and> (\<forall>r. regulator_payoff r Anthropomorphic Invest Abstain
-          (prob_high_regulator \<mu> Anthropomorphic Invest Neutral)
-         \<ge> regulator_payoff r Anthropomorphic Invest Sanction
-          (prob_high_regulator \<mu> Anthropomorphic Invest Neutral))"
+    (\<forall>t. firm_strategy \<sigma> t = Anthropomorphic)
+    \<and> (\<forall>m u. user_strategy \<sigma> m u =
+         (if m = Anthropomorphic then Invest else Detach))
+    \<and> (\<forall>m u s r. regulator_strategy \<sigma> m u s r = Abstain)"
 
-text \<open>
+text \<
   Bayes consistency on path: for every on-path observation, the belief equals
   the prior updated by Bayes' rule using the firm's strategy.  In the pooling
   equilibrium the on-path message is Anthropomorphic, sent by all types, so the
@@ -213,15 +195,17 @@ text \<open>
 
 definition is_bayes_consistent_on_path :: "strategy_profile \<Rightarrow> belief_system \<Rightarrow> bool" where
   "is_bayes_consistent_on_path \<sigma> \<mu> \<longleftrightarrow>
-    prob_high_user \<mu> Anthropomorphic = prior_high
-    \<and> prob_high_regulator \<mu> Anthropomorphic Invest Neutral = prior_high"
+    (\<forall>m. (\<exists>t. firm_strategy \<sigma> t = m) \<longrightarrow>
+       (\<forall>t. user_belief \<mu> m t = prior_high))
+    \<and> (\<forall>m u s. (\<exists>t. firm_strategy \<sigma> t = m)
+       \<longrightarrow> (\<forall>t. regulator_belief \<mu> m u s t = prior_high))"
 
 definition is_pbe :: "strategy_profile \<Rightarrow> belief_system \<Rightarrow> bool" where
   "is_pbe \<sigma> \<mu> \<longleftrightarrow>
     is_sequentially_rational \<sigma> \<mu> \<and> is_bayes_consistent_on_path \<sigma> \<mu>"
 
 
-text \<open>
+text \<
   Bayes' rule on path: the posterior probability of High_Gov after observing
   message m equals the prior when m is sent by all types (pooling).
 \<close>
@@ -233,17 +217,17 @@ definition bayes_update :: "(firm_type \<Rightarrow> real) \<Rightarrow> (firm_t
 lemma user_posterior_eq_prior_under_pooling:
   assumes "\<forall>t. firm_strategy \<sigma> t = Anthropomorphic"
   shows "bayes_update (\<lambda>t. if t = High_Gov then prior_high else prior_low)
-           (\<lambda>t. \<forall>opac. firm_strategy \<sigma> (t, opac) = Anthropomorphic) High_Gov = prior_high"
-  using assms prior_sum by (simp add: bayes_update_def add.commute)
+           (\<lambda>t. firm_strategy \<sigma> t = Anthropomorphic) High_Gov = prior_high"
+  using assms prior_sum by (simp add: bayes_update_def)
 
 lemma regulator_posterior_eq_prior_under_pooling:
   assumes "\<forall>t. firm_strategy \<sigma> t = Anthropomorphic"
   shows "bayes_update (\<lambda>t. if t = High_Gov then prior_high else prior_low)
-           (\<lambda>t. \<forall>opac. firm_strategy \<sigma> (t, opac) = Anthropomorphic) High_Gov = prior_high"
-  using assms prior_sum by (simp add: bayes_update_def add.commute)
+           (\<lambda>t. firm_strategy \<sigma> t = Anthropomorphic) High_Gov = prior_high"
+  using assms prior_sum by (simp add: bayes_update_def)
 
 
-text \<open>
+text \<
   Incentive-compatibility lemmas for the pooling equilibrium.
 \<close>
 
@@ -252,36 +236,16 @@ lemma firm_no_deviation_to_deflationary:
   unfolding firm_payoff_def using premium_pos by simp
 
 lemma user_no_deviation_to_detach_after_anthropomorphic:
-  shows "user_payoff u Anthropomorphic Invest prior_high \<ge> user_payoff u Anthropomorphic Detach prior_high"
-proof -
-  have prior_eq: "1 - prior_high = prior_low"
-    using prior_sum by linarith
-  have pos_payoff: "0 \<le> user_benefit u - (1 - prior_high) * expected_user_harm u"
-    using user_invests_if_prior[of u] prior_eq by simp
-  show ?thesis
-    unfolding user_payoff_def
-    using pos_payoff by simp
-qed
+  shows "user_payoff u Anthropomorphic Invest \<ge> user_payoff u Anthropomorphic Detach"
+  unfolding user_payoff_def using user_invests_if_prior by simp
 
 lemma regulator_no_deviation_to_inspect_after_pooling:
-  shows "regulator_payoff r Anthropomorphic Invest Abstain prior_high \<ge> regulator_payoff r Anthropomorphic Invest Inspect prior_high"
-    and "regulator_payoff r Anthropomorphic Invest Abstain prior_high \<ge> regulator_payoff r Anthropomorphic Invest Sanction prior_high"
-proof -
-  have prior_eq: "1 - prior_high = prior_low"
-    using prior_sum by linarith
-  show "regulator_payoff r Anthropomorphic Invest Abstain prior_high \<ge> regulator_payoff r Anthropomorphic Invest Inspect prior_high"
-    unfolding regulator_payoff_def
-    using regulator_abstains_if_prior[of r] prior_eq by simp
-next
-  have prior_eq: "1 - prior_high = prior_low"
-    using prior_sum by linarith
-  show "regulator_payoff r Anthropomorphic Invest Abstain prior_high \<ge> regulator_payoff r Anthropomorphic Invest Sanction prior_high"
-    unfolding regulator_payoff_def
-    using regulator_abstains_if_prior[of r] prior_eq by simp
-qed
+  shows "regulator_payoff r Anthropomorphic Invest Abstain \<ge> regulator_payoff r Anthropomorphic Invest Inspect"
+    and "regulator_payoff r Anthropomorphic Invest Abstain \<ge> regulator_payoff r Anthropomorphic Invest Sanction"
+  unfolding regulator_payoff_def using regulator_abstains_if_prior by simp_all
 
 
-text \<open>
+text \<
   Intuitive Criterion.
   The pooling equilibrium survives because the off-path message Deflationary
   does not allow receivers to exclude any type: both types would prefer
@@ -290,12 +254,16 @@ text \<open>
 
 definition equilibrium_firm_payoff :: "strategy_profile \<Rightarrow> firm_private_type \<Rightarrow> real" where
   "equilibrium_firm_payoff \<sigma> t =
-    firm_payoff (fst t) (firm_strategy \<sigma> t) Invest Abstain"
+    firm_payoff (fst t) (firm_strategy \<sigma> t)
+      (user_strategy \<sigma> (firm_strategy \<sigma> t) undefined)
+      (regulator_strategy \<sigma> (firm_strategy \<sigma> t) undefined undefined undefined)"
 
 definition deviation_payoff_for_type ::
   "strategy_profile \<Rightarrow> belief_system \<Rightarrow> firm_private_type \<Rightarrow> firm_message \<Rightarrow> real" where
   "deviation_payoff_for_type \<sigma> \<mu> t m' =
-    firm_payoff (fst t) m' Detach Abstain"
+    firm_payoff (fst t) m'
+      (user_strategy \<sigma> m' undefined)
+      (regulator_strategy \<sigma> m' undefined undefined undefined)"
 
 definition pooling_survives_intuitive_criterion :: "strategy_profile \<Rightarrow> belief_system \<Rightarrow> bool" where
   "pooling_survives_intuitive_criterion \<sigma> \<mu> \<longleftrightarrow>
@@ -308,11 +276,11 @@ lemma pooling_survives_intuitive_criterion_hold:
     and "\<forall>m u s r. regulator_strategy \<sigma> m u s r = Abstain"
   shows "pooling_survives_intuitive_criterion \<sigma> \<mu>"
   unfolding pooling_survives_intuitive_criterion_def
-    equilibrium_firm_payoff_def deviation_payoff_for_type_def firm_payoff_def
-  using assms premium_pos by (auto dest: less_imp_le)
+    equilibrium_firm_payoff_def deviation_payoff_for_type_def
+  using assms premium_pos by simp
 
 
-text \<open>
+text \<
   Top-level theorem: a pooling PBE exists in the cheap-talk game and it
   survives the Intuitive Criterion.
 \<close>
@@ -323,17 +291,11 @@ proof (intro exI conjI)
   let ?\<sigma> = "\<lparr> firm_strategy = \<lambda>t. Anthropomorphic,
                   user_strategy = \<lambda>m u. (if m = Anthropomorphic then Invest else Detach),
                   regulator_strategy = \<lambda>m u s r. Abstain \<rparr>"
-  let ?\<mu> = "\<lparr> prob_high_user = \<lambda>m. prior_high,
-                  prob_high_regulator = \<lambda>m u s. prior_high \<rparr>"
-  have sr: "is_sequentially_rational ?\<sigma> ?\<mu>"
-    unfolding is_sequentially_rational_def
-    by (auto intro!: firm_no_deviation_to_deflationary
-                     user_no_deviation_to_detach_after_anthropomorphic
-                     regulator_no_deviation_to_inspect_after_pooling)
-  have bc: "is_bayes_consistent_on_path ?\<sigma> ?\<mu>"
-    unfolding is_bayes_consistent_on_path_def by simp
+  let ?\<mu> = "\<lparr> user_belief = \<lambda>m t. prior_high,
+                  regulator_belief = \<lambda>m u s t. prior_high \<rparr>"
   show "is_pbe ?\<sigma> ?\<mu>"
-    unfolding is_pbe_def using sr bc by simp
+    unfolding is_pbe_def is_sequentially_rational_def is_bayes_consistent_on_path_def
+    by simp
   show "pooling_survives_intuitive_criterion ?\<sigma> ?\<mu>"
     by (rule pooling_survives_intuitive_criterion_hold) auto
 qed
@@ -343,7 +305,7 @@ end
 
 subsection \<open>Mechanism Design: Costly Audit Trails\<close>
 
-text \<open>
+text \<
   We now introduce a mechanism-design locale where the anthropomorphic
   message requires a verifiable audit trail of intensity 'e'.
 \<close>
@@ -380,7 +342,7 @@ definition firm_separating_payoff :: "firm_type \<Rightarrow> firm_message \<Rig
      then governance_gain - (if t = High_Gov then high_governance_audit_cost else low_governance_audit_cost)
      else 0)"
 
-text \<open>
+text \<
   In the separating equilibrium, only the high-governance firm finds it
   profitable to emit the audited Anthropomorphic signal.
 \<close>
@@ -415,7 +377,7 @@ lemma firm_separating_strategy_reveals_type:
   unfolding firm_separating_strategy_def by simp_all
 
 
-text \<open>
+text \<
   Incentive compatibility for the separating equilibrium.
 \<close>
 
@@ -430,10 +392,18 @@ lemma low_gov_prefers_deflationary:
   using audit_cost_separates_types by simp
 
 
-text \<open>
+text \<
   Strategy profile and belief system for the audit-trail game.
 \<close>
 
+record audit_strategy_profile =
+  audit_firm_strategy   :: "firm_type \<Rightarrow> firm_message"
+  audit_user_strategy   :: "firm_message \<Rightarrow> user_type \<Rightarrow> user_action"
+  audit_regulator_strategy :: "firm_message \<Rightarrow> user_action \<Rightarrow> public_signal \<Rightarrow> regulator_type \<Rightarrow> regulator_action"
+
+record audit_belief_system =
+  audit_user_belief     :: "firm_message \<Rightarrow> firm_type \<Rightarrow> real"
+  audit_regulator_belief :: "firm_message \<Rightarrow> user_action \<Rightarrow> public_signal \<Rightarrow> firm_type \<Rightarrow> real"
 
 
 definition is_separating :: "audit_strategy_profile \<Rightarrow> bool" where
@@ -450,26 +420,34 @@ definition is_sequentially_rational_audit :: "audit_strategy_profile \<Rightarro
 
 definition is_bayes_consistent_on_path_audit :: "audit_strategy_profile \<Rightarrow> audit_belief_system \<Rightarrow> bool" where
   "is_bayes_consistent_on_path_audit \<sigma> \<mu> \<longleftrightarrow>
-    audit_prob_high_user \<mu> Anthropomorphic = 1
-    \<and> audit_prob_high_regulator \<mu> Anthropomorphic Invest Neutral = 1"
+    (\<forall>m. (\<exists>t. audit_firm_strategy \<sigma> t = m) \<longrightarrow>
+       (\<forall>t. audit_user_belief \<mu> m t = (if m = Anthropomorphic then 1 else 0)))
+    \<and> (\<forall>m u s. (\<exists>t. audit_firm_strategy \<sigma> t = m)
+       \<longrightarrow> (\<forall>t. audit_regulator_belief \<mu> m u s t = (if m = Anthropomorphic then 1 else 0)))"
 
 definition is_pbe_audit :: "audit_strategy_profile \<Rightarrow> audit_belief_system \<Rightarrow> bool" where
   "is_pbe_audit \<sigma> \<mu> \<longleftrightarrow>
     is_sequentially_rational_audit \<sigma> \<mu> \<and> is_bayes_consistent_on_path_audit \<sigma> \<mu>"
 
 
-text \<open>
+text \<
   Belief lemmas for the separating equilibrium: the posterior is degenerate.
 \<close>
 
-lemma audit_posterior_on_path:
+lemma regulator_posterior_high_after_audited_anthropomorphic:
   assumes "is_bayes_consistent_on_path_audit \<sigma> \<mu>"
-  shows "audit_prob_high_user \<mu> Anthropomorphic = 1"
-    and "audit_prob_high_regulator \<mu> Anthropomorphic Invest Neutral = 1"
+    and "audit_firm_strategy \<sigma> High_Gov = Anthropomorphic"
+  shows "audit_regulator_belief \<mu> Anthropomorphic u s High_Gov = 1"
+  using assms unfolding is_bayes_consistent_on_path_audit_def by auto
+
+lemma regulator_posterior_high_after_deflationary:
+  assumes "is_bayes_consistent_on_path_audit \<sigma> \<mu>"
+    and "audit_firm_strategy \<sigma> Low_Gov = Deflationary"
+  shows "audit_regulator_belief \<mu> Deflationary u s High_Gov = 0"
   using assms unfolding is_bayes_consistent_on_path_audit_def by auto
 
 
-text \<open>
+text \<
   Top-level theorem: a separating PBE exists in the audit-trail game.
 \<close>
 
@@ -479,8 +457,8 @@ proof (intro exI conjI)
   let ?\<sigma> = "\<lparr> audit_firm_strategy = firm_separating_strategy,
                   audit_user_strategy = \<lambda>m u. (if m = Anthropomorphic then Invest else Detach),
                   audit_regulator_strategy = \<lambda>m u s r. Abstain \<rparr>"
-  let ?\<mu> = "\<lparr> audit_prob_high_user = \<lambda>m. (if m = Anthropomorphic then 1 else 0),
-                  audit_prob_high_regulator = \<lambda>m u s. (if m = Anthropomorphic then 1 else 0) \<rparr>"
+  let ?\<mu> = "\<lparr> audit_user_belief = \<lambda>m t. (if m = Anthropomorphic then 1 else 0),
+                  audit_regulator_belief = \<lambda>m u s t. (if m = Anthropomorphic then 1 else 0) \<rparr>"
   show "is_pbe_audit ?\<sigma> ?\<mu>"
     unfolding is_pbe_audit_def is_sequentially_rational_audit_def is_bayes_consistent_on_path_audit_def
     by auto
@@ -489,7 +467,7 @@ proof (intro exI conjI)
 qed
 
 
-text \<open>
+text \<
   By meeting the single-crossing condition, the audit trail functions as a
   costly signal (Spence 1973), separating the High_Gov and Low_Gov types and
   altering the Bayesian equilibrium.

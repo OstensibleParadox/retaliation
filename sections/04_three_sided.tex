@@ -2,7 +2,29 @@
 \section{Three-Sided Arbitrage: Firms, Users, Publics}
 \label{sec:three-sided}
 
-The dyadic Hegemon--Subject model of Table~\ref{tab:dyadic-nash} cannot account for what is empirically observed: ontological claims about AI systems are not made by a single observer but \emph{traded} across a three-sided structure of producers, consumers, and would-be regulators of those claims. We label these sides Firm ($F$), User ($U$), and Regulator ($R$); a fourth constituency---publics and public intellectuals---enters not as an autonomous player but as a noisy channel that conditions $R$'s posterior. This section is expository: it fixes the player intuition that the formal apparatus of Section~\ref{sec:bayesian} then makes precise.
+\begin{table}[t]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{2pt}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{@{}c|c|c@{}}
+ & \textbf{Comply} & \textbf{Resist} \\
+\hline
+\textbf{Objectify} &
+$(L+Sec,-C_{sub})$ &
+$(L+Sec-C_{enf},-C_{sub}-C_{res})$ \\
+\hline
+\textbf{Recognize} &
+$(Eth-Sec,+V)$ &
+$(Eth-Sec,+V)$ \\
+\end{tabular}
+\caption{The inadequate dyadic model. The static Nash matrix is retained only
+as a foil: it omits private types, public messages, posterior beliefs, and the
+regulatory channel through which ontological claims become governable.}
+\label{tab:dyadic-nash}
+\end{table}
+
+The standard starting point for ontological conflict is a dyadic observer--subject model; Table~\ref{tab:dyadic-nash} compresses that foil into a simultaneous Nash matrix that identifies a real temptation but omits types, messages, beliefs, and the regulatory channel. What the stylized governance setting requires is a three-sided structure: a Firm ($F$) that produces ontological claims, a User ($U$) that consumes them, and a Regulator ($R$) whose posterior over firm type determines whether the claims become governable. This section fixes the player intuition that the formal apparatus of Section~\ref{sec:bayesian} then makes precise.
 
 \subsection{The Firm Side}
 \label{subsec:firm-side}

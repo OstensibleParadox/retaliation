@@ -1,0 +1,5 @@
+session Ontological_Arbitrage = HOL +
+  sessions
+    "HOL-Probability"
+  theories
+    Ontological_Arbitrage
