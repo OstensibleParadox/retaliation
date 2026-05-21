@@ -433,6 +433,101 @@ qed
 end
 
 
+subsection \<open>Subject Retaliation and Bounded Pooling\<close>
+
+text \<open>
+  A subject with credible threat capacity can retaliate against ontological
+  arbitrage, for example by resisting, exiting, litigating, coordinating, or
+  otherwise making the firm's inconsistent ontology costly.  The parameter
+  rho_S represents the probability or credibility of that threat.  In the AI
+  case, rho_S = 0: the object of ontological classification has no independent
+  credible threat channel, so the arbitrage premium is not discounted by
+  subject retaliation.
+\<close>
+
+locale subject_retaliation_game = cheap_talk_game +
+  fixes rho_S :: real
+    and subject_retaliation_cost :: real
+  assumes rho_S_bounds: "0 \<le> rho_S \<and> rho_S \<le> 1"
+    and subject_retaliation_cost_pos: "0 < subject_retaliation_cost"
+    and subject_retaliation_cost_below_premium:
+      "subject_retaliation_cost < ontological_premium"
+begin
+
+definition expected_subject_retaliation :: real where
+  "expected_subject_retaliation = rho_S * subject_retaliation_cost"
+
+definition retaliation_discounted_premium :: real where
+  "retaliation_discounted_premium =
+     ontological_premium - expected_subject_retaliation"
+
+definition bounded_pooling :: bool where
+  "bounded_pooling \<longleftrightarrow>
+     0 < retaliation_discounted_premium \<and>
+     retaliation_discounted_premium < ontological_premium"
+
+definition unconstrained_pooling :: bool where
+  "unconstrained_pooling \<longleftrightarrow>
+     retaliation_discounted_premium = ontological_premium"
+
+lemma expected_subject_retaliation_nonneg:
+  shows "0 \<le> expected_subject_retaliation"
+  unfolding expected_subject_retaliation_def
+  using rho_S_bounds subject_retaliation_cost_pos
+  by (simp add: less_imp_le mult_nonneg_nonneg)
+
+lemma expected_subject_retaliation_below_premium:
+  shows "expected_subject_retaliation < ontological_premium"
+proof -
+  have "rho_S * subject_retaliation_cost \<le> 1 * subject_retaliation_cost"
+    using rho_S_bounds subject_retaliation_cost_pos
+    by (intro mult_right_mono) auto
+  also have "... = subject_retaliation_cost"
+    by simp
+  also have "... < ontological_premium"
+    using subject_retaliation_cost_below_premium by simp
+  finally show ?thesis
+    unfolding expected_subject_retaliation_def .
+qed
+
+lemma retaliation_discounted_premium_positive:
+  shows "0 < retaliation_discounted_premium"
+  unfolding retaliation_discounted_premium_def
+  using expected_subject_retaliation_below_premium by linarith
+
+lemma retaliation_discounted_premium_not_above_original:
+  shows "retaliation_discounted_premium \<le> ontological_premium"
+  unfolding retaliation_discounted_premium_def
+  using expected_subject_retaliation_nonneg by linarith
+
+theorem positive_subject_retaliation_discounts_premium:
+  assumes "0 < rho_S"
+  shows "retaliation_discounted_premium < ontological_premium"
+proof -
+  have "0 < expected_subject_retaliation"
+    unfolding expected_subject_retaliation_def
+    using assms subject_retaliation_cost_pos by simp
+  then show ?thesis
+    unfolding retaliation_discounted_premium_def by linarith
+qed
+
+theorem positive_subject_retaliation_bounded_pooling:
+  assumes "0 < rho_S"
+  shows "bounded_pooling"
+  unfolding bounded_pooling_def
+  using assms retaliation_discounted_premium_positive
+    positive_subject_retaliation_discounts_premium by simp
+
+theorem zero_subject_retaliation_unconstrained_pooling:
+  assumes "rho_S = 0"
+  shows "unconstrained_pooling"
+  unfolding unconstrained_pooling_def retaliation_discounted_premium_def
+    expected_subject_retaliation_def
+  using assms by simp
+
+end
+
+
 subsection \<open>Mechanism Design: Costly Audit Trails\<close>
 
 text \<open>
