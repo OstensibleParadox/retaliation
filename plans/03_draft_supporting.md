@@ -59,7 +59,7 @@ Everything in this phase must serve those three claims. No theory parade. No hum
 - **Content**:
   - The paper does not settle AI personhood.
   - It shows why inconsistent ontological claims can persist as equilibrium behavior.
-  - It identifies institutional levers that change the incentives.
+  - It establishes that under joint enforcement of the mechanisms, the harmonized deflationary register $(p,p)$ is the only surviving strategy for low-governance firms, while high-governance firms sustain the harmonized agentic register $(a,a)$ iff they satisfy the audit condition $e \ge e^\ast$.
 - **No agape, no grand theory, no late-stage conceptual expansion.**
 - **Target**: 80--120 words.
 

@@ -6,84 +6,97 @@
 - Aren't just saying frame-switching is bad; proving why it is an incentive-compatible equilibrium for firms, users, and regulators. 
 - Lastly offer actual mechanism design solutions (costly signals, sanctionable inconsistency) to shift the payoff matrix.
 
-# Old 9 sections structure, for paragraphs location reference only.
-# Do not treat as source of truth!
+# Ontological Arbitrage: Current Paper Upgrade Reasoning
 
-## Original Aggregated Sections (logical tautology)
-### §1 Introduction: The Hard Problem as Strategic Ontology
-- **Source**: `archive/A_ontological_arbitrage.tex` lines 188–193 (Voight-Kampff opener).
-- **Cuts**: drop "research note" phrasing; soften "operating system of our current metaphysical crisis."
-- **Add**: 2-sentence preview of §3 result (PBE existence; deviation unprofitability under cheap talk).
-- **Target**: ~250 words.
+This document outlines the structural, mathematical, and sociological rationale behind the reconstruction of the paper from its prior version—**"Ontological Arbitrage: The Biopolitics of Substrate Chauvinism in Synthetic and Non-Normative Subjects"** (originally targeting humanistic/social theory)—into the current version—**"Ontological Arbitrage: Bayesian Equilibrium under Substrate Chauvinism"** (formatted for AIES 2026 with a formal Isabelle/HOL spine).
 
-### §2 Conceptual Core: Ontological Arbitrage
-- **Source**: A lines 196–210 (definition + Discursive Toggle + Genetic Fallacy).
-- **Cuts**: A line 269 ("If the problem is economic, the solution must be Theological") and all forward-pointers to agape.
-- **Add**: 4-term glossary — `ontological arbitrage`, `substrate chauvinism`, `strategic ontological switching`, `ontological premium` (last term from B, locate by grep).
-- **Target**: ~400 words.
+It serves as the definitive ruling on the paper's logical boundaries, detailing what has been integrated, what has been pruned, and what is deferred to the follow-up publication (*Paper 2*).
 
-### §3 From Static Nash to Bayesian Signaling Equilibrium — **LOAD-BEARING**
-- **Foil only**: B's 2×2 Nash payoff matrix becomes Table 1, labelled "the inadequate dyadic model." Locate via grep for `Objectify`/`Recognize` in `archive/B_aies26_arbitrage.tex`.
-- **Discard**: B's static Nash proof (the `Eth > 2·Sec` inequality is not the load-bearing claim).
-- **Draft fresh** (this IS the contribution):
-  - **Players**: F (firm), U (user), R (regulator). Publics + intellectuals fold into R as a noisy signal channel modifying R's prior.
-  - **Type space**: θ_F ∈ {high-gov, low-gov}, θ_U ∈ {high-vuln, low-vuln}, θ_R ∈ {high-bw, low-bw}; system opacity θ_S as F's private parameter. Common prior π on Θ.
-  - **Signal space**: m_F ∈ {marketing-anthropomorphic, policy-deflationary}; m_U ∈ {invest, detach}; m_R ∈ {inspect, sanction, abstain}. Exogenous public signal z ∈ Z feeds R's posterior.
-  - **Information structure**: sequential — F → U → R. Types private; messages public.
-  - **Solution concept**: Perfect Bayesian Equilibrium (PBE) as headline. Sequential Equilibrium (Kreps-Wilson 1982) as consistency strengthening. Intuitive Criterion (Cho-Kreps 1987) as refinement.
-  - **Worked example (mandatory, ~1 page)**: Under c(m_F) = 0 (cheap talk), show pooling equilibrium — both governance types pool on anthropomorphic marketing; both vulnerability types pool on invest; R abstains. Compute posteriors = priors. No profitable unilateral deviation. Then redesign c(m_F) via audit-trail cost; derive single-crossing threshold (Spence 1973) above which separating PBE exists.
-  - **Proposition (named, with proof sketch)**: "Under cheap-talk cost structure, pooling-on-anthropomorphize is a PBE surviving the Intuitive Criterion. Under audit-trail signal cost satisfying single-crossing in θ_F, a separating PBE exists in which m_F reveals θ_F."
-- **Figures**: Table 1 (the discarded 2×2 Nash, as foil) + Figure 1 (extensive-form game tree via tikz).
-- **Target**: ~1500 words (~2.5 pages with display math).
+---
 
-### §4 Three-Sided Arbitrage: Firms, Users, Publics
-- **Source**: fresh draft. Structure from `STRUCTURE.md` §4. Paraphrase from B for §4.1 (firm side), stripped of trader theatrics.
-- **For each side**: one paragraph on type, one on signal, one stylized illustration. §4.3 covers R + public-as-channel.
-- **Cut**: anything implying firms are uniquely opportunistic.
-- **Target**: ~700 words.
+## 1. Core Structural Transition
 
-### §5 The Ontological Black Market (compressed)
-- **Source**: B's "sell wall / shorting / long investors" subsections — locate via grep for `short`, `sell wall`, `ontological premium`.
-- **Cuts (zero tolerance)**: every "dataset," "Xiaohongshu," "小红书", "N=389/148," "corpus," "density" reference; all Chinese-language exemplars; all explicit Žižek/Black Body/Hope/Coda material; financial-trader vocabulary that exceeds institutional-microstructure register (drop "stop-loss," "margin call," "liquidity crisis," "portfolio rebalancing" as section-driving metaphors).
-- **Keep**: "shorting subjectivity," "long position," "ontological premium," "goalpost shifting."
-- **Target**: ~500 words.
+The upgrade replaces a descriptive/ethical framework with an engineering/game-theoretic framework. The shift in structural architecture is summarized below:
 
-### §6 Illustrative Arena (stylized facts, NOT empirics)
-- **Source**: fresh draft. Spec's "Xiaohongshu" framing **overridden** per user instruction.
-- **Content**: three short illustrations, ~120 words each, each clearly flagged "illustration."
-  - Firm: marketing-copy vs ToS-liability paired contrast (hypothetical or public record).
-  - User: generalized AI-companionship forum pattern. No platform name. No stats.
-  - Regulator: public-record gap between AI-safety statements and enforcement (FTC, EU AI Act, China generative-AI rules at public-record level).
-- **Target**: ~350 words.
+| Dimension | Prior Version (Archive) | Upgraded Version (Current) |
+| :--- | :--- | :--- |
+| **Game Structure** | Dyadic simultaneous Nash foil (2×2 matrix). | Three-sided sequential signaling game ($F, U, R$) with a noisy public signal ($z$). |
+| **Solution Concept** | Pure-strategy Nash deadlock. | Perfect Bayesian Equilibrium (PBE) + Cho-Kreps Intuitive Criterion. |
+| **Resolution Agent** | Ethical tie-breaker (external Levinas radical asymmetry). | Costly signaling mechanism design (Spence-style single-crossing audit cost). |
+| **Verification** | Informal text-based proofs. | Machine-checked proofs in Isabelle/HOL (zero `sorry` assertions). |
+| **Primary Framing** | Transgender subjects, biopolitics, and critical theory. | Artificial intelligence governance and substrate chauvinism. |
 
-### §7 Why Cheap Talk Persists
-- **Source**: fresh draft. Spec §7.
-- **Content**: 5 short paragraphs — opacity, verification bandwidth, asynchronous harms, fragmentation of affected parties, no penalty for inconsistency. Each linked back to a §3 model parameter.
-- **Cite**: Akerlof 1970, Pasquale 2015, Crawford-Sobel 1982.
-- **Target**: ~500 words.
+---
 
-### §8 Mechanism Design: Equilibrium Redesign — **LOAD-BEARING**
-- **Source**: fresh draft. Operative conclusion per `STRUCTURE.md`.
-- **Three proposals**, each with: (a) §3 signal-cost parameter modified, (b) equilibrium shift induced (pooling → separating or off-path belief constraint), (c) existing-law analog establishing feasibility.
-  - **Proposal 1 — Sanctionable inconsistency**: jointly auditable marketing + liability docs; inconsistent ontological claims trigger deceptive-practices penalty. Analog: FTC §5; SEC anti-fraud rules.
-  - **Proposal 2 — Costly signaling (Spence)**: mandatory third-party capability audits as precondition for agency/safety marketing. Analog: pharmaceutical efficacy trials; food labeling. Threshold from §3 single-crossing.
-  - **Proposal 3 — Auditable records**: append-only, regulator-readable logs of model behavior tied to capability claims. Analog: GDPR Art. 30; SOX §404; EU AI Act Art. 12.
-- **Cite**: Spence 1973, Myerson 1979/1981, Milgrom-Roberts 1986, Hadfield 2017.
-- **Target**: ~1000 words.
+## 2. The Logical Boundary Verdict
 
-### §9 Epilogue: What Remains of Agape
-- **Source**: compress A lines 269–271 + one line from B's Coda to a single paragraph ≤ 80 words.
-- **Delete in full**: all Žižek / Black Body / Hope / Coda apparatus from B.
-- **No salvage** from the positionality endmatter.
-- **Target**: ~80 words.
+To ensure compilation integrity, maintain proof tractability in Isabelle, and secure a strong "genre fit" for AIES 2026, the boundaries are drawn as follows:
 
-## 11. Risks
+```mermaid
+graph TD
+    A[Ontological Arbitrage Framework] --> B[Current Paper: AIES 2026]
+    A --> C[Future Paper: Paper 2]
 
-- **R1 (highest): §3 written too informally → AAAI/AIES game-theory referees reject.** Mitigation: commit early to PBE + Intuitive Criterion; worked example with explicit posteriors is non-negotiable; Figure 1 extensive-form game tree included.
-- **R2 (high): AIES 26 venue + zero empirics = genre mismatch.** AIES reviewers expect empirical or systems contributions. Mitigation: position §6 stylized facts as "motivating illustrations from public record"; lean §8 mechanism proposals into AIES's governance-friendly register. Fallback if desk-rejected on empirics-light grounds: SSRN + re-target JLA or JEP.
-- **R3: Three-sided claim under-evidenced without empirics.** Mitigation: §6 illustrations clearly flagged; §4 stylized facts tight to §3 model.
-- **R4: Mechanism design dismissed as utopian.** Mitigation: every §8 proposal has a current-law analog. If none can be found for a proposal, drop the proposal.
-- **R5: Substrate chauvinism premise over-claims (AI + trans + non-normative + non-human animals).** Mitigation: scope §3 model explicitly to the AI case; let §§1–2 keep broader frame as motivation; one footnote noting analogous spaces for other domains.
-- **R6: 7-page limit forces cuts to §3 or §8.** Mitigation: §3 ≥ 2 pages and §8 ≥ 1.5 pages are protected floors. Tighten §§1, 5, 6, 7 on overrun.
-- **R7: Load-bearing citations misremembered (Spence year, Crawford-Sobel page range, etc.).** Mitigation: citation-verification skill runs before §3 or §8 commits.
-- **R8: AAAI 2026 template version drift.** The `_inputs/template_aaai26/` snapshot is frozen. Before the final compile, the agent checks `https://aaai.org/conference/aaai/aaai-26/` for any pre-submission template update; if updated, the user is asked whether to swap the `.sty`/`.bst`.
+    B --> B1[Three-Sided Signaling Game: F, U, R]
+    B --> B2[Isabelle/HOL Machine-Checked spine]
+    B --> B3[AI Substrate Opacity: theta_S]
+    B --> B4[Subject Retaliation Boundary: rho_S = 0]
+    B --> B5[Discussion: Apology as Cheap Talk]
+
+    C --> C1[Complicit-by-Design Regulator: Ambiguity Rent]
+    C --> C2[Human Sociological Instantiations: Parental 50k]
+    C --> C3[Historical Case Studies: Wu Zetian, An Lushan]
+    C --> C4[Ethical Critique: Levinas & Hegelian Recognition]
+```
+
+### In Scope (Current Paper)
+*   **Three-Sided Signaling Equilibrium**: Formal model of Firm ($F$) type signaling, User ($U$) investment, and Regulator ($R$) inspection/sanction.
+*   **Subject Retaliation Boundary ($\rho_S = 0$)**: The mathematical proof that AI systems represent a unique governance risk because they lack independent retaliation capacity, making the firm's arbitrage premium unconstrained compared to human-to-human recognition dynamics.
+*   **Three Mechanism Interventions**:
+    1. *Sanctionable Inconsistency* (taxing cross-channel contradictions).
+    2. *Costly Auditing* (imposing a single-crossing audit intensity).
+    3. *Auditable Records* (reducing the regulator's verification cost $K_{\theta_R}$).
+*   **Apology as Cheap Talk (Discussion Section)**: Highlighting how the cheap-talk pooling equilibrium explains the public stability of corporate apologies (which are cheap talk) over strategic arbitrage disclosures (which carry ruinous social costs).
+
+### Out of Scope / Deferred (Paper 2)
+*   **Complicit-by-Design Regulator**: Modeling the regulator as an agent with institutional self-preservation incentives in maintaining category ambiguity (Ambiguity Rent). Doing so would alter the regulator's payoff, breaking all sequential rationality proofs and requiring a complete rebuild of the Isabelle theories.
+*   **Sociological Gender Arbitrage (The Transgender 50k Family Model)**: A highly potent analogy, but one that risks reviewer alienation at an AI-centric conference if presented as a primary modeling channel. It is restricted to a brief illustrative footnote.
+*   **Historical Narrative Cases**: All lengthy analyses of imperial court mechanics (e.g., An Lushan, Wu Zetian, Cui Zhu) are cut to maintain the AAAI/AIES page limit and technical tone.
+
+---
+
+## 3. Mathematical Rationale for Key Boundaries
+
+### 3.1. The AI Retaliation Limiting Case ($\rho_S = 0$)
+In a standard recognition game between human subjects, the subject has a credible threat channel (exit, rebellion, litigation) that discounts the observer's arbitrage premium:
+
+$$\Delta_F^S = \Delta_F - \rho_S C_S$$
+
+Because AI systems have no biological基质 (substrate), they cannot rebel or sue. For AI, $\rho_S = 0$, meaning the effective premium remains at its maximum:
+
+$$\Delta_F^S = \Delta_F$$
+
+This mathematical reality justifies why ontological arbitrage is an urgent problem for AI governance specifically, whereas in human history, the threat of retaliation bounded the stability of such equilibria.
+
+### 3.2. Why the Complicit Regulator Must Be Deferred
+Under the current model, the regulator's expected payoff is:
+
+$$U_R = \begin{cases} 
+-K_{\theta_R} + \pi(\mathsf{L}) D_R & \text{if Inspect} \\
+-S_I & \text{if Sanction} \\
+0 & \text{if Abstain}
+\end{cases}$$
+
+If the regulator has an institutional interest in maintaining ambiguity (rent-seeking), the payoff for *Abstain* would be modified by an ambiguity rent term $R_A > 0$:
+
+$$U_R(\text{Abstain}) = R_A$$
+
+This shifts the inspection threshold, making abstention rational even when expected damage is high ($\pi(\mathsf{L})D_R > K_{\theta_R}$). This is a profound game-theoretic result (complicity under strategic ambiguity), but implementing it requires changing the basic locales in `Ontological_Arbitrage.thy` and re-proving all downstream lemmas. To preserve the verification chain for the AIES 2026 deadline, this must be deferred.
+
+---
+
+## 4. Strictly keep out of scope (Paper 2)
+
+*   **Target Venue**: *Journal of Law and Economics*, *Games and Economic Behavior*, or *Journal of Political Philosophy*.
+*   **Proposed Title**: *The Economics of Strategic Ambiguity: Complicit Regulators and Category Arbitrage*
+*   **Narrative Focus**: Transition from engineering AI solutions to the political economy of recognition. It will use the mathematical foundation established in the first paper to explain why institutions actively resist category clarity, integrating the historical cases (Wu Zetian, Cui Zhu) and the sociological dynamics of transgender parental recognition.

@@ -35,3 +35,16 @@ To compile the paper from the root directory:
 ```bash
 pdflatex arbitrage && bibtex arbitrage && pdflatex arbitrage && pdflatex arbitrage
 ```
+
+## Isabelle Scope & Limitations
+
+The formalization of the "Ontological Arbitrage" model in Isabelle/HOL has the following characteristics:
+
+* **Strategic Opacity in `bayes_update`**:
+  The `bayes_update` function conditions on a predicate over `firm_type` rather than the joint `firm_private_type` (which includes `opacity`). This models Bayes' rule under the assumption that message transmission is independent of opacity (i.e., for any governance type, either all opacities send the message or none do). While mathematically sound for the pooling and separating equilibria analyzed in the paper, it restricts the general use of the update function for strategies that vary across opacity levels.
+
+* **Indifference-Based Off-Path Behavior**:
+  In the cheap-talk game, the user's payoff from investing after the off-path `Deflationary` message is hardcoded to `0`. Consequently, the user is indifferent between investing and detaching, which allows the candidate strategy (detach after deflationary) to be formally proved as a best response by indifference.
+
+* **Register Game Simplifications**:
+  The multi-channel register game in [Sanctionable_Inconsistency.thy](file:///Users/ostensible_paradox/Documents/aies26/isabelleHOL/Sanctionable_Inconsistency.thy) is modeled as a decision-theoretic optimization problem. Rather than computing dynamic equilibrium responses of users and regulators, their actions are modeled as static expected payoffs (`ontological_premium` and `expected_sanction`). This isolates the firm's incentives to choose between consistent and inconsistent registers under varying enforcement regimes but does not model the full extensive-form feedback loop.
