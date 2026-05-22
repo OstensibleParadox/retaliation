@@ -182,6 +182,30 @@ definition register_firm_sequentially_rational :: "register_strategy_profile \<R
   "register_firm_sequentially_rational \<sigma> \<longleftrightarrow>
      (\<forall>t. register_is_best_response_firm t (register_firm_strategy \<sigma> t))"
 
+definition register_is_pbe ::
+  "(register_strategy_profile \<Rightarrow> register_belief_system \<Rightarrow> bool) \<Rightarrow>
+   (register_strategy_profile \<Rightarrow> register_belief_system \<Rightarrow> bool) \<Rightarrow>
+   (register_strategy_profile \<Rightarrow> register_belief_system \<Rightarrow> bool) \<Rightarrow>
+   register_strategy_profile \<Rightarrow> register_belief_system \<Rightarrow> bool" where
+  "register_is_pbe user_sequentially_rational regulator_sequentially_rational
+      bayes_consistent \<sigma> \<mu> \<longleftrightarrow>
+     register_firm_sequentially_rational \<sigma> \<and>
+     user_sequentially_rational \<sigma> \<mu> \<and>
+     regulator_sequentially_rational \<sigma> \<mu> \<and>
+     bayes_consistent \<sigma> \<mu>"
+
+lemma register_pbe_implies_firm_sequentially_rational:
+  assumes "register_is_pbe user_sequentially_rational regulator_sequentially_rational
+      bayes_consistent \<sigma> \<mu>"
+  shows "register_firm_sequentially_rational \<sigma>"
+  using assms unfolding register_is_pbe_def by simp
+
+lemma firm_not_sequentially_rational_not_register_pbe:
+  assumes "\<not> register_firm_sequentially_rational \<sigma>"
+  shows "\<not> register_is_pbe user_sequentially_rational regulator_sequentially_rational
+      bayes_consistent \<sigma> \<mu>"
+  using assms unfolding register_is_pbe_def by simp
+
 theorem all_agentic_on_path_not_sequentially_rational:
   assumes "all_agentic_register (register_firm_strategy \<sigma> t)"
   shows "\<not> register_firm_sequentially_rational \<sigma>"
@@ -193,6 +217,13 @@ proof -
   then show ?thesis
     unfolding register_firm_sequentially_rational_def by metis
 qed
+
+theorem all_agentic_on_path_not_register_pbe:
+  assumes "all_agentic_register (register_firm_strategy \<sigma> t)"
+  shows "\<not> register_is_pbe user_sequentially_rational regulator_sequentially_rational
+      bayes_consistent \<sigma> \<mu>"
+  using assms all_agentic_on_path_not_sequentially_rational
+    firm_not_sequentially_rational_not_register_pbe by blast
 
 end
 
@@ -266,6 +297,13 @@ proof -
     unfolding register_firm_sequentially_rational_def by metis
 qed
 
+theorem inconsistent_on_path_not_register_pbe:
+  assumes "inconsistent_register (register_firm_strategy \<sigma> t)"
+  shows "\<not> register_is_pbe user_sequentially_rational regulator_sequentially_rational
+      bayes_consistent \<sigma> \<mu>"
+  using assms inconsistent_on_path_not_sequentially_rational
+    firm_not_sequentially_rational_not_register_pbe by blast
+
 theorem arbitrage_on_path_not_sequentially_rational:
   assumes "arbitrage_register (register_firm_strategy \<sigma> t)"
   shows "\<not> register_firm_sequentially_rational \<sigma>"
@@ -277,6 +315,13 @@ proof -
   then show ?thesis
     unfolding register_firm_sequentially_rational_def by metis
 qed
+
+theorem arbitrage_on_path_not_register_pbe:
+  assumes "arbitrage_register (register_firm_strategy \<sigma> t)"
+  shows "\<not> register_is_pbe user_sequentially_rational regulator_sequentially_rational
+      bayes_consistent \<sigma> \<mu>"
+  using assms arbitrage_on_path_not_sequentially_rational
+    firm_not_sequentially_rational_not_register_pbe by blast
 
 end
 

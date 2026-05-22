@@ -289,6 +289,50 @@ text \<open>
   Payoff inequalities for the pooling candidate are verified inline below.
 \<close>
 
+lemma regulator_no_deviation_general:
+  shows "is_best_response_regulator rt m ua Abstain s prior_high"
+proof -
+  have prior_eq: "1 - prior_high = prior_low"
+    using prior_sum by linarith
+  have expected_abstain: "expected_regulator_payoff rt m ua Abstain s prior_high = 0"
+    unfolding expected_regulator_payoff_def regulator_payoff_def by simp
+  have expected_other: "\<And>ra'. ra' \<noteq> Abstain \<Longrightarrow>
+    expected_regulator_payoff rt m ua ra' s prior_high =
+    - regulator_cost rt + prior_low * regulatory_damage"
+  proof -
+    fix ra' assume "ra' \<noteq> Abstain"
+    have term_high: "regulator_payoff High_Gov rt m ua ra' s = - regulator_cost rt"
+      using \<open>ra' \<noteq> Abstain\<close> unfolding regulator_payoff_def by simp
+    have term_low: "regulator_payoff Low_Gov rt m ua ra' s =
+      - regulator_cost rt + regulatory_damage"
+      using \<open>ra' \<noteq> Abstain\<close> unfolding regulator_payoff_def by simp
+    show "expected_regulator_payoff rt m ua ra' s prior_high =
+      - regulator_cost rt + prior_low * regulatory_damage"
+      unfolding expected_regulator_payoff_def term_high term_low prior_eq
+      using prior_sum by (simp add: algebra_simps distrib_right [symmetric])
+  qed
+  have neg_payoff: "- regulator_cost rt + prior_low * regulatory_damage \<le> 0"
+    using regulator_abstains_if_prior[of rt] by simp
+  show ?thesis
+    unfolding is_best_response_regulator_def regulator_actions_def
+    using expected_abstain expected_other neg_payoff by auto
+qed
+
+lemma user_no_deviation_after_deflationary:
+  shows "is_best_response_user ut Deflationary Detach
+    (\<lambda>m u s r. Abstain) prior_high"
+proof -
+  have expected_invest:
+    "expected_user_payoff ut Deflationary Invest (\<lambda>m u s r. Abstain) prior_high = 0"
+    unfolding expected_user_payoff_def user_payoff_def by simp
+  have expected_detach:
+    "expected_user_payoff ut Deflationary Detach (\<lambda>m u s r. Abstain) prior_high = 0"
+    unfolding expected_user_payoff_def user_payoff_def by simp
+  show ?thesis
+    unfolding is_best_response_user_def user_actions_def
+    using expected_invest expected_detach by auto
+qed
+
 text \<open>
   Limited Intuitive Criterion (Cho and Kreps 1987).
 \<close>
@@ -332,7 +376,7 @@ proof (intro exI conjI)
   have sr: "is_sequentially_rational ?\<sigma> ?\<mu>"
     unfolding is_sequentially_rational_def
   proof (intro conjI allI)
-    fix t
+    fix t :: firm_private_type
     have "expected_firm_payoff (fst t) Anthropomorphic (user_strategy ?\<sigma>) (regulator_strategy ?\<sigma>) = ontological_premium"
       unfolding expected_firm_payoff_def firm_payoff_def by simp
     moreover have "expected_firm_payoff (fst t) Deflationary (user_strategy ?\<sigma>) (regulator_strategy ?\<sigma>) = 0"
@@ -354,8 +398,8 @@ proof (intro exI conjI)
         have term_low: "user_payoff Low_Gov ut Anthropomorphic Invest Abstain = user_benefit ut - expected_user_harm ut"
           unfolding user_payoff_def by simp
         show ?thesis
-          unfolding expected_user_payoff_def term_high term_low prior_eq
-          using prior_sum by (simp add: field_simps distrib_right [symmetric])
+          unfolding expected_user_payoff_def user_payoff_def prior_eq
+          using prior_sum by (simp add: field_simps; algebra)
       qed
       have expected_detach: "expected_user_payoff ut Anthropomorphic Detach (regulator_strategy ?\<sigma>) prior_high = 0"
         unfolding expected_user_payoff_def user_payoff_def by simp
@@ -617,6 +661,21 @@ definition is_best_response_audit_firm ::
   "is_best_response_audit_firm t m us rs \<longleftrightarrow>
      (\<forall>m' \<in> firm_actions. expected_audit_firm_payoff t m us rs \<ge> expected_audit_firm_payoff t m' us rs)"
 
+definition is_best_response_user_audit ::
+    "user_type \<Rightarrow> firm_message \<Rightarrow> user_action \<Rightarrow> regulator_strat \<Rightarrow> real \<Rightarrow> bool" where
+  "is_best_response_user_audit ut m ua rs p_high \<longleftrightarrow>
+     (\<forall>ua' \<in> user_actions.
+        expected_user_payoff ut m ua rs p_high
+        \<ge> expected_user_payoff ut m ua' rs p_high)"
+
+definition is_best_response_regulator_audit ::
+    "regulator_type \<Rightarrow> firm_message \<Rightarrow> user_action \<Rightarrow>
+     regulator_action \<Rightarrow> public_signal \<Rightarrow> real \<Rightarrow> bool" where
+  "is_best_response_regulator_audit rt m ua ra s p_high \<longleftrightarrow>
+     (\<forall>ra' \<in> regulator_actions.
+        expected_regulator_payoff rt m ua ra s p_high
+        \<ge> expected_regulator_payoff rt m ua ra' s p_high)"
+
 text \<open>
   Payoff inequalities for the separating candidate are verified inline below.
 \<close>
@@ -673,7 +732,7 @@ proof (intro exI conjI)
   have sr: "is_sequentially_rational_audit ?\<sigma> ?\<mu>"
     unfolding is_sequentially_rational_audit_def
   proof (intro conjI allI)
-    fix t
+    fix t :: firm_private_type
     obtain g opac where t_eq: "t = (g, opac)" by (cases t)
     have eq_anth: "expected_audit_firm_payoff t Anthropomorphic (audit_user_strategy ?\<sigma>) (audit_regulator_strategy ?\<sigma>) = governance_gain - audit_cost t"
       unfolding expected_audit_firm_payoff_def audit_firm_payoff_def by simp
