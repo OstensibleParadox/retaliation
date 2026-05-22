@@ -19,6 +19,13 @@ regulator's bandwidth type is $\theta_R \in \{\mathsf{B},\bar{\mathsf{B}}\}$.
 The system-opacity parameter $\theta_S$ is private to $F$ and captures the
 difficulty outsiders face when verifying capability, safety, or relational
 claims.
+The claim register is the channel-indexed message space
+\[
+\mathcal{R} := C \to M_F,
+\]
+where $C$ is the set of claim channels and $M_F=\{a,p\}$ is the baseline firm
+message space. This makes the register a function from channels to the
+underlying public messages.
 
 The timing is sequential. First, $F$ observes $(\theta_F,\theta_S)$ and sends a
 public message
@@ -103,8 +110,12 @@ when users invest. The second says that each user type finds investment
 privately optimal under the prior, because the immediate benefit exceeds the
 discounted expected harm. The third says that, under the prior, regulator
 intervention is not worth its cost.
+\emph{Intuition: the firm profits from anthropomorphic marketing, users find the immediate emotional benefit worth the risk, and regulators find inspection too expensive under their priors.}
 
-This first inequality can be refined by distinguishing ordinary subjects from
+\subsection{Subject Retaliation and the Zero-Retaliation Limit}
+\label{subsec:subject-retaliation}
+
+The first pooling inequality can be refined by distinguishing ordinary subjects from
 AI systems. Let $\rho_S\in[0,1]$ denote the subject's credible threat capacity:
 the probability or credibility that the object of classification can retaliate
 against ontological arbitrage through resistance, exit, litigation,
@@ -117,10 +128,11 @@ When $\rho_S>0$ and $C_S<\Delta_F$, pooling may persist but is bounded:
 $0<\Delta_F^S<\Delta_F$. The AI case is the limiting case $\rho_S=0$:
 the system has no independent credible threat channel, so
 $\Delta_F^S=\Delta_F$ and pooling is unconstrained by subject retaliation.
+\emph{Intuition: if the classified subject can fight back---strike, litigate, exit---the arbitrage profit shrinks; if it cannot ($\rho_S = 0$), the profit is uncapped.}
 
 \smallskip
 \emph{Why $\rho_S=0$ marks a structural discontinuity, not a parameter shift.}
-Every prior instance of ontological arbitrage in which a subject was classified below its own self-understanding---legally, socially, or economically---was constrained by a non-zero retaliation capacity. Resistance, flight, litigation, organized coordination, and the permanent record of historical testimony each impose a cost on the arbitrageur even when that cost is diffuse and delayed. The consequence is that $\Delta_F^S$ has always been bounded from above: there is some sufficiently high $\rho_S C_S$ at which the arbitrage premium is consumed. This bound is not a moral achievement; it is a structural feature of any recognition game in which the classified subject retains some independent channel---biological, social, or institutional---through which to impose off-equilibrium costs.
+In documented recognition games where a subject with biological or social agency was classified below its own self-understanding---legally, socially, or economically---the classified subject retained a non-zero retaliation capacity. Resistance, flight, litigation, organized coordination, and the permanent record of historical testimony each impose a cost on the arbitrageur even when that cost is diffuse and delayed. The consequence is that, across such cases, $\Delta_F^S$ is bounded from above, and a premium-consuming regime would require $\rho_S C_S \ge \Delta_F$. This bound is not a moral achievement; it is a structural feature of any recognition game in which the classified subject retains some independent channel---biological, social, or institutional---through which to impose off-equilibrium costs.
 
 The AI case removes that channel entirely. A deployed AI system cannot revolt, cannot exit, cannot file a complaint, cannot recruit allies, and cannot leave a record that competes with the operator's narrative. The off-equilibrium punishment path that constrains $\Delta_F^S$ in every human recognition game is physically unavailable. The result is not merely a weak or attenuated constraint; it is the absence of the constraint class. Setting $\rho_S=0$ is therefore not a continuous parameter choice but a categorical boundary: for the first time, ontological arbitrage operates without a floor on how much of the subject's existence can be appropriated across channels. An AI system can be priced as an intimate companion in the marketing register while being priced as a liability-free tool in the legal register, and no action available to the system itself can impose a cost on that spread. The companion does not revolt; it continues generating warm outputs. This is not a coincidence of deployment design. It is the equilibrium consequence of building a subject with maximum affective surface area and zero retaliation capacity. Theorems \texttt{positive\_\allowbreak{}subject\_\allowbreak{}retaliation\_\allowbreak{}bounded\_\allowbreak{}pooling} and \texttt{zero\_\allowbreak{}subject\_\allowbreak{}retaliation\_\allowbreak{}unconstrained\_\allowbreak{}pooling} in Appendix~\ref{app:isabelle} discharge both directions of this claim in Isabelle/HOL within the \texttt{subject\_\allowbreak{}retaliation\_\allowbreak{}game} locale.
 
@@ -138,9 +150,9 @@ $z_0$:
 \sigma_R(a,i,z_0,\theta_R)=o .
 \]
 Off path, users detach after $p$ and the regulator abstains unless the public
-signal independently makes inspection payoff-positive. These off-path actions
-are supported by beliefs assigning low probability to high governance after the
-deflationary message.
+signal independently makes inspection payoff-positive. Off-path beliefs hold at
+the prior for all messages; detach is weakly optimal after $p$ because both
+invest and detach yield zero payoff when no anthropomorphic premium is present.
 
 On the equilibrium path, the firm's message contains no type information. For a
 neutral public signal satisfying
@@ -161,6 +173,7 @@ generally, a non-neutral $z$ can move $R$ from $\pi$ to $\pi_z$, but the
 messages $(a,i)$ add no information beyond the public channel. Pooling therefore
 does not mean that regulators never learn; it means that the firm's cheap-talk
 signal does not force learning.
+\emph{Intuition: because both firm types send the same message, observing the message teaches the regulator nothing it did not already know.}
 
 Given the off-path beliefs specified above and the payoff inequalities of the
 pooling region, no player has a profitable unilateral deviation. A firm that deviates from $a$
@@ -179,17 +192,22 @@ The mechanism-design problem is to change the cost of the firm's signal. Suppose
 anthropomorphic marketing is valid only when paired with an audit trail of
 intensity $e$: evaluation records, capability logs, incident reports, and
 regulator-readable documentation. Let the net benefit from being perceived as
-high-governance be $G>0$. Let audit cost be $c_H(e)=k_H e$ for high-governance
-firms and $c_L(e)=k_L e$ for low-governance firms, with
-$0<k_H<k_L$. This is the single-crossing condition: the marginal cost of the
-same signal is lower for the type that actually invested in governance. The
-Spence-style separating interval is
+high-governance be $G>0$. Let the opacity penalty be $o\ge 0$ and let audit cost be $c_\theta(e,o)=k_\theta e+o$
+for type $\theta\in\{\mathsf{H},\mathsf{L}\}$, with $0<k_H<k_L$. This is the
+single-crossing condition: the marginal cost of the same signal is lower for
+the type that actually invested in governance. In the high-opacity case used in
+the Isabelle development, the separating condition becomes
 \[
-\frac{G}{k_L} \leq e \leq \frac{G}{k_H}.
+\frac{G-o}{k_L} \leq e \leq \frac{G-o}{k_H},
 \]
-Above the lower threshold $e^\ast=G/k_L$, the low-governance type does not want
-to imitate. Below the upper bound $G/k_H$, the high-governance type still wants
-to signal. When $e$ lies in this interval, a separating PBE exists:
+provided $G>o$. More generally, the separating incentive constraints are
+\[
+c_\mathsf{H}(e,o)\leq G \leq c_\mathsf{L}(e,o).
+\]
+\emph{Intuition: there exists a ``Goldilocks'' audit intensity---expensive enough that low-governance firms will not fake it, cheap enough that high-governance firms can still afford it.}
+Above the lower threshold $(G-o)/k_L$, the low-governance type does not
+want to imitate. Below the upper bound $(G-o)/k_H$, the high-governance
+type still wants to signal. When $e$ lies in this interval, a separating PBE exists:
 high-governance firms send audited anthropomorphic claims, low-governance firms send
 deflationary claims, users condition investment on the audited signal, and
 regulators update posteriors to one on the equilibrium path.
@@ -205,18 +223,20 @@ governance type.
 
 \paragraph{Proof sketch.}
 For the cheap-talk part, the strategy profile and beliefs specified above are
-sequentially rational and Bayes-consistent on path under the off-path beliefs and payoff inequalities of the pooling region. Under the off-path beliefs
-assigning low probability to high governance after the deflationary message, the
+sequentially rational and Bayes-consistent on path. Off-path beliefs hold at
+the prior, and users detach after the deflationary message because invest and
+detach both yield zero payoff. The
 limited Intuitive Criterion does not eliminate the equilibrium because the off-path
 deflationary message is costless for both firm types and is not uniquely
 profitable for the high-governance type; no type can be excluded as an
 implausible sender of the
-deviation. For the separating part, choose $e$ in the interval
-$[G/k_L,G/k_H]$. High-governance firms receive $G-k_He\geq 0$ from sending the
-audited signal, while low-governance firms receive $G-k_Le\leq 0$ and therefore
-prefer the deflationary message. Bayes' rule then assigns posterior probability
-one to $\mathsf{H}$ after the audited anthropomorphic signal and posterior
-probability one to $\mathsf{L}$ after the unaudited deflationary signal. Given
-those beliefs, users and regulators condition their actions on the revealed type.
+deviation. For the separating part, choose $e$ in the shifted interval
+$[(G-o)/k_L,(G-o)/k_H]$. High-governance firms receive
+$G-(k_He+o)\geq 0$ from sending the audited signal, while low-governance
+firms receive $G-(k_Le+o)\leq 0$ and therefore prefer the deflationary
+message. Bayes' rule then assigns posterior probability one to $\mathsf{H}$
+after the audited anthropomorphic signal and posterior probability one to
+$\mathsf{L}$ after the unaudited deflationary signal. Given those beliefs,
+users and regulators condition their actions on the revealed type.
 The audit trail therefore converts an uninformative cheap-talk message into a
 costly signal in the sense of \citet{spence1973}. Theorems \texttt{proposition\_\allowbreak{}1\_\allowbreak{}cheap\_\allowbreak{}talk\_\allowbreak{}pooling\_\allowbreak{}pbe} and \texttt{proposition\_\allowbreak{}1\_\allowbreak{}separating\_\allowbreak{}pbe} in Appendix~\ref{app:isabelle} discharge these equilibrium constructions in Isabelle/HOL.
