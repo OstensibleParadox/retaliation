@@ -30,10 +30,10 @@ The implementation plan has been broken down into sequential phases to ensure st
 
 ## Build Command
 
-To compile the paper from the root directory:
+Compile from the `paper/` directory so the PDF, `.aux`, and bibliography artifacts stay there:
 
 ```bash
-pdflatex arbitrage && bibtex arbitrage && pdflatex arbitrage && pdflatex arbitrage
+cd paper && pdflatex arbitrage && bibtex arbitrage && pdflatex arbitrage && pdflatex arbitrage
 ```
 
 ## Isabelle Scope & Limitations
