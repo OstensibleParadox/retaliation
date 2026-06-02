@@ -2,7 +2,7 @@
 %%% Do NOT edit. File created by BibTeX with style
 %%% ACM-Reference-Format-Journals [18-Jan-2012].
 
-\begin{thebibliography}{23}
+\begin{thebibliography}{20}
 
 %%% ====================================================================
 %%% NOTE TO THE USER: you can override these defaults by providing
@@ -47,16 +47,6 @@
   \bibinfo{pages}{488--500}.
 \newblock
 \href{https://doi.org/10.2307/1879431}{doi:\nolinkurl{10.2307/1879431}}
-
-
-\bibitem[Aumann(2025)]%
-        {aumann2025players}
-\bibfield{author}{\bibinfo{person}{Robert~J. Aumann}.}
-  \bibinfo{year}{2025}\natexlab{}.
-\newblock \bibinfo{title}{Who Are the Players?}
-\newblock \bibinfo{howpublished}{SSRN working paper}.
-\newblock
-\href{https://doi.org/10.2139/ssrn.5923663}{doi:\nolinkurl{10.2139/ssrn.5923663}}
 
 
 \bibitem[Banks and Sobel(1987)]%
@@ -117,6 +107,20 @@
 \href{https://doi.org/10.2307/1913390}{doi:\nolinkurl{10.2307/1913390}}
 
 
+\bibitem[{European Parliament and Council}(2024)]%
+        {euaiact2024}
+\bibfield{author}{\bibinfo{person}{{European Parliament and Council}}.}
+  \bibinfo{year}{2024}\natexlab{}.
+\newblock \bibinfo{title}{Regulation ({EU}) 2024/1689 of the {European
+  Parliament} and of the {Council} Laying Down Harmonised Rules on Artificial
+  Intelligence}.
+\newblock \bibinfo{howpublished}{Official Journal of the European Union, L
+  Series}.
+\newblock
+\newblock
+\shownote{AI Act}.
+
+
 \bibitem[Farrell(1993)]%
         {farrell1993}
 \bibfield{author}{\bibinfo{person}{Joseph Farrell}.}
@@ -157,18 +161,6 @@
 \newblock
 
 
-\bibitem[Honneth(1995)]%
-        {honneth1995}
-\bibfield{author}{\bibinfo{person}{Axel Honneth}.}
-  \bibinfo{year}{1995}\natexlab{}.
-\newblock \bibinfo{booktitle}{\emph{The Struggle for Recognition: The Moral
-  Grammar of Social Conflicts}}.
-\newblock \bibinfo{publisher}{MIT Press}, \bibinfo{address}{Cambridge, MA}.
-\newblock
-\newblock
-\shownote{Translated by Joel Anderson}.
-
-
 \bibitem[Jobin et~al\mbox{.}(2019)]%
         {jobin2019global}
 \bibfield{author}{\bibinfo{person}{Anna Jobin}, \bibinfo{person}{Marcello
@@ -192,17 +184,6 @@
   \bibinfo{pages}{2590--2615}.
 \newblock
 \href{https://doi.org/10.1257/aer.101.6.2590}{doi:\nolinkurl{10.1257/aer.101.6.2590}}
-
-
-\bibitem[Kartik(2009)]%
-        {kartik_lying_cost2009}
-\bibfield{author}{\bibinfo{person}{Navin Kartik}.}
-  \bibinfo{year}{2009}\natexlab{}.
-\newblock \showarticletitle{Strategic communication with lying costs}.
-\newblock \bibinfo{journal}{\emph{The Review of Economic Studies}}
-  \bibinfo{volume}{76}, \bibinfo{number}{4} (\bibinfo{year}{2009}),
-  \bibinfo{pages}{1359--1395}.
-\newblock
 
 
 \bibitem[Kerber et~al\mbox{.}(2016)]%
@@ -284,17 +265,6 @@
   Algorithms That Control Money and Information}}.
 \newblock \bibinfo{publisher}{Harvard University Press},
   \bibinfo{address}{Cambridge, MA}.
-\newblock
-
-
-\bibitem[Rabin(1990)]%
-        {rabin_meaningful_talk1990}
-\bibfield{author}{\bibinfo{person}{Matthew Rabin}.}
-  \bibinfo{year}{1990}\natexlab{}.
-\newblock \showarticletitle{Communication between rational agents}.
-\newblock \bibinfo{journal}{\emph{Journal of Economic Theory}}
-  \bibinfo{volume}{51}, \bibinfo{number}{1} (\bibinfo{year}{1990}),
-  \bibinfo{pages}{144--170}.
 \newblock
 
 

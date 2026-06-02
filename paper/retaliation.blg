@@ -13,45 +13,45 @@ Reallocated global_strs (elt_size=200001) to 20 items from 10.
 Reallocated glb_str_end (elt_size=4) to 20 items from 10.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Warning--empty address in nipkow2002isabelle
-You've used 23 entries,
+You've used 20 entries,
             6273 wiz_defined-function locations,
-            1673 strings with 21658 characters,
-and the built_in function-call counts, 26146 in all, are:
-= -- 4068
-> -- 647
+            1654 strings with 21434 characters,
+and the built_in function-call counts, 23080 in all, are:
+= -- 3598
+> -- 596
 < -- 0
-+ -- 214
-- -- 253
-* -- 1681
-:= -- 2396
-add.period$ -- 121
-call.type$ -- 23
-change.case$ -- 143
-chr.to.int$ -- 23
-cite$ -- 24
-duplicate$ -- 2203
-empty$ -- 1557
-format.name$ -- 301
-if$ -- 6736
++ -- 200
+- -- 232
+* -- 1508
+:= -- 2121
+add.period$ -- 105
+call.type$ -- 20
+change.case$ -- 128
+chr.to.int$ -- 20
+cite$ -- 21
+duplicate$ -- 1919
+empty$ -- 1357
+format.name$ -- 280
+if$ -- 5941
 int.to.chr$ -- 2
 int.to.str$ -- 1
-missing$ -- 80
-newline$ -- 238
-num.names$ -- 161
-pop$ -- 715
+missing$ -- 70
+newline$ -- 213
+num.names$ -- 140
+pop$ -- 624
 preamble$ -- 1
-purify$ -- 327
+purify$ -- 288
 quote$ -- 0
-skip$ -- 775
+skip$ -- 676
 stack$ -- 0
-substring$ -- 2144
-swap$ -- 245
+substring$ -- 1873
+swap$ -- 212
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 378
+type$ -- 331
 warning$ -- 1
-while$ -- 195
+while$ -- 168
 width$ -- 0
-write$ -- 493
+write$ -- 434
 (There was 1 warning)
