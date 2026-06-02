@@ -43,7 +43,11 @@ observes $(m_F,m_U,z)$ and its own bandwidth type $\theta_R$, then chooses
 m_R \in M_R=\{x,s,o\},
 \]
 where $x$ denotes inspection, $s$ sanction, and $o$ abstention. Messages are
-public; types are private. A strategy profile and belief system constitute a
+public; types are private. The game sequence induces a finite state space over
+the stage, private types, public history, public signal, and actions. The transition
+kernel is induced by the prior $\pi$, the public-signal likelihood $q$, and the
+behavioral strategies of the players, with pure strategies represented as point masses.
+A strategy profile and belief system constitute a
 Perfect Bayesian Equilibrium when strategies are sequentially rational given
 beliefs and beliefs are derived from Bayes' rule wherever possible. Sequential
 equilibrium supplies the usual consistency strengthening \citep{kreps_wilson1982}.
@@ -200,13 +204,25 @@ path \citep{farrell1993}. A neologism is credible only if the types named by the
 message strictly gain when receivers respond to that literal meaning, while the
 types excluded by the message do not gain.
 
-At $\rho_S=0$, the pooling equilibrium is immune to this challenge. Consider
-the only trust-restoring nontrivial claim, $K=\{\mathsf{H}\}$: the message says
-that the sender is high-governance. If users treat that message as credible,
-they invest; if the regulator continues to abstain, the sender obtains the
-recognition premium. But the low-governance type can send the same new message
-at the same zero cost and obtain the same trust-restoring continuation. The
-deviation therefore cannot exclude $\mathsf{L}$. The alternative nontrivial
+At $\rho_S=0$, the pooling equilibrium is immune to this challenge. In Farrell's
+formalization, a type subset $K$ is a credible neologism if there exists a receiver
+continuation $c$ induced by believing $K$ such that:
+\[
+\exists c:\; \forall\theta\in K,\ u_\theta(c)>\bar u_\theta
+\quad\text{and}\quad
+\forall\theta\notin K,\ u_\theta(c)\le \bar u_\theta ,
+\]
+where $\bar u_\theta$ is the pooling equilibrium payoff. Consider the only trust-restoring
+nontrivial claim, $K=\{\mathsf{H}\}$. If users treat that message as credible,
+it induces a continuation where users invest and regulators abstain. However, any
+such continuation satisfies perfect shadowing:
+\[
+u_\mathsf{H}(c)>\bar u_\mathsf{H} \Rightarrow u_\mathsf{L}(c)>\bar u_\mathsf{L} .
+\]
+Because both firm types can send the new message at zero cost and face the same
+unconstrained downstream environment at $\rho_S=0$, any continuation strictly
+preferred by the high-governance type is also strictly preferred by the
+low-governance type. The deviation therefore cannot exclude $\mathsf{L}$. The alternative nontrivial
 claim, $K=\{\mathsf{L}\}$, does not restore trust and therefore gives the
 low-governance type no strict gain. Hence no nontrivial type claim satisfies the
 two-sided credibility condition for a Farrell neologism. In the Isabelle
@@ -242,26 +258,33 @@ high-governance firms send audited anthropomorphic claims, low-governance firms 
 deflationary claims, users condition investment on the audited signal, and
 regulators update posteriors to one on the equilibrium path.
 
-\begin{proposition}[Cheap talk and audit-trail separation]
-\label{prop:cheap-talk-separation}
+\begin{proposition}[Cheap-talk pooling PBE]
 Under the cheap-talk cost structure above, pooling on anthropomorphic marketing
-is a Perfect Bayesian Equilibrium. At the zero-retaliation limit, this pooling
-equilibrium is neologism-proof against nontrivial type claims in Farrell's
-sense. Under an audit-trail signal cost satisfying single crossing in $\theta_F$,
+is a Perfect Bayesian Equilibrium.
+\end{proposition}
+
+\begin{theorem}[Zero-retaliation neologism-proofness]
+At the zero-retaliation limit ($\rho_S=0$), the pooling equilibrium is neologism-proof
+against any nontrivial type claim.
+\end{theorem}
+
+\begin{proposition}[Audit-trail separation]
+\label{prop:cheap-talk-separation}
+Under an audit-trail signal cost satisfying single crossing in $\theta_F$,
 there is a separating Perfect Bayesian Equilibrium in which $m_F$ reveals the
 firm's governance type.
 \end{proposition}
 
 \paragraph{Proof sketch.}
-For the cheap-talk part, the strategy profile and beliefs specified above are
+For the pooling proposition, the strategy profile and beliefs specified above are
 sequentially rational and Bayes-consistent on path. Off-path beliefs hold at
 the prior, and users detach after the deflationary message because invest and
-detach both yield zero payoff. The neologism-proofness argument follows from
-perfect shadowing at $\rho_S=0$: any trust-restoring claim that would make
-$\mathsf{H}$ strictly better off also makes $\mathsf{L}$ strictly better off,
-because both types can send the same message at zero cost and receive the same
-retaliation-undiscounted premium. Thus no nontrivial claim can be credible in
-Farrell's sense. For the separating part, choose $e$ in the shifted interval
+detach both yield zero payoff. For the neologism-proofness theorem, the argument follows from
+perfect shadowing at $\rho_S=0$: any trust-restoring continuation $c$ satisfying
+$u_\mathsf{H}(c)>\bar u_\mathsf{H}$ must also satisfy $u_\mathsf{L}(c)>\bar u_\mathsf{L}$,
+because both types send the message at zero cost and face the same downstream receiver actions.
+Thus no nontrivial claim can be credible in
+Farrell's sense. For the separating proposition, choose $e$ in the shifted interval
 $[(G-o)/k_L,(G-o)/k_H]$. High-governance firms receive
 $G-(k_He+o)\geq 0$ from sending the audited signal, while low-governance
 firms receive $G-(k_Le+o)\leq 0$ and therefore prefer the deflationary

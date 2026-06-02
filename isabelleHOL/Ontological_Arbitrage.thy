@@ -126,6 +126,10 @@ record audit_belief_system =
   audit_prob_high_user     :: user_bel
   audit_prob_high_regulator :: belief_after
 
+record receiver_continuation =
+  cont_user_action :: user_action
+  cont_regulator_action :: regulator_action
+
 subsection \<open>Cheap-Talk Game: Pooling Equilibrium\<close>
 
 text \<open>
@@ -613,19 +617,18 @@ qed
 
 subsection \<open>Farrell-Style Neologism-Proof Pooling\<close>
 
-definition user_BR :: "firm_type set \<Rightarrow> user_action" where
-  "user_BR K = (if High_Gov \<in> K then Invest else Detach)"
+definition admissible_continuation :: "firm_type set \<Rightarrow> receiver_continuation \<Rightarrow> bool" where
+  "admissible_continuation K c \<longleftrightarrow>
+     cont_user_action c = (if High_Gov \<in> K then Invest else Detach) \<and>
+     cont_regulator_action c = Abstain"
 
-definition regulator_BR :: "firm_type set \<Rightarrow> regulator_action" where
-  "regulator_BR K = Abstain"
+definition equilibrium_payoff :: "firm_type \<Rightarrow> real" where
+  "equilibrium_payoff \<theta> = retaliation_discounted_premium"
 
-definition trust_restoring_continuation :: "firm_type set \<Rightarrow> bool" where
-  "trust_restoring_continuation K \<longleftrightarrow>
-     user_BR K = Invest \<and> regulator_BR K = Abstain"
-
-definition neologism_gain :: "firm_type \<Rightarrow> firm_type set \<Rightarrow> real" where
-  "neologism_gain \<theta> K =
-     (if trust_restoring_continuation K then retaliation_discounted_premium else 0)"
+definition payoff_after :: "firm_type \<Rightarrow> receiver_continuation \<Rightarrow> real" where
+  "payoff_after \<theta> c =
+     (if cont_user_action c = Invest \<and> cont_regulator_action c = Abstain
+      then retaliation_discounted_premium else 0)"
 
 definition nontrivial_claim :: "firm_type set \<Rightarrow> bool" where
   "nontrivial_claim K \<longleftrightarrow> K \<noteq> {} \<and> K \<noteq> {High_Gov, Low_Gov}"
@@ -633,19 +636,9 @@ definition nontrivial_claim :: "firm_type set \<Rightarrow> bool" where
 definition is_credible_neologism :: "firm_type set \<Rightarrow> bool" where
   "is_credible_neologism K \<longleftrightarrow>
      nontrivial_claim K \<and>
-     (\<forall>\<theta>. \<theta> \<in> K \<longrightarrow> neologism_gain \<theta> K > 0) \<and>
-     (\<forall>\<theta>. \<theta> \<notin> K \<longrightarrow> neologism_gain \<theta> K \<le> 0)"
-
-definition strong_perfect_shadowing_property :: bool where
-  "strong_perfect_shadowing_property \<longleftrightarrow>
-     (\<forall>K. Low_Gov \<notin> K \<and> trust_restoring_continuation K
-           \<longrightarrow> neologism_gain Low_Gov K > 0)"
-
-definition perfect_shadowing_property :: bool where
-  "perfect_shadowing_property \<longleftrightarrow>
-     (\<forall>K. Low_Gov \<notin> K \<and> trust_restoring_continuation K
-           \<and> neologism_gain High_Gov K > 0
-           \<longrightarrow> neologism_gain Low_Gov K > 0)"
+     (\<exists>c. admissible_continuation K c \<and>
+          (\<forall>\<theta>. \<theta> \<in> K \<longrightarrow> payoff_after \<theta> c > equilibrium_payoff \<theta>) \<and>
+          (\<forall>\<theta>. \<theta> \<notin> K \<longrightarrow> payoff_after \<theta> c \<le> equilibrium_payoff \<theta>))"
 
 lemma zero_retaliation_discounted_premium_positive:
   assumes "rho_S = 0"
@@ -654,38 +647,39 @@ lemma zero_retaliation_discounted_premium_positive:
   unfolding retaliation_discounted_premium_def expected_subject_retaliation_def
   by simp
 
-lemma zero_retaliation_strong_perfect_shadowing:
+lemma zero_retaliation_perfect_shadowing:
   assumes "rho_S = 0"
-  shows "strong_perfect_shadowing_property"
-  unfolding strong_perfect_shadowing_property_def neologism_gain_def
-  using zero_retaliation_discounted_premium_positive[OF assms] by auto
-
-lemma strong_shadowing_implies_shadowing:
-  assumes "strong_perfect_shadowing_property"
-  shows "perfect_shadowing_property"
-  using assms
-  unfolding strong_perfect_shadowing_property_def perfect_shadowing_property_def
-  by blast
+    and "admissible_continuation {High_Gov} c"
+    and "payoff_after High_Gov c > equilibrium_payoff High_Gov"
+  shows "payoff_after Low_Gov c > equilibrium_payoff Low_Gov"
+proof -
+  have payoff_H: "payoff_after High_Gov c =
+    (if cont_user_action c = Invest \<and> cont_regulator_action c = Abstain
+     then retaliation_discounted_premium else 0)"
+    unfolding payoff_after_def by simp
+  have payoff_L: "payoff_after Low_Gov c = payoff_after High_Gov c"
+    unfolding payoff_after_def by simp
+  have "equilibrium_payoff Low_Gov = equilibrium_payoff High_Gov"
+    unfolding equilibrium_payoff_def by simp
+  thus ?thesis using assms(3) payoff_L by simp
+qed
 
 theorem zero_retaliation_no_high_claim_neologism:
   assumes "rho_S = 0"
   shows "\<not> is_credible_neologism {High_Gov}"
 proof
   assume credible: "is_credible_neologism {High_Gov}"
-  have shadowing: "perfect_shadowing_property"
-    using assms zero_retaliation_strong_perfect_shadowing
-      strong_shadowing_implies_shadowing by blast
-  have trust: "trust_restoring_continuation {High_Gov}"
-    unfolding trust_restoring_continuation_def user_BR_def regulator_BR_def by simp
-  have high_gain: "neologism_gain High_Gov {High_Gov} > 0"
-    using credible unfolding is_credible_neologism_def by simp
-  have low_gain: "neologism_gain Low_Gov {High_Gov} > 0"
-    using shadowing trust high_gain
-    unfolding perfect_shadowing_property_def by simp
-  have low_excluded: "neologism_gain Low_Gov {High_Gov} \<le> 0"
-    using credible unfolding is_credible_neologism_def by simp
-  show False
-    using low_gain low_excluded by linarith
+  then obtain c where c_admissible: "admissible_continuation {High_Gov} c"
+    and high_gain: "\<forall>\<theta>. \<theta> \<in> {High_Gov} \<longrightarrow> payoff_after \<theta> c > equilibrium_payoff \<theta>"
+    and low_excluded: "\<forall>\<theta>. \<theta> \<notin> {High_Gov} \<longrightarrow> payoff_after \<theta> c \<le> equilibrium_payoff \<theta>"
+    unfolding is_credible_neologism_def by blast
+  have high_strict_gain: "payoff_after High_Gov c > equilibrium_payoff High_Gov"
+    using high_gain by simp
+  have low_strict_gain: "payoff_after Low_Gov c > equilibrium_payoff Low_Gov"
+    using zero_retaliation_perfect_shadowing[OF assms c_admissible high_strict_gain] by simp
+  have low_no_gain: "payoff_after Low_Gov c \<le> equilibrium_payoff Low_Gov"
+    using low_excluded by simp
+  show False using low_strict_gain low_no_gain by linarith
 qed
 
 lemma nontrivial_firm_type_claim_cases:
@@ -694,6 +688,37 @@ lemma nontrivial_firm_type_claim_cases:
   using assms
   unfolding nontrivial_claim_def
   by (cases "High_Gov \<in> K"; cases "Low_Gov \<in> K"; auto; metis firm_type.exhaust)
+
+theorem zero_retaliation_low_claim_not_attractive:
+  assumes "rho_S = 0"
+  shows "\<forall>c. admissible_continuation {Low_Gov} c \<longrightarrow> payoff_after Low_Gov c \<le> equilibrium_payoff Low_Gov"
+proof (intro allI impI)
+  fix c
+  assume adm: "admissible_continuation {Low_Gov} c"
+  then have "cont_user_action c = Detach"
+    unfolding admissible_continuation_def by auto
+  then have "payoff_after Low_Gov c = 0"
+    unfolding payoff_after_def by simp
+  moreover have "0 \<le> equilibrium_payoff Low_Gov"
+    unfolding equilibrium_payoff_def
+    using zero_retaliation_discounted_premium_positive[OF assms] by simp
+  ultimately show "payoff_after Low_Gov c \<le> equilibrium_payoff Low_Gov" by linarith
+qed
+
+theorem no_low_gov_credible_neologism:
+  assumes "rho_S = 0"
+  shows "\<not> is_credible_neologism {Low_Gov}"
+proof
+  assume credible: "is_credible_neologism {Low_Gov}"
+  then obtain c where c_adm: "admissible_continuation {Low_Gov} c"
+    and gain: "\<forall>\<theta>. \<theta> \<in> {Low_Gov} \<longrightarrow> payoff_after \<theta> c > equilibrium_payoff \<theta>"
+    unfolding is_credible_neologism_def by blast
+  have "payoff_after Low_Gov c > equilibrium_payoff Low_Gov"
+    using gain by simp
+  moreover have "payoff_after Low_Gov c \<le> equilibrium_payoff Low_Gov"
+    using zero_retaliation_low_claim_not_attractive[OF assms] c_adm by simp
+  ultimately show False by linarith
+qed
 
 theorem zero_retaliation_neologism_absorbing:
   assumes "rho_S = 0"
@@ -709,20 +734,9 @@ proof (intro allI impI)
     then show "\<not> is_credible_neologism K"
       using assms zero_retaliation_no_high_claim_neologism by simp
   next
-    assume low_claim: "K = {Low_Gov}"
-    show "\<not> is_credible_neologism K"
-    proof
-      assume credible: "is_credible_neologism K"
-      have low_gain_positive: "neologism_gain Low_Gov K > 0"
-        using credible low_claim unfolding is_credible_neologism_def by simp
-      have low_gain_zero: "neologism_gain Low_Gov K = 0"
-        using low_claim
-        unfolding neologism_gain_def trust_restoring_continuation_def
-          user_BR_def regulator_BR_def
-        by simp
-      show False
-        using low_gain_positive low_gain_zero by linarith
-    qed
+    assume "K = {Low_Gov}"
+    then show "\<not> is_credible_neologism K"
+      using assms no_low_gov_credible_neologism by simp
   qed
 qed
 
