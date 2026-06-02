@@ -1,12 +1,12 @@
 % !TEX root = ../arbitrage.tex
-\section{Mechanism Design: Equilibrium Redesign}
+\section{Mechanism Design: Pricing the Arbitrage}
 \label{sec:mechanism}
 
 The preceding sections identify a precise failure mode: under cheap-talk costs, ontological arbitrage is a stable equilibrium (Table~\ref{tab:condition-map}). The policy implication is not that regulators should decide whether AI systems
-are persons. It is that the public signal environment should be redesigned so
+are persons, or that they should maximize social welfare directly. It is that the public signal environment should be redesigned so
 that inconsistent ontological claims no longer remain costless. In
-mechanism-design terms, the problem is to make truthful revelation of $\theta_F$ incentive
-compatible rather than to ask firms to volunteer it \citep{myerson1979}.
+mechanism-design terms, the problem is to make non-arbitrage incentive
+compatible by pricing the spread, rather than to ask firms to volunteer restraint \citep{myerson1979}.
 
 The proposals below therefore alter the game in Section~\ref{sec:bayesian} at
 three different points: the cost of inconsistent messages, the cost of
@@ -30,8 +30,8 @@ Auditable records (Section~\ref{subsec:auditable-records}) lower the
 regulator's verification cost $K_{\theta_R}$, relieving the bandwidth
 constraint that made abstention dominant. The remaining two
 conditions---asynchronous harms and fragmentation of affected
-parties---are not resolved by any single mechanism but are jointly mitigated:
-auditable records shorten the evidentiary lag that makes harm asynchronous, and
+parties---are not solved by any single mechanism. They are translated into costs:
+auditable records shorten the evidentiary lag that lets harm remain discounted, and
 costly audits give fragmented publics a procedural object around which to
 coordinate demands on the regulator's agenda.
 
@@ -43,7 +43,7 @@ than as two isolated texts. In the cheap-talk model, marketing can send $a$
 while policy and liability documents send $p$, with no cost assigned to the
 inconsistency. A sanctionable-inconsistency rule would require firms to maintain
 a claim register $\mathcal{R} := C \to M_F$ linking outward-facing
-marketing, safety statements, terms of service, incident disclosures, and
+marketing, capability statements, terms of service, incident disclosures, and
 liability positions, where the baseline firm message space remains
 $M_F=\{a,p\}$. If the firm represents the system as agentic, caring, autonomous,
 or safety-critical in one channel while denying the legal significance of the
@@ -89,9 +89,9 @@ incompatible ontology for adjudicators without paying a regulatory price.
 \subsection{Costly Signaling Through Third-Party Audits}
 \label{subsec:costly-signaling-audits}
 
-The second intervention makes anthropomorphic or agency-adjacent marketing a
+The second mechanism makes anthropomorphic or agency-adjacent marketing a
 costly signal. A firm may still describe a system as a companion, agent,
-co-worker, tutor, or safety-critical assistant, but only after a qualified third
+co-worker, tutor, or high-reliance assistant, but only after a qualified third
 party verifies the governance conditions that make such a claim non-misleading:
 evaluation coverage, red-team results, escalation pathways, incident-response
 capacity, model-update controls, and post-deployment monitoring. The audit does
@@ -119,7 +119,7 @@ the interval where signal cost separates types.
 \paragraph{Equilibrium shift.}
 The shift is from pooling to separating PBE. High-governance firms send audited
 anthropomorphic claims; low-governance firms either invest in governance until
-their cost curve changes or use deflationary marketing. Users can then condition
+their cost curve changes or use deflationary marketing because mimicry is no longer privately profitable. Users can then condition
 investment on an informative signal rather than on undisciplined warmth in
 product copy. Regulators can condition abstention on the audit result rather
 than on an unverified prior. This is the Spence logic of costly signaling
@@ -143,7 +143,7 @@ the claim to be marketed at scale.
 The third intervention reduces the regulator's verification cost by requiring
 append-only, regulator-readable records tied to capability and relational
 claims. Records should include the claim identifier, model version, relevant
-evaluation suite, deployment date, material model updates, safety interventions,
+evaluation suite, deployment date, material model updates, risk controls,
 known incident classes, and the internal owner responsible for the claim. The
 point is not to publish every interaction or expose user data. It is to create a
 durable evidentiary substrate that lets $R$ test whether a public claim remained
@@ -160,7 +160,7 @@ D'_R=D_R+\eta .
 When $K'_{\theta_R}\leq \pi(\mathsf{L})D'_R$, inspection becomes sequentially
 rational.
 \emph{Intuition: once the cost of checking drops below the expected payoff from catching a bad actor, the regulator starts checking.}
-Records also improve the public channel $z$ by giving journalists,
+Records also sharpen the public channel $z$ by giving journalists,
 researchers, and civil society a procedural object to demand or contest, rather
 than leaving them to infer governance quality from outputs alone.
 
@@ -198,11 +198,11 @@ checkpoint only, not across the firm's full messaging surface. Auditable records
 lower $K_{\theta_R}$ and make public signal $z$ less noisy, but without the
 first two mechanisms the information they produce lacks legal teeth: the
 regulator can observe inconsistency but has no parameter under which to price
-it, and a firm's record of good governance confers no marketing advantage
+it, and a firm's record of high-governance investment confers no marketing advantage
 because the market cannot distinguish it from cheap talk. The three proposals
 therefore form a complementary system: records supply the evidentiary
 infrastructure, sanctionable inconsistency supplies the price, and costly
 audits supply the separation condition. The result is not metaphysical
-settlement. It is a governance design in which firms remain free to choose their
+settlement. It is a cost design in which firms remain free to choose their
 ontology, but not to arbitrage incompatible ontologies across audiences at zero
 cost.
