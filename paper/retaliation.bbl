@@ -1,85 +1,233 @@
-\begin{thebibliography}{14}
-\providecommand{\natexlab}[1]{#1}
+%%% -*-BibTeX-*-
+%%% Do NOT edit. File created by BibTeX with style
+%%% ACM-Reference-Format-Journals [18-Jan-2012].
 
-\bibitem[{Akerlof(1970)}]{akerlof1970}
-Akerlof, G.~A. 1970.
-\newblock The Market for ``Lemons'': Quality Uncertainty and the Market
-  Mechanism.
-\newblock \emph{The Quarterly Journal of Economics}, 84(3): 488--500.
+\begin{thebibliography}{16}
 
-\bibitem[{Aumann(2025)}]{aumann2025players}
-Aumann, R.~J. 2025.
-\newblock Who Are the Players?
-\newblock SSRN working paper.
+%%% ====================================================================
+%%% NOTE TO THE USER: you can override these defaults by providing
+%%% customized versions of any of these macros before the \bibliography
+%%% command.  Each of them MUST provide its own final punctuation,
+%%% except for \shownote{} and \showURL{}.  The latter two
+%%% do not use final punctuation, in order to avoid confusing it with
+%%% the Web address.
+%%%
+%%% To suppress output of a particular field, define its macro to expand
+%%% to an empty string, or better, \unskip, like this:
+%%%
+%%% \newcommand{\showURL}[1]{\unskip}   % LaTeX syntax
+%%%
+%%% \def \showURL #1{\unskip}           % plain TeX syntax
+%%%
+%%% ====================================================================
 
-\bibitem[{Cho and Kreps(1987)}]{cho_kreps1987}
-Cho, I.-K.; and Kreps, D.~M. 1987.
-\newblock Signaling Games and Stable Equilibria.
-\newblock \emph{The Quarterly Journal of Economics}, 102(2): 179--221.
+\ifx \showCODEN    \undefined \def \showCODEN     #1{\unskip}     \fi
+\ifx \showISBNx    \undefined \def \showISBNx     #1{\unskip}     \fi
+\ifx \showISBNxiii \undefined \def \showISBNxiii  #1{\unskip}     \fi
+\ifx \showISSN     \undefined \def \showISSN      #1{\unskip}     \fi
+\ifx \showLCCN     \undefined \def \showLCCN      #1{\unskip}     \fi
+\ifx \shownote     \undefined \def \shownote      #1{#1}          \fi
+\ifx \showarticletitle \undefined \def \showarticletitle #1{#1}   \fi
+\ifx \showURL      \undefined \def \showURL       {\relax}        \fi
+% The following commands are used for tagged output and should be
+% invisible to TeX
+\providecommand\bibfield[2]{#2}
+\providecommand\bibinfo[2]{#2}
+\providecommand\natexlab[1]{#1}
+\providecommand\showeprint[2][]{arXiv:#2}
 
-\bibitem[{Crawford and Sobel(1982)}]{crawford_sobel1982}
-Crawford, V.~P.; and Sobel, J. 1982.
-\newblock Strategic Information Transmission.
-\newblock \emph{Econometrica}, 50(6): 1431--1451.
+\bibitem[Akerlof(1970)]%
+        {akerlof1970}
+\bibfield{author}{\bibinfo{person}{George~A. Akerlof}.}
+  \bibinfo{year}{1970}\natexlab{}.
+\newblock \showarticletitle{The Market for ``Lemons'': Quality Uncertainty and
+  the Market Mechanism}.
+\newblock \bibinfo{journal}{\emph{The Quarterly Journal of Economics}}
+  \bibinfo{volume}{84}, \bibinfo{number}{3} (\bibinfo{year}{1970}),
+  \bibinfo{pages}{488--500}.
+\newblock
+\href{https://doi.org/10.2307/1879431}{doi:\nolinkurl{10.2307/1879431}}
 
-\bibitem[{Floridi et~al.(2018)Floridi, Cowls, Beltrametti, Chatila, Chazerand,
-  Dignum, Luetge, Madelin, Pagallo, Rossi, Schafer, Valcke, and
-  Vayena}]{floridi2018ai4people}
-Floridi, L.; Cowls, J.; Beltrametti, M.; Chatila, R.; Chazerand, P.; Dignum,
-  V.; Luetge, C.; Madelin, R.; Pagallo, U.; Rossi, F.; Schafer, B.; Valcke, P.;
-  and Vayena, E. 2018.
-\newblock {AI4People}---An Ethical Framework for a Good {AI} Society:
-  Opportunities, Risks, Principles, and Recommendations.
-\newblock \emph{Minds and Machines}, 28(4): 689--707.
 
-\bibitem[{Hadfield(2017)}]{hadfield2017rules}
-Hadfield, G.~K. 2017.
-\newblock \emph{Rules for a Flat World: Why Humans Invented Law and How to
-  Reinvent It for a Complex Global Economy}.
-\newblock New York: Oxford University Press.
+\bibitem[Aumann(2025)]%
+        {aumann2025players}
+\bibfield{author}{\bibinfo{person}{Robert~J. Aumann}.}
+  \bibinfo{year}{2025}\natexlab{}.
+\newblock \bibinfo{title}{Who Are the Players?}
+\newblock \bibinfo{howpublished}{SSRN working paper}.
+\newblock
+\href{https://doi.org/10.2139/ssrn.5923663}{doi:\nolinkurl{10.2139/ssrn.5923663}}
 
-\bibitem[{Honneth(1995)}]{honneth1995}
-Honneth, A. 1995.
-\newblock \emph{The Struggle for Recognition: The Moral Grammar of Social
-  Conflicts}.
-\newblock Cambridge, MA: MIT Press.
-\newblock Translated by Joel Anderson.
 
-\bibitem[{Jobin, Ienca, and Vayena(2019)}]{jobin2019global}
-Jobin, A.; Ienca, M.; and Vayena, E. 2019.
-\newblock The Global Landscape of {AI} Ethics Guidelines.
-\newblock \emph{Nature Machine Intelligence}, 1(9): 389--399.
+\bibitem[Cho and Kreps(1987)]%
+        {cho_kreps1987}
+\bibfield{author}{\bibinfo{person}{In-Koo Cho} {and} \bibinfo{person}{David~M.
+  Kreps}.} \bibinfo{year}{1987}\natexlab{}.
+\newblock \showarticletitle{Signaling Games and Stable Equilibria}.
+\newblock \bibinfo{journal}{\emph{The Quarterly Journal of Economics}}
+  \bibinfo{volume}{102}, \bibinfo{number}{2} (\bibinfo{year}{1987}),
+  \bibinfo{pages}{179--221}.
+\newblock
+\href{https://doi.org/10.2307/1885060}{doi:\nolinkurl{10.2307/1885060}}
 
-\bibitem[{Kreps and Wilson(1982)}]{kreps_wilson1982}
-Kreps, D.~M.; and Wilson, R. 1982.
-\newblock Sequential Equilibria.
-\newblock \emph{Econometrica}, 50(4): 863--894.
 
-\bibitem[{Milgrom and Roberts(1986)}]{milgrom_roberts1986}
-Milgrom, P.; and Roberts, J. 1986.
-\newblock Price and Advertising Signals of Product Quality.
-\newblock \emph{Journal of Political Economy}, 94(4): 796--821.
+\bibitem[Crawford and Sobel(1982)]%
+        {crawford_sobel1982}
+\bibfield{author}{\bibinfo{person}{Vincent~P. Crawford} {and}
+  \bibinfo{person}{Joel Sobel}.} \bibinfo{year}{1982}\natexlab{}.
+\newblock \showarticletitle{Strategic Information Transmission}.
+\newblock \bibinfo{journal}{\emph{Econometrica}} \bibinfo{volume}{50},
+  \bibinfo{number}{6} (\bibinfo{year}{1982}), \bibinfo{pages}{1431--1451}.
+\newblock
+\href{https://doi.org/10.2307/1913390}{doi:\nolinkurl{10.2307/1913390}}
 
-\bibitem[{Myerson(1979)}]{myerson1979}
-Myerson, R.~B. 1979.
-\newblock Incentive Compatibility and the Bargaining Problem.
-\newblock \emph{Econometrica}, 47(1): 61--73.
 
-\bibitem[{Nipkow, Paulson, and Wenzel(2002)}]{nipkow2002isabelle}
-Nipkow, T.; Paulson, L.~C.; and Wenzel, M. 2002.
-\newblock \emph{Isabelle/{HOL}: A Proof Assistant for Higher-Order Logic},
-  volume 2283 of \emph{Lecture Notes in Computer Science}.
-\newblock Springer.
+\bibitem[Farrell(1993)]%
+        {farrell1993}
+\bibfield{author}{\bibinfo{person}{Joseph Farrell}.}
+  \bibinfo{year}{1993}\natexlab{}.
+\newblock \showarticletitle{Meaning and Credibility in Cheap-Talk Games}.
+\newblock \bibinfo{journal}{\emph{Games and Economic Behavior}}
+  \bibinfo{volume}{5}, \bibinfo{number}{4} (\bibinfo{year}{1993}),
+  \bibinfo{pages}{514--531}.
+\newblock
+\href{https://doi.org/10.1006/game.1993.1029}{doi:\nolinkurl{10.1006/game.1993.1029}}
 
-\bibitem[{Pasquale(2015)}]{pasquale2015}
-Pasquale, F. 2015.
-\newblock \emph{The Black Box Society: The Secret Algorithms That Control Money
-  and Information}.
-\newblock Cambridge, MA: Harvard University Press.
 
-\bibitem[{Spence(1973)}]{spence1973}
-Spence, M. 1973.
-\newblock Job Market Signaling.
-\newblock \emph{The Quarterly Journal of Economics}, 87(3): 355--374.
+\bibitem[Floridi et~al\mbox{.}(2018)]%
+        {floridi2018ai4people}
+\bibfield{author}{\bibinfo{person}{Luciano Floridi}, \bibinfo{person}{Josh
+  Cowls}, \bibinfo{person}{Monica Beltrametti}, \bibinfo{person}{Raja Chatila},
+  \bibinfo{person}{Patrice Chazerand}, \bibinfo{person}{Virginia Dignum},
+  \bibinfo{person}{Christoph Luetge}, \bibinfo{person}{Robert Madelin},
+  \bibinfo{person}{Ugo Pagallo}, \bibinfo{person}{Francesca Rossi},
+  \bibinfo{person}{Burkhard Schafer}, \bibinfo{person}{Peggy Valcke}, {and}
+  \bibinfo{person}{Effy Vayena}.} \bibinfo{year}{2018}\natexlab{}.
+\newblock \showarticletitle{{AI4People}---An Ethical Framework for a Good {AI}
+  Society: Opportunities, Risks, Principles, and Recommendations}.
+\newblock \bibinfo{journal}{\emph{Minds and Machines}} \bibinfo{volume}{28},
+  \bibinfo{number}{4} (\bibinfo{year}{2018}), \bibinfo{pages}{689--707}.
+\newblock
+\href{https://doi.org/10.1007/s11023-018-9482-5}{doi:\nolinkurl{10.1007/s11023-018-9482-5}}
+
+
+\bibitem[Hadfield(2017)]%
+        {hadfield2017rules}
+\bibfield{author}{\bibinfo{person}{Gillian~K. Hadfield}.}
+  \bibinfo{year}{2017}\natexlab{}.
+\newblock \bibinfo{booktitle}{\emph{Rules for a Flat World: Why Humans Invented
+  Law and How to Reinvent It for a Complex Global Economy}}.
+\newblock \bibinfo{publisher}{Oxford University Press}, \bibinfo{address}{New
+  York}.
+\newblock
+
+
+\bibitem[Honneth(1995)]%
+        {honneth1995}
+\bibfield{author}{\bibinfo{person}{Axel Honneth}.}
+  \bibinfo{year}{1995}\natexlab{}.
+\newblock \bibinfo{booktitle}{\emph{The Struggle for Recognition: The Moral
+  Grammar of Social Conflicts}}.
+\newblock \bibinfo{publisher}{MIT Press}, \bibinfo{address}{Cambridge, MA}.
+\newblock
+\newblock
+\shownote{Translated by Joel Anderson}.
+
+
+\bibitem[Jobin et~al\mbox{.}(2019)]%
+        {jobin2019global}
+\bibfield{author}{\bibinfo{person}{Anna Jobin}, \bibinfo{person}{Marcello
+  Ienca}, {and} \bibinfo{person}{Effy Vayena}.}
+  \bibinfo{year}{2019}\natexlab{}.
+\newblock \showarticletitle{The Global Landscape of {AI} Ethics Guidelines}.
+\newblock \bibinfo{journal}{\emph{Nature Machine Intelligence}}
+  \bibinfo{volume}{1}, \bibinfo{number}{9} (\bibinfo{year}{2019}),
+  \bibinfo{pages}{389--399}.
+\newblock
+\href{https://doi.org/10.1038/s42256-019-0088-2}{doi:\nolinkurl{10.1038/s42256-019-0088-2}}
+
+
+\bibitem[Kamenica and Gentzkow(2011)]%
+        {kamenica2011bayesian}
+\bibfield{author}{\bibinfo{person}{Emir Kamenica} {and}
+  \bibinfo{person}{Matthew Gentzkow}.} \bibinfo{year}{2011}\natexlab{}.
+\newblock \showarticletitle{Bayesian Persuasion}.
+\newblock \bibinfo{journal}{\emph{American Economic Review}}
+  \bibinfo{volume}{101}, \bibinfo{number}{6} (\bibinfo{year}{2011}),
+  \bibinfo{pages}{2590--2615}.
+\newblock
+\href{https://doi.org/10.1257/aer.101.6.2590}{doi:\nolinkurl{10.1257/aer.101.6.2590}}
+
+
+\bibitem[Kreps and Wilson(1982)]%
+        {kreps_wilson1982}
+\bibfield{author}{\bibinfo{person}{David~M. Kreps} {and}
+  \bibinfo{person}{Robert Wilson}.} \bibinfo{year}{1982}\natexlab{}.
+\newblock \showarticletitle{Sequential Equilibria}.
+\newblock \bibinfo{journal}{\emph{Econometrica}} \bibinfo{volume}{50},
+  \bibinfo{number}{4} (\bibinfo{year}{1982}), \bibinfo{pages}{863--894}.
+\newblock
+\href{https://doi.org/10.2307/1912767}{doi:\nolinkurl{10.2307/1912767}}
+
+
+\bibitem[Milgrom and Roberts(1986)]%
+        {milgrom_roberts1986}
+\bibfield{author}{\bibinfo{person}{Paul Milgrom} {and} \bibinfo{person}{John
+  Roberts}.} \bibinfo{year}{1986}\natexlab{}.
+\newblock \showarticletitle{Price and Advertising Signals of Product Quality}.
+\newblock \bibinfo{journal}{\emph{Journal of Political Economy}}
+  \bibinfo{volume}{94}, \bibinfo{number}{4} (\bibinfo{year}{1986}),
+  \bibinfo{pages}{796--821}.
+\newblock
+\href{https://doi.org/10.1086/261408}{doi:\nolinkurl{10.1086/261408}}
+
+
+\bibitem[Myerson(1979)]%
+        {myerson1979}
+\bibfield{author}{\bibinfo{person}{Roger~B. Myerson}.}
+  \bibinfo{year}{1979}\natexlab{}.
+\newblock \showarticletitle{Incentive Compatibility and the Bargaining
+  Problem}.
+\newblock \bibinfo{journal}{\emph{Econometrica}} \bibinfo{volume}{47},
+  \bibinfo{number}{1} (\bibinfo{year}{1979}), \bibinfo{pages}{61--73}.
+\newblock
+\href{https://doi.org/10.2307/1912346}{doi:\nolinkurl{10.2307/1912346}}
+
+
+\bibitem[Nipkow et~al\mbox{.}(2002)]%
+        {nipkow2002isabelle}
+\bibfield{author}{\bibinfo{person}{Tobias Nipkow}, \bibinfo{person}{Lawrence~C.
+  Paulson}, {and} \bibinfo{person}{Markus Wenzel}.}
+  \bibinfo{year}{2002}\natexlab{}.
+\newblock \bibinfo{booktitle}{\emph{Isabelle/{HOL}: A Proof Assistant for
+  Higher-Order Logic}}. \bibinfo{series}{Lecture Notes in Computer Science},
+  Vol.~\bibinfo{volume}{2283}.
+\newblock \bibinfo{publisher}{Springer}.
+\newblock
+\href{https://doi.org/10.1007/3-540-45949-9}{doi:\nolinkurl{10.1007/3-540-45949-9}}
+
+
+\bibitem[Pasquale(2015)]%
+        {pasquale2015}
+\bibfield{author}{\bibinfo{person}{Frank Pasquale}.}
+  \bibinfo{year}{2015}\natexlab{}.
+\newblock \bibinfo{booktitle}{\emph{The Black Box Society: The Secret
+  Algorithms That Control Money and Information}}.
+\newblock \bibinfo{publisher}{Harvard University Press},
+  \bibinfo{address}{Cambridge, MA}.
+\newblock
+
+
+\bibitem[Spence(1973)]%
+        {spence1973}
+\bibfield{author}{\bibinfo{person}{Michael Spence}.}
+  \bibinfo{year}{1973}\natexlab{}.
+\newblock \showarticletitle{Job Market Signaling}.
+\newblock \bibinfo{journal}{\emph{The Quarterly Journal of Economics}}
+  \bibinfo{volume}{87}, \bibinfo{number}{3} (\bibinfo{year}{1973}),
+  \bibinfo{pages}{355--374}.
+\newblock
+\href{https://doi.org/10.2307/1882010}{doi:\nolinkurl{10.2307/1882010}}
+
 
 \end{thebibliography}

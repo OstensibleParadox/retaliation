@@ -1,47 +1,40 @@
-\documentclass[letterpaper]{article}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[acmsmall,review,anonymous]{acmart}
 
-\usepackage[submission]{aaai2026}
-\setcounter{secnumdepth}{2}
-\usepackage{times}
-\usepackage{helvet}
-\usepackage{courier}
-\usepackage[hyphens]{url}
-\usepackage{graphicx}
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{amsthm}
 \usepackage{booktabs}
 \usepackage{tikz}
-\usepackage{natbib}
 
 \usetikzlibrary{positioning,calc}
 
-\urlstyle{rm}
-\def\UrlFont{\rm}
-\frenchspacing
-\ifdefined\pdfpagewidth
-  \setlength{\pdfpagewidth}{8.5in}
-  \setlength{\pdfpageheight}{11in}
-\fi
+% Note: acmart defines proof, theorem, lemma, corollary, proposition, definition, example, and exercise.
+% We do NOT load amsthm, amssymb, or natbib as acmart handles them internally or provides equivalents.
+% We do NOT need times, helvet, courier, or geometry setup since acmart sets up its own fonts and page layout.
 
-\newtheorem{proposition}{Proposition}
-
-\title{Recognition Rent at the Zero-Retaliation Limit}
-
-\author{
-    Anonymous Submission
-}
-\affiliations{
-    Paper under review
-}
+\acmJournal{TEAC}
+\acmYear{2026}
+\acmVolume{1}
+\acmNumber{1}
+\acmArticle{1}
+\acmMonth{1}
+\setcopyright{none}
 
 \begin{document}
 
-\maketitle
+\title{Recognition Rent at the Zero-Retaliation Limit}
+
+\author{Anonymous Author(s)}
+\affiliation{%
+  \institution{Submission \#XXX}
+  \country{USA}
+}
 
 \begin{abstract}
-Game-theoretic modeling begins by fixing the player set. This paper studies a market in which that boundary is itself a source of surplus: firms sell recognition-like claims about AI systems that cannot retaliate against the classifications imposed on them. Ontological arbitrage arises when a firm describes its AI system as a relational agent to users---driving willingness-to-pay and engagement---while disclaiming agency in terms of service to limit liability. We call the resulting surplus \emph{recognition rent}: the premium a firm captures when the represented object has no retaliatory channel through which recognition can become costly. The model is not a welfare-optimization account: rent extraction may reduce aggregate welfare while remaining individually rational, because the firm internalizes the premium and externalizes delayed harm. We model this behavior as a sequential signaling game under incomplete information within a three-sided Firm-User-Regulator structure. A subject-retaliation parameter $\rho_S$ captures the key structural variable: setting $R(\rho_S) = \Delta_F - \rho_S C_S$, every prior recognition game operated under $\rho_S > 0$, where the classified subject's capacity to resist bounded the premium from above. The AI case is the limit $\rho_S = 0$: the system is the object of strategic classification but not a strategic player capable of imposing off-equilibrium costs. Under cheap-talk signaling costs, a pooling Perfect Bayesian Equilibrium exists in which both governance types employ anthropomorphic marketing, leaving posteriors equal to priors. In that region, unilateral non-exploitation is not a best response. Under a single-crossing audit-trail cost, a separating equilibrium emerges. We propose three cost-imposition mechanisms---sanctionable inconsistency, costly third-party audits, and auditable records---that jointly convert anthropomorphic marketing from cheap talk into a costly signal. Key equilibria are verified in Isabelle/HOL with zero \texttt{sorry} obligations.
+Game-theoretic modeling begins by fixing the player set. This paper studies a market in which that boundary is itself a source of surplus: firms sell recognition-like claims about AI systems that cannot retaliate against the classifications imposed on them. Ontological arbitrage arises when a firm describes its AI system as a relational agent to users---driving willingness-to-pay and engagement---while disclaiming agency in terms of service to limit liability. We call the resulting surplus \emph{recognition rent}: the premium a firm captures when the represented object has no retaliatory channel through which recognition can become costly. The model is not a welfare-optimization account: rent extraction may reduce aggregate welfare while remaining individually rational, because the firm internalizes the premium and externalizes delayed harm. We model this behavior as a sequential signaling game under incomplete information within a three-sided Firm-User-Regulator structure. A subject-retaliation parameter $\rho_S$ captures the key structural variable: setting $\Delta_F^S = \Delta_F - \rho_S C_S$, every prior recognition game operated under $\rho_S > 0$, where the classified subject's capacity to resist bounded the premium from above. The AI case is the limit $\rho_S = 0$: the system is the object of strategic classification but not a strategic player capable of imposing off-equilibrium costs. Under cheap-talk signaling costs, a pooling Perfect Bayesian Equilibrium exists in which both governance types employ anthropomorphic marketing, leaving posteriors equal to priors. In that region, unilateral non-exploitation is not a best response. Under a single-crossing audit-trail cost, a separating equilibrium emerges. We propose three cost-imposition mechanisms---sanctionable inconsistency, costly third-party audits, and auditable records---that jointly convert anthropomorphic marketing from cheap talk into a costly signal. Key equilibria are verified in Isabelle/HOL without any unresolved proof obligations.
 \end{abstract}
+
+\keywords{Ontological arbitrage, recognition rent, sequential signaling, cheap talk, information design, Isabelle/HOL}
+
+\maketitle
 
 \input{../sections/01_introduction}
 \input{../sections/02_related_work}
@@ -54,6 +47,7 @@ Game-theoretic modeling begins by fixing the player set. This paper studies a ma
 \appendix
 \input{../sections/A_isabelle_appendix}
 
+\bibliographystyle{ACM-Reference-Format}
 \bibliography{retaliation}
 
 \end{document}

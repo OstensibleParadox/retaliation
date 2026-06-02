@@ -52,6 +52,34 @@ datatype opacity = High_Opacity | Low_Opacity
 type_synonym firm_private_type = "firm_type \<times> opacity"
 type_synonym payoff_state = "user_type \<times> public_signal \<times> regulator_type"
 
+lemma finite_payoff_state_UNIV [simp]:
+  shows "finite (UNIV :: payoff_state set)"
+proof -
+  have subset: "(UNIV :: payoff_state set) \<subseteq>
+    {(High_Vuln, Neutral, High_Bandwidth), (High_Vuln, Neutral, Low_Bandwidth),
+     (High_Vuln, Adverse_Public_Signal, High_Bandwidth),
+     (High_Vuln, Adverse_Public_Signal, Low_Bandwidth),
+     (Low_Vuln, Neutral, High_Bandwidth), (Low_Vuln, Neutral, Low_Bandwidth),
+     (Low_Vuln, Adverse_Public_Signal, High_Bandwidth),
+     (Low_Vuln, Adverse_Public_Signal, Low_Bandwidth)}"
+  proof
+    fix st :: payoff_state
+    obtain ut sr where st: "st = (ut, sr)" by (cases st)
+    obtain s rt where sr: "sr = (s, rt)" by (cases sr)
+    show "st \<in>
+      {(High_Vuln, Neutral, High_Bandwidth), (High_Vuln, Neutral, Low_Bandwidth),
+       (High_Vuln, Adverse_Public_Signal, High_Bandwidth),
+       (High_Vuln, Adverse_Public_Signal, Low_Bandwidth),
+       (Low_Vuln, Neutral, High_Bandwidth), (Low_Vuln, Neutral, Low_Bandwidth),
+       (Low_Vuln, Adverse_Public_Signal, High_Bandwidth),
+       (Low_Vuln, Adverse_Public_Signal, Low_Bandwidth)}"
+      unfolding st sr
+      by (cases ut; cases s; cases rt; simp)
+  qed
+  show ?thesis
+    by (rule finite_subset[OF subset]) simp
+qed
+
 text \<open>Observation spaces used in the strategy-profile records.\<close>
 type_synonym firm_observation = "firm_private_type"
 type_synonym user_observation = "firm_message \<times> user_type"
@@ -154,7 +182,14 @@ lemma payoff_state_distribution_mass_UNIV:
 
 lemma payoff_state_weighted_sum_const:
   shows "(\<Sum>st\<in>(UNIV :: payoff_state set). pmf payoff_state_distribution st * c) = c"
-  by (simp add: sum_distrib_right payoff_state_distribution_mass_UNIV)
+proof -
+  have "(\<Sum>st\<in>(UNIV :: payoff_state set). pmf payoff_state_distribution st * c) =
+      (\<Sum>st\<in>(UNIV :: payoff_state set). pmf payoff_state_distribution st) * c"
+    by (simp add: sum_distrib_right[symmetric])
+  also have "... = c"
+    by (simp add: payoff_state_distribution_mass_UNIV)
+  finally show ?thesis .
+qed
 
 definition expected_firm_payoff :: "firm_type \<Rightarrow> firm_message \<Rightarrow> user_strat \<Rightarrow> regulator_strat \<Rightarrow> real" where
   "expected_firm_payoff ft m' us rs =
@@ -339,40 +374,12 @@ proof -
 qed
 
 text \<open>
-  Limited Intuitive Criterion (Cho and Kreps 1987).
-\<close>
-
-definition equilibrium_firm_payoff :: "strategy_profile \<Rightarrow> firm_private_type \<Rightarrow> real" where
-  "equilibrium_firm_payoff \<sigma> t =
-    expected_firm_payoff (fst t) (firm_strategy \<sigma> t) (user_strategy \<sigma>) (regulator_strategy \<sigma>)"
-
-definition deviation_payoff_for_type ::
-  "strategy_profile \<Rightarrow> belief_system \<Rightarrow> firm_private_type \<Rightarrow> firm_message \<Rightarrow> real" where
-  "deviation_payoff_for_type \<sigma> \<mu> t m' =
-    expected_firm_payoff (fst t) m' (\<lambda>m ut. Detach) (\<lambda>m ua s rt. Abstain)"
-
-definition pooling_survives_limited_intuitive_criterion :: "strategy_profile \<Rightarrow> belief_system \<Rightarrow> bool" where
-  "pooling_survives_limited_intuitive_criterion \<sigma> \<mu> \<longleftrightarrow>
-    (\<forall>t. deviation_payoff_for_type \<sigma> \<mu> t Deflationary
-          \<le> equilibrium_firm_payoff \<sigma> t)"
-
-lemma pooling_survives_limited_intuitive_criterion_hold:
-  assumes "\<forall>t. firm_strategy \<sigma> t = Anthropomorphic"
-    and "\<forall>m u. user_strategy \<sigma> m u = (if m = Anthropomorphic then Invest else Detach)"
-    and "\<forall>m u s r. regulator_strategy \<sigma> m u s r = Abstain"
-  shows "pooling_survives_limited_intuitive_criterion \<sigma> \<mu>"
-  unfolding pooling_survives_limited_intuitive_criterion_def
-    equilibrium_firm_payoff_def deviation_payoff_for_type_def expected_firm_payoff_def firm_payoff_def
-  using assms premium_pos by (auto simp: payoff_state_weighted_sum_const dest: less_imp_le)
-
-
-text \<open>
   Existence statement for the cheap-talk pooling equilibrium.
 \<close>
 
 theorem proposition_1_cheap_talk_pooling_pbe:
-  shows "\<exists>\<sigma> \<mu>. is_pbe \<sigma> \<mu> \<and> pooling_survives_limited_intuitive_criterion \<sigma> \<mu>"
-proof (intro exI conjI)
+  shows "\<exists>\<sigma> \<mu>. is_pbe \<sigma> \<mu>"
+proof (intro exI)
   let ?\<sigma> = "\<lparr> firm_strategy = \<lambda>t. Anthropomorphic,
                   user_strategy = \<lambda>m u. (if m = Anthropomorphic then Invest else Detach),
                   regulator_strategy = \<lambda>m u s r. Abstain \<rparr>"
@@ -436,8 +443,6 @@ proof (intro exI conjI)
     unfolding is_bayes_consistent_on_path_def by simp
   show "is_pbe ?\<sigma> ?\<mu>"
     unfolding is_pbe_def using sr bc by simp
-  show "pooling_survives_limited_intuitive_criterion ?\<sigma> ?\<mu>"
-    by (rule pooling_survives_limited_intuitive_criterion_hold) auto
 qed
 
 end
@@ -604,6 +609,121 @@ proof -
     using assms subject_retaliation_cost_pos by simp
   then show ?thesis
     unfolding retaliation_discounted_premium_def by linarith
+qed
+
+subsection \<open>Farrell-Style Neologism-Proof Pooling\<close>
+
+definition user_BR :: "firm_type set \<Rightarrow> user_action" where
+  "user_BR K = (if High_Gov \<in> K then Invest else Detach)"
+
+definition regulator_BR :: "firm_type set \<Rightarrow> regulator_action" where
+  "regulator_BR K = Abstain"
+
+definition trust_restoring_continuation :: "firm_type set \<Rightarrow> bool" where
+  "trust_restoring_continuation K \<longleftrightarrow>
+     user_BR K = Invest \<and> regulator_BR K = Abstain"
+
+definition neologism_gain :: "firm_type \<Rightarrow> firm_type set \<Rightarrow> real" where
+  "neologism_gain \<theta> K =
+     (if trust_restoring_continuation K then retaliation_discounted_premium else 0)"
+
+definition nontrivial_claim :: "firm_type set \<Rightarrow> bool" where
+  "nontrivial_claim K \<longleftrightarrow> K \<noteq> {} \<and> K \<noteq> {High_Gov, Low_Gov}"
+
+definition is_credible_neologism :: "firm_type set \<Rightarrow> bool" where
+  "is_credible_neologism K \<longleftrightarrow>
+     nontrivial_claim K \<and>
+     (\<forall>\<theta>. \<theta> \<in> K \<longrightarrow> neologism_gain \<theta> K > 0) \<and>
+     (\<forall>\<theta>. \<theta> \<notin> K \<longrightarrow> neologism_gain \<theta> K \<le> 0)"
+
+definition strong_perfect_shadowing_property :: bool where
+  "strong_perfect_shadowing_property \<longleftrightarrow>
+     (\<forall>K. Low_Gov \<notin> K \<and> trust_restoring_continuation K
+           \<longrightarrow> neologism_gain Low_Gov K > 0)"
+
+definition perfect_shadowing_property :: bool where
+  "perfect_shadowing_property \<longleftrightarrow>
+     (\<forall>K. Low_Gov \<notin> K \<and> trust_restoring_continuation K
+           \<and> neologism_gain High_Gov K > 0
+           \<longrightarrow> neologism_gain Low_Gov K > 0)"
+
+lemma zero_retaliation_discounted_premium_positive:
+  assumes "rho_S = 0"
+  shows "0 < retaliation_discounted_premium"
+  using assms premium_pos
+  unfolding retaliation_discounted_premium_def expected_subject_retaliation_def
+  by simp
+
+lemma zero_retaliation_strong_perfect_shadowing:
+  assumes "rho_S = 0"
+  shows "strong_perfect_shadowing_property"
+  unfolding strong_perfect_shadowing_property_def neologism_gain_def
+  using zero_retaliation_discounted_premium_positive[OF assms] by auto
+
+lemma strong_shadowing_implies_shadowing:
+  assumes "strong_perfect_shadowing_property"
+  shows "perfect_shadowing_property"
+  using assms
+  unfolding strong_perfect_shadowing_property_def perfect_shadowing_property_def
+  by blast
+
+theorem zero_retaliation_no_high_claim_neologism:
+  assumes "rho_S = 0"
+  shows "\<not> is_credible_neologism {High_Gov}"
+proof
+  assume credible: "is_credible_neologism {High_Gov}"
+  have shadowing: "perfect_shadowing_property"
+    using assms zero_retaliation_strong_perfect_shadowing
+      strong_shadowing_implies_shadowing by blast
+  have trust: "trust_restoring_continuation {High_Gov}"
+    unfolding trust_restoring_continuation_def user_BR_def regulator_BR_def by simp
+  have high_gain: "neologism_gain High_Gov {High_Gov} > 0"
+    using credible unfolding is_credible_neologism_def by simp
+  have low_gain: "neologism_gain Low_Gov {High_Gov} > 0"
+    using shadowing trust high_gain
+    unfolding perfect_shadowing_property_def by simp
+  have low_excluded: "neologism_gain Low_Gov {High_Gov} \<le> 0"
+    using credible unfolding is_credible_neologism_def by simp
+  show False
+    using low_gain low_excluded by linarith
+qed
+
+lemma nontrivial_firm_type_claim_cases:
+  assumes "nontrivial_claim K"
+  shows "K = {High_Gov} \<or> K = {Low_Gov}"
+  using assms
+  unfolding nontrivial_claim_def
+  by (cases "High_Gov \<in> K"; cases "Low_Gov \<in> K"; auto; metis firm_type.exhaust)
+
+theorem zero_retaliation_neologism_absorbing:
+  assumes "rho_S = 0"
+  shows "\<forall>K. nontrivial_claim K \<longrightarrow> \<not> is_credible_neologism K"
+proof (intro allI impI)
+  fix K :: "firm_type set"
+  assume nontrivial: "nontrivial_claim K"
+  then have cases: "K = {High_Gov} \<or> K = {Low_Gov}"
+    by (rule nontrivial_firm_type_claim_cases)
+  show "\<not> is_credible_neologism K"
+  proof (rule disjE[OF cases])
+    assume "K = {High_Gov}"
+    then show "\<not> is_credible_neologism K"
+      using assms zero_retaliation_no_high_claim_neologism by simp
+  next
+    assume low_claim: "K = {Low_Gov}"
+    show "\<not> is_credible_neologism K"
+    proof
+      assume credible: "is_credible_neologism K"
+      have low_gain_positive: "neologism_gain Low_Gov K > 0"
+        using credible low_claim unfolding is_credible_neologism_def by simp
+      have low_gain_zero: "neologism_gain Low_Gov K = 0"
+        using low_claim
+        unfolding neologism_gain_def trust_restoring_continuation_def
+          user_BR_def regulator_BR_def
+        by simp
+      show False
+        using low_gain_positive low_gain_zero by linarith
+    qed
+  qed
 qed
 
 end
