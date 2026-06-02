@@ -52,6 +52,17 @@ datatype opacity = High_Opacity | Low_Opacity
 type_synonym firm_private_type = "firm_type \<times> opacity"
 type_synonym payoff_state = "user_type \<times> public_signal \<times> regulator_type"
 
+datatype game_stage = Firm_Move | User_Move | Regulator_Move | Terminal
+
+type_synonym public_history = "firm_message option \<times> user_action option \<times> public_signal option"
+
+record markov_state =
+  stage :: game_stage
+  private_types :: "firm_private_type \<times> user_type \<times> regulator_type"
+  history :: public_history
+
+type_synonym transition_kernel = "markov_state \<Rightarrow> markov_state pmf"
+
 lemma finite_payoff_state_UNIV [simp]:
   shows "finite (UNIV :: payoff_state set)"
 proof -
@@ -623,12 +634,12 @@ definition admissible_continuation :: "firm_type set \<Rightarrow> receiver_cont
      cont_regulator_action c = Abstain"
 
 definition equilibrium_payoff :: "firm_type \<Rightarrow> real" where
-  "equilibrium_payoff \<theta> = retaliation_discounted_premium"
+  "equilibrium_payoff \<theta> = (if \<theta> = High_Gov then ontological_premium else retaliation_discounted_premium)"
 
 definition payoff_after :: "firm_type \<Rightarrow> receiver_continuation \<Rightarrow> real" where
   "payoff_after \<theta> c =
      (if cont_user_action c = Invest \<and> cont_regulator_action c = Abstain
-      then retaliation_discounted_premium else 0)"
+      then (if \<theta> = High_Gov then ontological_premium else retaliation_discounted_premium) else 0)"
 
 definition nontrivial_claim :: "firm_type set \<Rightarrow> bool" where
   "nontrivial_claim K \<longleftrightarrow> K \<noteq> {} \<and> K \<noteq> {High_Gov, Low_Gov}"
@@ -653,15 +664,10 @@ lemma zero_retaliation_perfect_shadowing:
     and "payoff_after High_Gov c > equilibrium_payoff High_Gov"
   shows "payoff_after Low_Gov c > equilibrium_payoff Low_Gov"
 proof -
-  have payoff_H: "payoff_after High_Gov c =
-    (if cont_user_action c = Invest \<and> cont_regulator_action c = Abstain
-     then retaliation_discounted_premium else 0)"
-    unfolding payoff_after_def by simp
-  have payoff_L: "payoff_after Low_Gov c = payoff_after High_Gov c"
-    unfolding payoff_after_def by simp
-  have "equilibrium_payoff Low_Gov = equilibrium_payoff High_Gov"
-    unfolding equilibrium_payoff_def by simp
-  thus ?thesis using assms(3) payoff_L by simp
+  have "retaliation_discounted_premium = ontological_premium"
+    using assms(1) unfolding retaliation_discounted_premium_def expected_subject_retaliation_def by simp
+  then show ?thesis
+    using assms(3) unfolding payoff_after_def equilibrium_payoff_def by auto
 qed
 
 theorem zero_retaliation_no_high_claim_neologism:
