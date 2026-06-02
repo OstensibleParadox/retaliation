@@ -192,6 +192,19 @@ incurs expected cost exceeding expected gain under the third inequality. The
 result is a cheap-talk equilibrium in the sense of Crawford and Sobel:
 communication occurs, but it does not separate types \citep{crawford_sobel1982}.
 
+\begin{proposition}[Cheap-talk pooling PBE]
+\label{prop:pooling-pbe}
+Under the cheap-talk cost structure above, pooling on anthropomorphic marketing
+is a Perfect Bayesian Equilibrium.
+\end{proposition}
+
+\begin{proof}[Proof sketch]
+The strategy profile and beliefs specified in Section~\ref{subsec:subject-retaliation} are
+sequentially rational and Bayes-consistent on path. Off-path beliefs hold at
+the prior, and users detach after the deflationary message because invest and
+detach both yield zero payoff. Theorem \texttt{proposition\_\allowbreak{}1\_\allowbreak{}cheap\_\allowbreak{}talk\_\allowbreak{}pooling\_\allowbreak{}pbe} in Appendix~\ref{app:isabelle} discharges this equilibrium construction in Isabelle/HOL.
+\end{proof}
+
 \subsection{No Credible Neologism at the Zero-Retaliation Limit}
 \label{subsec:neologism-proof}
 
@@ -231,6 +244,20 @@ development, this is the theorem
 for every nontrivial claim $K$, $\rho_S=0$ implies that $K$ is not a credible
 neologism.
 
+\begin{theorem}[Zero-retaliation neologism-proofness]
+\label{thm:neologism-proof}
+At the zero-retaliation limit ($\rho_S=0$), the pooling equilibrium is neologism-proof
+against any nontrivial type claim.
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+The argument follows from perfect shadowing at $\rho_S=0$: any trust-restoring continuation $c$ satisfying
+$u_\mathsf{H}(c)>\bar u_\mathsf{H}$ must also satisfy $u_\mathsf{L}(c)>\bar u_\mathsf{L}$,
+because both types send the message at zero cost and face the same downstream receiver actions.
+Thus no nontrivial claim can be credible in
+Farrell's sense.
+\end{proof}
+
 \subsection{Audit-Trail Costs and Separation}
 \label{subsec:audit-trail-separation}
 
@@ -238,35 +265,31 @@ The mechanism-design problem is to change the cost of the firm's signal. Suppose
 anthropomorphic marketing is valid only when paired with an audit trail of
 intensity $e$: evaluation records, capability logs, incident reports, and
 regulator-readable documentation. Let the net benefit from being perceived as
-high-governance be $G>0$. Let the opacity penalty be $o\ge 0$ and let audit cost be $c_\theta(e,o)=k_\theta e+o$
-for type $\theta\in\{\mathsf{H},\mathsf{L}\}$, with $0<k_H<k_L$. This is the
-single-crossing condition: the marginal cost of the same signal is lower for
-the type that actually invested in governance. In the high-opacity case used in
-the Isabelle development, the separating condition becomes
+high-governance be $G>0$. The audit cost is
 \[
-\frac{G-o}{k_L} \leq e \leq \frac{G-o}{k_H},
+c_\theta(e,\theta_S)=k_\theta e+\theta_S
 \]
-provided $G>o$. More generally, the separating incentive constraints are
+for type $\theta\in\{\mathsf{H},\mathsf{L}\}$, with $0<k_H<k_L$ and the
+system-opacity parameter $\theta_S$ drawn by Nature in Section~\ref{sec:bayesian}
+entering as a fixed cost shift that the firm cannot avoid by reclassifying
+itself. This is the single-crossing condition: the marginal cost of the same
+signal is lower for the type that actually invested in governance. In the
+high-opacity case used in the Isabelle development, the separating condition
+becomes
 \[
-c_\mathsf{H}(e,o)\leq G \leq c_\mathsf{L}(e,o).
+\frac{G-\theta_S}{k_L} \leq e \leq \frac{G-\theta_S}{k_H},
+\]
+provided $G>\theta_S$. More generally, the separating incentive constraints are
+\[
+c_\mathsf{H}(e,\theta_S)\leq G \leq c_\mathsf{L}(e,\theta_S).
 \]
 \emph{Intuition: there exists a ``Goldilocks'' audit intensity---expensive enough that low-governance firms will not fake it, cheap enough that high-governance firms can still afford it.}
-Above the lower threshold $(G-o)/k_L$, the low-governance type does not
-want to imitate. Below the upper bound $(G-o)/k_H$, the high-governance
+Above the lower threshold $(G-\theta_S)/k_L$, the low-governance type does not
+want to imitate. Below the upper bound $(G-\theta_S)/k_H$, the high-governance
 type still wants to signal. When $e$ lies in this interval, a separating PBE exists:
 high-governance firms send audited anthropomorphic claims, low-governance firms send
 deflationary claims, users condition investment on the audited signal, and
 regulators update posteriors to one on the equilibrium path.
-
-\begin{proposition}[Cheap-talk pooling PBE]
-Under the cheap-talk cost structure above, pooling on anthropomorphic marketing
-is a Perfect Bayesian Equilibrium.
-\end{proposition}
-
-\begin{theorem}[Zero-retaliation neologism-proofness]
-At the zero-retaliation limit ($\rho_S=0$), the pooling equilibrium is neologism-proof
-against any nontrivial type claim.
-\end{theorem}
 
 \begin{proposition}[Audit-trail separation]
 \label{prop:audit-trail-separation}
@@ -275,22 +298,15 @@ there is a separating Perfect Bayesian Equilibrium in which $m_F$ reveals the
 firm's governance type.
 \end{proposition}
 
-\paragraph{Proof sketch.}
-For the pooling proposition, the strategy profile and beliefs specified above are
-sequentially rational and Bayes-consistent on path. Off-path beliefs hold at
-the prior, and users detach after the deflationary message because invest and
-detach both yield zero payoff. For the neologism-proofness theorem, the argument follows from
-perfect shadowing at $\rho_S=0$: any trust-restoring continuation $c$ satisfying
-$u_\mathsf{H}(c)>\bar u_\mathsf{H}$ must also satisfy $u_\mathsf{L}(c)>\bar u_\mathsf{L}$,
-because both types send the message at zero cost and face the same downstream receiver actions.
-Thus no nontrivial claim can be credible in
-Farrell's sense. For the separating proposition, choose $e$ in the shifted interval
-$[(G-o)/k_L,(G-o)/k_H]$. High-governance firms receive
-$G-(k_He+o)\geq 0$ from sending the audited signal, while low-governance
-firms receive $G-(k_Le+o)\leq 0$ and therefore prefer the deflationary
+\begin{proof}[Proof sketch]
+Choose $e$ in the shifted interval
+$[(G-\theta_S)/k_L,(G-\theta_S)/k_H]$. High-governance firms receive
+$G-(k_He+\theta_S)\geq 0$ from sending the audited signal, while low-governance
+firms receive $G-(k_Le+\theta_S)\leq 0$ and therefore prefer the deflationary
 message. Bayes' rule then assigns posterior probability one to $\mathsf{H}$
 after the audited anthropomorphic signal and posterior probability one to
 $\mathsf{L}$ after the unaudited deflationary signal. Given those beliefs,
 users and regulators condition their actions on the revealed type.
 The audit trail therefore converts an uninformative cheap-talk message into a
-costly signal in the sense of \citet{spence1973}. Theorems \texttt{proposition\_\allowbreak{}1\_\allowbreak{}cheap\_\allowbreak{}talk\_\allowbreak{}pooling\_\allowbreak{}pbe} and \texttt{proposition\_\allowbreak{}1\_\allowbreak{}separating\_\allowbreak{}pbe} in Appendix~\ref{app:isabelle} discharge these equilibrium constructions in Isabelle/HOL.
+costly signal in the sense of \citet{spence1973}. Theorem \texttt{proposition\_\allowbreak{}1\_\allowbreak{}separating\_\allowbreak{}pbe} in Appendix~\ref{app:isabelle} discharges this equilibrium construction in Isabelle/HOL.
+\end{proof}
