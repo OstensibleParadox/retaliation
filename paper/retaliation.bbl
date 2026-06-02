@@ -2,7 +2,7 @@
 %%% Do NOT edit. File created by BibTeX with style
 %%% ACM-Reference-Format-Journals [18-Jan-2012].
 
-\begin{thebibliography}{16}
+\begin{thebibliography}{23}
 
 %%% ====================================================================
 %%% NOTE TO THE USER: you can override these defaults by providing
@@ -57,6 +57,41 @@
 \newblock \bibinfo{howpublished}{SSRN working paper}.
 \newblock
 \href{https://doi.org/10.2139/ssrn.5923663}{doi:\nolinkurl{10.2139/ssrn.5923663}}
+
+
+\bibitem[Banks and Sobel(1987)]%
+        {banks_sobel1987}
+\bibfield{author}{\bibinfo{person}{Jeffrey~S Banks} {and} \bibinfo{person}{Joel
+  Sobel}.} \bibinfo{year}{1987}\natexlab{}.
+\newblock \showarticletitle{Equilibrium selection in signaling games}.
+\newblock \bibinfo{journal}{\emph{Econometrica: Journal of the Econometric
+  Society}} \bibinfo{volume}{55}, \bibinfo{number}{3} (\bibinfo{year}{1987}),
+  \bibinfo{pages}{647--661}.
+\newblock
+
+
+\bibitem[Bergemann and Morris(2019)]%
+        {bergemann_morris_information_design2019}
+\bibfield{author}{\bibinfo{person}{Dirk Bergemann} {and}
+  \bibinfo{person}{Stephen Morris}.} \bibinfo{year}{2019}\natexlab{}.
+\newblock \showarticletitle{Information design: A unified perspective}.
+\newblock \bibinfo{journal}{\emph{Journal of Economic Literature}}
+  \bibinfo{volume}{57}, \bibinfo{number}{1} (\bibinfo{year}{2019}),
+  \bibinfo{pages}{44--95}.
+\newblock
+
+
+\bibitem[Caminati et~al\mbox{.}(2015)]%
+        {caminati_kerber_lange_rowat_vcg2015}
+\bibfield{author}{\bibinfo{person}{Marco~B Caminati}, \bibinfo{person}{Manfred
+  Kerber}, \bibinfo{person}{Christoph Lange}, {and} \bibinfo{person}{Colin
+  Rowat}.} \bibinfo{year}{2015}\natexlab{}.
+\newblock \showarticletitle{Proving soundness of combinatorial
+  Vickrey-Clarke-Groves auctions}.
+\newblock \bibinfo{journal}{\emph{Journal of Automated Reasoning}}
+  \bibinfo{volume}{55}, \bibinfo{number}{3} (\bibinfo{year}{2015}),
+  \bibinfo{pages}{257--291}.
+\newblock
 
 
 \bibitem[Cho and Kreps(1987)]%
@@ -159,6 +194,28 @@
 \href{https://doi.org/10.1257/aer.101.6.2590}{doi:\nolinkurl{10.1257/aer.101.6.2590}}
 
 
+\bibitem[Kartik(2009)]%
+        {kartik_lying_cost2009}
+\bibfield{author}{\bibinfo{person}{Navin Kartik}.}
+  \bibinfo{year}{2009}\natexlab{}.
+\newblock \showarticletitle{Strategic communication with lying costs}.
+\newblock \bibinfo{journal}{\emph{The Review of Economic Studies}}
+  \bibinfo{volume}{76}, \bibinfo{number}{4} (\bibinfo{year}{2009}),
+  \bibinfo{pages}{1359--1395}.
+\newblock
+
+
+\bibitem[Kerber et~al\mbox{.}(2016)]%
+        {kerber_lange_rowat_intro2016}
+\bibfield{author}{\bibinfo{person}{Manfred Kerber}, \bibinfo{person}{Christoph
+  Lange}, {and} \bibinfo{person}{Colin Rowat}.}
+  \bibinfo{year}{2016}\natexlab{}.
+\newblock \showarticletitle{An introduction to mechanized reasoning}.
+\newblock \bibinfo{journal}{\emph{Journal of Mathematical Economics}}
+  \bibinfo{volume}{66} (\bibinfo{year}{2016}), \bibinfo{pages}{26--39}.
+\newblock
+
+
 \bibitem[Kreps and Wilson(1982)]%
         {kreps_wilson1982}
 \bibfield{author}{\bibinfo{person}{David~M. Kreps} {and}
@@ -174,12 +231,12 @@
         {milgrom_roberts1986}
 \bibfield{author}{\bibinfo{person}{Paul Milgrom} {and} \bibinfo{person}{John
   Roberts}.} \bibinfo{year}{1986}\natexlab{}.
-\newblock \showarticletitle{Price and Advertising Signals of Product Quality}.
-\newblock \bibinfo{journal}{\emph{Journal of Political Economy}}
-  \bibinfo{volume}{94}, \bibinfo{number}{4} (\bibinfo{year}{1986}),
-  \bibinfo{pages}{796--821}.
+\newblock \showarticletitle{Relying on the Information of Interested Parties}.
+\newblock \bibinfo{journal}{\emph{The RAND Journal of Economics}}
+  \bibinfo{volume}{17}, \bibinfo{number}{1} (\bibinfo{year}{1986}),
+  \bibinfo{pages}{18--32}.
 \newblock
-\href{https://doi.org/10.1086/261408}{doi:\nolinkurl{10.1086/261408}}
+\href{https://doi.org/10.2307/2555625}{doi:\nolinkurl{10.2307/2555625}}
 
 
 \bibitem[Myerson(1979)]%
@@ -192,6 +249,18 @@
   \bibinfo{number}{1} (\bibinfo{year}{1979}), \bibinfo{pages}{61--73}.
 \newblock
 \href{https://doi.org/10.2307/1912346}{doi:\nolinkurl{10.2307/1912346}}
+
+
+\bibitem[Nipkow(2009)]%
+        {nipkow_arrows_thm2009}
+\bibfield{author}{\bibinfo{person}{Tobias Nipkow}.}
+  \bibinfo{year}{2009}\natexlab{}.
+\newblock \showarticletitle{Social choice theory in {HOL}: Arrow and
+  Gibbard-Satterthwaite}.
+\newblock \bibinfo{journal}{\emph{Journal of Automated Reasoning}}
+  \bibinfo{volume}{43}, \bibinfo{number}{3} (\bibinfo{year}{2009}),
+  \bibinfo{pages}{289--304}.
+\newblock
 
 
 \bibitem[Nipkow et~al\mbox{.}(2002)]%
@@ -215,6 +284,17 @@
   Algorithms That Control Money and Information}}.
 \newblock \bibinfo{publisher}{Harvard University Press},
   \bibinfo{address}{Cambridge, MA}.
+\newblock
+
+
+\bibitem[Rabin(1990)]%
+        {rabin_meaningful_talk1990}
+\bibfield{author}{\bibinfo{person}{Matthew Rabin}.}
+  \bibinfo{year}{1990}\natexlab{}.
+\newblock \showarticletitle{Communication between rational agents}.
+\newblock \bibinfo{journal}{\emph{Journal of Economic Theory}}
+  \bibinfo{volume}{51}, \bibinfo{number}{1} (\bibinfo{year}{1990}),
+  \bibinfo{pages}{144--170}.
 \newblock
 
 
