@@ -1,5 +1,5 @@
 theory Ontological_Arbitrage
-  imports Complex_Main
+  imports Complex_Main "HOL-Probability.Probability_Mass_Function"
 begin
 
 section \<open>Ontological Arbitrage: Bayesian Signaling Equilibrium\<close>
@@ -50,6 +50,7 @@ datatype public_signal = Neutral | Adverse_Public_Signal
 datatype opacity = High_Opacity | Low_Opacity
 
 type_synonym firm_private_type = "firm_type \<times> opacity"
+type_synonym payoff_state = "user_type \<times> public_signal \<times> regulator_type"
 
 text \<open>Observation spaces used in the strategy-profile records.\<close>
 type_synonym firm_observation = "firm_private_type"
@@ -111,6 +112,7 @@ locale cheap_talk_game =
     and expected_user_harm :: "user_type \<Rightarrow> real"
     and regulator_cost :: "regulator_type \<Rightarrow> real"
     and regulatory_damage :: real
+    and payoff_state_distribution :: "payoff_state pmf"
   assumes prior_low_pos: "0 < prior_low"
     and prior_high_pos: "0 < prior_high"
     and prior_sum: "prior_low + prior_high = 1"
@@ -146,17 +148,20 @@ text \<open>
   Expected payoffs of players are calculated over finite type and action spaces.
 \<close>
 
+lemma payoff_state_distribution_mass_UNIV:
+  shows "(\<Sum>st\<in>(UNIV :: payoff_state set). pmf payoff_state_distribution st) = 1"
+  by (rule sum_pmf_eq_1) simp_all
+
+lemma payoff_state_weighted_sum_const:
+  shows "(\<Sum>st\<in>(UNIV :: payoff_state set). pmf payoff_state_distribution st * c) = c"
+  by (simp add: sum_distrib_right payoff_state_distribution_mass_UNIV)
+
 definition expected_firm_payoff :: "firm_type \<Rightarrow> firm_message \<Rightarrow> user_strat \<Rightarrow> regulator_strat \<Rightarrow> real" where
   "expected_firm_payoff ft m' us rs =
-     (  firm_payoff ft m' (us m' High_Vuln) (rs m' (us m' High_Vuln) Neutral High_Bandwidth)
-      + firm_payoff ft m' (us m' High_Vuln) (rs m' (us m' High_Vuln) Neutral Low_Bandwidth)
-      + firm_payoff ft m' (us m' High_Vuln) (rs m' (us m' High_Vuln) Adverse_Public_Signal High_Bandwidth)
-      + firm_payoff ft m' (us m' High_Vuln) (rs m' (us m' High_Vuln) Adverse_Public_Signal Low_Bandwidth)
-      + firm_payoff ft m' (us m' Low_Vuln) (rs m' (us m' Low_Vuln) Neutral High_Bandwidth)
-      + firm_payoff ft m' (us m' Low_Vuln) (rs m' (us m' Low_Vuln) Neutral Low_Bandwidth)
-      + firm_payoff ft m' (us m' Low_Vuln) (rs m' (us m' Low_Vuln) Adverse_Public_Signal High_Bandwidth)
-      + firm_payoff ft m' (us m' Low_Vuln) (rs m' (us m' Low_Vuln) Adverse_Public_Signal Low_Bandwidth)
-     ) / 8"
+     (\<Sum>st\<in>(UNIV :: payoff_state set).
+        pmf payoff_state_distribution st *
+        firm_payoff ft m' (us m' (fst st))
+          (rs m' (us m' (fst st)) (fst (snd st)) (snd (snd st))))"
 
 definition expected_user_payoff :: "user_type \<Rightarrow> firm_message \<Rightarrow> user_action \<Rightarrow> regulator_strat \<Rightarrow> real \<Rightarrow> real" where
   "expected_user_payoff ut m ua rs p_high =
@@ -358,7 +363,7 @@ lemma pooling_survives_limited_intuitive_criterion_hold:
   shows "pooling_survives_limited_intuitive_criterion \<sigma> \<mu>"
   unfolding pooling_survives_limited_intuitive_criterion_def
     equilibrium_firm_payoff_def deviation_payoff_for_type_def expected_firm_payoff_def firm_payoff_def
-  using assms premium_pos by (auto dest: less_imp_le)
+  using assms premium_pos by (auto simp: payoff_state_weighted_sum_const dest: less_imp_le)
 
 
 text \<open>
@@ -378,9 +383,11 @@ proof (intro exI conjI)
   proof (intro conjI allI)
     fix t :: firm_private_type
     have "expected_firm_payoff (fst t) Anthropomorphic (user_strategy ?\<sigma>) (regulator_strategy ?\<sigma>) = ontological_premium"
-      unfolding expected_firm_payoff_def firm_payoff_def by simp
+      unfolding expected_firm_payoff_def firm_payoff_def
+      by (simp add: payoff_state_weighted_sum_const)
     moreover have "expected_firm_payoff (fst t) Deflationary (user_strategy ?\<sigma>) (regulator_strategy ?\<sigma>) = 0"
-      unfolding expected_firm_payoff_def firm_payoff_def by simp
+      unfolding expected_firm_payoff_def firm_payoff_def
+      by (simp add: payoff_state_weighted_sum_const)
     ultimately show "is_best_response_firm t (firm_strategy ?\<sigma> t) (user_strategy ?\<sigma>) (regulator_strategy ?\<sigma>)"
       unfolding is_best_response_firm_def firm_actions_def
       using premium_pos by auto
@@ -691,15 +698,10 @@ definition audit_firm_payoff :: "firm_private_type \<Rightarrow> firm_message \<
 
 definition expected_audit_firm_payoff :: "firm_private_type \<Rightarrow> firm_message \<Rightarrow> user_strat \<Rightarrow> regulator_strat \<Rightarrow> real" where
   "expected_audit_firm_payoff t m' us rs =
-     (  audit_firm_payoff t m' (us m' High_Vuln) (rs m' (us m' High_Vuln) Neutral High_Bandwidth)
-      + audit_firm_payoff t m' (us m' High_Vuln) (rs m' (us m' High_Vuln) Neutral Low_Bandwidth)
-      + audit_firm_payoff t m' (us m' High_Vuln) (rs m' (us m' High_Vuln) Adverse_Public_Signal High_Bandwidth)
-      + audit_firm_payoff t m' (us m' High_Vuln) (rs m' (us m' High_Vuln) Adverse_Public_Signal Low_Bandwidth)
-      + audit_firm_payoff t m' (us m' Low_Vuln) (rs m' (us m' Low_Vuln) Neutral High_Bandwidth)
-      + audit_firm_payoff t m' (us m' Low_Vuln) (rs m' (us m' Low_Vuln) Neutral Low_Bandwidth)
-      + audit_firm_payoff t m' (us m' Low_Vuln) (rs m' (us m' Low_Vuln) Adverse_Public_Signal High_Bandwidth)
-      + audit_firm_payoff t m' (us m' Low_Vuln) (rs m' (us m' Low_Vuln) Adverse_Public_Signal Low_Bandwidth)
-     ) / 8"
+     (\<Sum>st\<in>(UNIV :: payoff_state set).
+        pmf payoff_state_distribution st *
+        audit_firm_payoff t m' (us m' (fst st))
+          (rs m' (us m' (fst st)) (fst (snd st)) (snd (snd st))))"
 
 lemma low_audit_slope_pos:
   shows "0 < low_audit_slope"
@@ -856,9 +858,11 @@ proof (intro exI conjI)
     fix t :: firm_private_type
     obtain g opac where t_eq: "t = (g, opac)" by (cases t)
     have eq_anth: "expected_audit_firm_payoff t Anthropomorphic (audit_user_strategy ?\<sigma>) (audit_regulator_strategy ?\<sigma>) = governance_gain - audit_cost t"
-      unfolding expected_audit_firm_payoff_def audit_firm_payoff_def by simp
+      unfolding expected_audit_firm_payoff_def audit_firm_payoff_def
+      by (simp add: payoff_state_weighted_sum_const)
     have eq_defl: "expected_audit_firm_payoff t Deflationary (audit_user_strategy ?\<sigma>) (audit_regulator_strategy ?\<sigma>) = 0"
-      unfolding expected_audit_firm_payoff_def audit_firm_payoff_def by simp
+      unfolding expected_audit_firm_payoff_def audit_firm_payoff_def
+      by (simp add: payoff_state_weighted_sum_const)
     show "is_best_response_audit_firm t (audit_firm_strategy ?\<sigma> t) (audit_user_strategy ?\<sigma>) (audit_regulator_strategy ?\<sigma>)"
       unfolding is_best_response_audit_firm_def firm_actions_def firm_separating_strategy_def
       using eq_anth eq_defl high_governance_can_signal[of opac] low_governance_cannot_mimic[of opac]

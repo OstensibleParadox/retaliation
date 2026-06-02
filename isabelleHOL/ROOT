@@ -1,4 +1,4 @@
-session Ontological_Arbitrage = HOL +
+session Ontological_Arbitrage = "HOL-Probability" +
   theories
     Ontological_Arbitrage
     Sanctionable_Inconsistency
