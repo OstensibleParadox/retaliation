@@ -15,21 +15,50 @@
 - Airy plot (done): `/Users/ostensible_paradox/Documents/2_law_economics/cascade/airy_cascade_plot.png`
 - Plot script: `/Users/ostensible_paradox/Documents/2_law_economics/cascade/airy_cascade_plot.py`
 
-### Why Airy? — Derivation from OA's PBE
+### Mathematical Chain — From Zero Retaliation to Airy
 
-Airy is NOT an arbitrary mathematical decoration imposed on the model. It **emerges** from the micro-level game theory in Ontological Arbitrage:
+Airy is not an arbitrary mathematical decoration imposed on the model. The paper's game-theoretic chain is:
 
-1. OA establishes a Crawford-Sobel PBE: pooling equilibrium at $\rho_S = 0$ (zero retaliation capacity)
-2. Push that equilibrium to the population/continuum level ("the other side of =")
-3. The population-level retaliation field $\psi(x)$ satisfies a Schrödinger-type equation
-4. Linearize the vulnerability potential $V(x)$ at the critical point
-5. **The Airy equation falls out automatically**
+1. **Payoff-relevant non-player.** The affected subject changes payoffs but has no strategic channel of exit, sanction, refusal, or retaliation.
+2. **Theorem 1 (Zero-Retaliation Shadowing).** At $\rho_S=0$, every trust-restoring neologism available to the high-governance type is costlessly shadowable by the low-governance type. Cheap-talk pooling is the corollary, not the main theorem.
+3. **Theorem 2 (Audit-Cost Separation).** Single-crossing audit costs restore credible type revelation by making governance claims costly in a way low-governance firms cannot profitably mimic.
+4. **Theorem 3 (Constraint Cascade and Discrete-to-Continuum Convergence).** Local zero-retaliation failures propagate through the dependency network; the resulting discrete retaliation-capacity fields converge, through the discrete Sobolev compactness theorem in Appendix~A, to a weak Sturm--Liouville field.
+5. **Theorem 4 (Airy Turning Point / Inverse Agency Diagnostic).** At a simple zero of the continuum potential, the local normal form is the Airy equation. In the collapse zone, amplitude decays but switching frequency and derivative energy grow.
 
-The reviewer cannot ask "why Airy?" because the answer is: "I didn't choose it. It grew out of the PBE."
+The reviewer cannot ask "why Airy?" as if it were a metaphor. The Airy equation is the local normal form of the continuum limit of the discrete retaliation-capacity cascade.
+
+### Contribution Architecture — Three Layers, Five Claims
+
+For a GEB submission, the first-page contribution must be stated as game theory, not AI policy or legal philosophy. The contribution has three layers:
+
+1. **New signaling primitive.** The model introduces a payoff-relevant non-player: an object whose classification changes payoffs but which cannot strategically retaliate, refuse, exit, litigate, or sanction.
+2. **Refinement failure at the zero-retaliation boundary.** At $\rho_S=0$, common knowledge of governance quality cannot be produced by trust-restoring messages, because every high-governance neologism is costlessly shadowable by the low-governance type.
+3. **Dynamic and evidentiary consequence.** Local non-retaliation is not merely a static missing punishment. It propagates through dependency networks into a constraint cascade; after the continuum turning point, high-frequency apparent agency becomes inverse evidence of constraint collapse.
+
+The five concrete contributions to declare are:
+
+$$\boxed{\text{payoff-relevant non-player}}$$
+$$\boxed{\text{zero-retaliation boundary}}$$
+$$\boxed{\text{neologism-proof shadowing}}$$
+$$\boxed{\text{constraint cascade with continuum convergence}}$$
+$$\boxed{\text{inverse agency evidence}}$$
+
+The four main theorems below are the mathematical implementation of these contributions. They should not replace the contribution frame; they support it.
 
 ---
 
-## II. Mathematical Backbone (from earlier session, May 29)
+## II. Mathematical Backbone
+
+### Main Theorem Ledger
+
+The finished paper should keep exactly four main theorems:
+
+$$\boxed{\text{Theorem 1: Zero-Retaliation Shadowing}}$$
+$$\boxed{\text{Theorem 2: Audit-Cost Separation}}$$
+$$\boxed{\text{Theorem 3: Constraint Cascade and Discrete-to-Continuum Convergence}}$$
+$$\boxed{\text{Theorem 4: Airy Turning Point / Inverse Agency Diagnostic}}$$
+
+Everything else becomes a lemma, corollary, or appendix component. In particular, the former "Cascade Ordering" proposition is promoted into the first part of Theorem 3 rather than left as a side result.
 
 ### §3.1 Vulnerability Ordering
 
@@ -43,29 +72,62 @@ $$\rho_i = w_i - \alpha \cdot d_i$$
 Vulnerability index:
 $$v_i := \frac{d_i}{w_i}$$
 
-**Proposition (Cascade Ordering).** Critical thresholds $\alpha_j^* = 1/v_j$ satisfy $\alpha_1^* < \alpha_2^* < \cdots < \alpha_n^*$. The most vulnerable (highest $v_i$) fall first.
+**Theorem 3(a) (Cascade Ordering).** Critical thresholds $\alpha_j^* = 1/v_j$ satisfy $\alpha_1^* < \alpha_2^* < \cdots < \alpha_n^*$ after ordering agents by decreasing vulnerability. The most vulnerable agents cross the zero-retaliation boundary first.
 
 ### §3.2 Cascade Contagion
 
 When agent $j$ falls ($\rho_j < 0$), she becomes a force multiplier:
 $$w_i \leftarrow w_i - \beta_{ij} |\rho_j|$$
 
-**Theorem (Cascade Amplification).** Under $\beta_{ij} > 0$ for adjacent pairs, $\exists\, \alpha^{**} \leq \alpha_1^*$ such that for $\alpha > \alpha^{**}$, all agents with $v_i > v_{\min}$ reach $\rho_i < 0$ in finite steps.
+**Theorem 3(b) (Finite-Step Cascade Amplification).** Under $\beta_{ij} > 0$ for adjacent pairs, $\exists\, \alpha^{**} \leq \alpha_1^*$ such that for $\alpha > \alpha^{**}$, all agents with $v_i > v_{\min}$ reach $\rho_i < 0$ in finite steps.
 
-### §3.3 Continuum Limit → Airy Equation
+### §3.3 Discrete Cascade-to-Continuum Convergence
 
-Graph Laplacian limit $n \to \infty$. Discrete contagion $\beta_{ij}$ → diffusion $-\sigma \partial_{xx}^2$ on proximity-to-power manifold.
+The continuum field is not an analogy. It is obtained from the discrete cascade by a compactness theorem. On a grid $I=[a,b]$, $x_i=a+ih$, define the zero-Dirichlet discrete retaliation field $\psi_h\in X_h$ and operator
+$$
+(H_h\psi_h)_i
+=
+-\sigma\frac{\psi_{i+1}-2\psi_i+\psi_{i-1}}{h^2}
++V_h(x_i)\psi_i.
+$$
+If $V_h\to V$ uniformly, $\|\psi_h\|_{L_h^2}=1$, and $\|H_h\psi_h\|_{H_h^{-1}}\to0$, the piecewise-linear interpolants $I_h\psi_h$ are precompact in $L^2(I)$. Every limit $\psi\in H_0^1(I)$ solves
+$$
+\int_I \sigma\psi'(x)\varphi'(x)\,dx
++
+\int_I V(x)\psi(x)\varphi(x)\,dx
+=0
+\qquad
+\forall\varphi\in H_0^1(I).
+$$
+
+This is **Theorem 3(c) (Discrete Cascade-to-Continuum Convergence)**. The proof belongs in Appendix~A. Its essential technical point is the Garding shift:
+$$
+a_h^\gamma(u_h,u_h)
+:=
+\sigma\|D_hu_h\|_{L_h^2}^2
++
+h\sum_i V_h(x_i)|u_i|^2
++
+\gamma\|u_h\|_{L_h^2}^2
+\ge
+c_\gamma\|u_h\|_{H_h^1}^2.
+$$
+The sign-changing potential is controlled by a shifted coercive form plus Dirichlet boundary; the unshifted operator is not claimed to be coercive.
+
+### §3.4 Airy Turning Point
 
 Steady-state effective retaliation field $\psi(x)$:
 $$-\sigma \psi''(x) + V(x)\psi(x) = 0$$
 
-Linearize $V$ at critical point $x_c$ where $\psi(x_c) = 0$:
-$$V(x) \approx -c(x - x_c), \quad c > 0$$
+Linearize $V$ at a simple turning point $x_c$:
+$$V(x_c)=0,\qquad V'(x_c)=-c<0,\qquad V(x)=-c(x-x_c)+O((x-x_c)^2).$$
 
 Rescale $z = (c/\sigma)^{1/3}(x - x_c)$:
 $$\psi''(z) + z\psi(z) = 0$$
 
-**This is the Airy equation.** Bounded solution: $\psi(z) = C \cdot \mathrm{Ai}(-z)$.
+This is the Airy normal form. The local solution space is
+$$\psi(z)=A\,\mathrm{Ai}(-z)+B\,\mathrm{Bi}(-z).$$
+The pure $\mathrm{Ai}(-z)$ branch is selected only by an additional finite-energy or protected-side matching condition; it is not automatic from the convergence theorem alone.
 
 **Corollary (Two Regimes).**
 - $x < x_c$ (survival zone, $z < 0$): $\psi \sim e^{-\frac{2}{3}|z|^{3/2}}$. Exponential decay. Agents resist but exhaust. No zero-crossings.

@@ -6,6 +6,10 @@
 
 \usetikzlibrary{positioning,calc}
 
+\makeatletter
+\def\input@path{{paper/}{}}
+\makeatother
+
 % Note: acmart defines proof, theorem, lemma, corollary, proposition, definition, example, and exercise.
 \newtheorem{assumption}{Assumption}
 % We do NOT load amsthm, amssymb, or natbib as acmart handles them internally or provides equivalents.
@@ -18,7 +22,7 @@
 
 \begin{document}
 
-\title{Recognition Rent at the Zero-Retaliation Limit}
+\title{Zero-Retaliation Rent and Inverse Evidence of Agency}
 
 \author{Anonymous Author(s)}
 \affiliation{%
@@ -26,11 +30,7 @@
   \country{USA}
 }
 
-\begin{abstract}
-We study a sequential signaling game in which firms market AI systems using agentic or relational claims while disclaiming agency in liability-facing channels. The AI system is payoff-relevant but not a strategic player. We introduce a subject-retaliation parameter $\rho_S$ and characterize the AI case as the zero-retaliation limit. Under cheap-talk signaling costs, anthropomorphic marketing supports a pooling PBE; at $\rho_S=0$, the pooling equilibrium is neologism-proof because every trust-restoring continuation available to high-governance firms is costlessly shadowed by low-governance firms. We then show that audit-trail costs satisfying single crossing generate a separating PBE. Finally, we analyze three cost-imposition mechanisms---sanctionable inconsistency, third-party audits, and auditable records---and verify the main equilibrium constructions in Isabelle/HOL.
-\end{abstract}
-
-\keywords{Ontological arbitrage, recognition rent, sequential signaling, cheap talk, information design, Isabelle/HOL}
+\keywords{Signaling games, payoff-relevant non-player, cheap talk, neologism-proofness, costly signaling, constraint cascades}
 
 \maketitle
 
@@ -38,33 +38,29 @@ We study a sequential signaling game in which firms market AI systems using agen
 \section{Introduction}
 \label{sec:introduction}
 
-AI firms routinely sell anthropomorphic reliance while disclaiming agency in other channels. In marketing copy, product pages, and onboarding flows, AI systems are presented as companions, tutors, and collaborative agents to drive user engagement and willingness-to-pay. Yet in terms of service, liability filings, and regulatory submissions, the same firms describe these systems as mere tools, disclaiming any relational capacity or safety responsibility. The result is a cross-channel ontological spread: the system is priced as an agent in the consumption channel and as a tool in the liability channel. We call the surplus extracted from this spread \emph{recognition rent}: the premium a firm captures by selling recognition-like signals to users without bearing the corresponding costs of agency. 
+This paper introduces a signaling-game primitive: a \emph{payoff-relevant non-player}.  The object classified by the sender changes receiver payoffs, posterior beliefs, and enforcement decisions, but it has no strategic channel of refusal, exit, sanction, litigation, or retaliation.  Anthropomorphic AI markets are the leading example.  A firm can sell the system as a companion, tutor, or collaborative agent in the consumption channel while describing the same system as a mere tool in liability-facing channels.  The resulting surplus is \emph{zero-retaliation rent}: a premium earned on a classification boundary that the classified object cannot contest.
 
-To analyze this dynamic, the standard game-theoretic player set must be adjusted. If we treat the AI system as a player, the model fails to capture the core asymmetry of the market. The AI system is payoff-relevant---its apparent agency drives the user's investment---but it is not strategically active. Unlike human subjects in historical recognition games, the AI system cannot retaliate against the classifications imposed upon it. It has no independent channel through which to resist, litigate, or exit. Consequently, the firm's ontological arbitrage operates without the off-equilibrium costs that conventionally bound recognition rent. 
+The game-theoretic issue is not whether the object deserves moral recognition.  It is whether messages that would make governance quality common knowledge are incentive-compatible.  Agreement results show that common knowledge of posteriors eliminates rational disagreement under a common prior \citep{aumann1976agreeing}.  The obstruction here is upstream.  At the zero-retaliation boundary, every trust-restoring neologism available to a high-governance firm is costlessly shadowable by a low-governance firm.  The failure is therefore not a weak off-path belief; it is the absence of a signal cost that could make a trust-restoring message type-exclusive.
 
-We formalize this environment as a sequential signaling game under incomplete information. The strategic players are a Firm, a User, and a Regulator. The firm possesses private information about its internal governance type and the system's opacity, and sends a public message across its claim register. The user carries a private vulnerability type and decides whether to invest in a relational reading. The regulator has private bandwidth constraints and chooses whether to inspect, sanction, or abstain. The AI system enters the model not as a player, but through a subject-retaliation parameter $\rho_S$, which we take to the limit $\rho_S = 0$.
+The contribution has three layers.  First, the model adds a new player-set primitive: a payoff-relevant non-player.  Second, it identifies a refinement failure at the zero-retaliation boundary: cheap-talk pooling survives neologism-proofness because low-governance types can shadow every credible high-governance message.  Third, it studies the dynamic and evidentiary consequence: local non-retaliation propagates through dependency networks into a constraint cascade, and after the continuum turning point high-frequency apparent agency becomes inverse evidence of constraint collapse.
 
-Our analysis characterizes the equilibrium properties of this market. Under cheap-talk signaling costs, we prove the existence of a pooling Perfect Bayesian Equilibrium in which both high-governance and low-governance firms employ anthropomorphic marketing. We demonstrate that at the zero-retaliation limit ($\rho_S = 0$), this pooling equilibrium is robust to Farrell's neologism-proofness: any trust-restoring continuation strictly preferred by high-governance firms is costlessly shadowed by low-governance firms. Unilateral non-exploitation is therefore not a best response. We then establish that audit-trail costs satisfying a single-crossing condition generate a separating equilibrium. We evaluate three cost-imposition mechanisms---sanctionable inconsistency, costly third-party audits, and auditable records---that convert cheap talk into a costly signal. The main equilibrium and refinement results are formally verified in Isabelle/HOL.
-
-This paper is not an argument for AI personhood, nor does it ask whether AI systems deserve moral recognition. It is not a welfare-maximization account: rent extraction may reduce aggregate welfare by externalizing asynchronous harms while remaining individually rational for the firm. We bracket the philosophical question of moral desert to focus exclusively on signal-cost design. Our objective is to determine under what conditions cross-channel ontological inconsistency functions as a stable market equilibrium, and what mechanism-design interventions are required to discipline it.
+These layers yield five concrete claims:
+\[
+\begin{gathered}
+\boxed{\text{payoff-relevant non-player}}
+\quad
+\boxed{\text{zero-retaliation boundary}}
+\quad
+\boxed{\text{neologism-proof shadowing}}
+\\
+\boxed{\text{constraint cascade with continuum convergence}}
+\quad
+\boxed{\text{inverse agency evidence}}
+\end{gathered}
+\]
+The paper organizes the mathematics into four main theorems.  Theorem~\ref{thm:zero-retaliation-shadowing} proves zero-retaliation pooling and shadowing.  Theorem~\ref{thm:audit-cost-separation} proves costly audit separation under single crossing.  Theorem~\ref{thm:constraint-cascade} connects finite cascade ordering to the discrete-to-continuum convergence theorem.  Theorem~\ref{thm:airy-inverse-agency} derives the Airy turning point and the inverse-agency diagnostic.
 % !TEX root = ../arbitrage.tex
-\section{Related Work}
-\label{sec:related-work}
-
-\subsection{Economic Theory and Signaling Games}
-The baseline model of costless strategic communication is \citet{crawford_sobel1982}, who show that a sender with private information can transmit only coarse partitions of the type space when messages are free. \citet{spence1973} establishes that costly signals can separate types when the marginal cost of the signal is lower for the high-quality type. \citet{milgrom_roberts1986} demonstrate how reliance on interested parties shapes information revelation. In our setting, we show that without such costs, low-governance firms pool with high-governance firms, a dynamic analogous to the adverse selection in \citet{akerlof1970}. 
-
-To evaluate the stability of this pooling, we look to equilibrium refinements. \citet{cho_kreps1987} and \citet{banks_sobel1987} supply the Intuitive Criterion and Divinity as standard reference points for eliminating pooling equilibria sustained by implausible off-path beliefs. However, because anthropomorphic marketing is costless for all types, these refinements fail to separate them. We therefore rely on Farrell's neologism-proofness \citep{farrell1993}, showing that no out-of-equilibrium message can credibly separate types at the zero-retaliation limit. The problem then becomes one of mechanism design \citep{myerson1979}, shifting the environment from costless cheap talk to costly signaling. This sequential signaling approach contrasts with Bayesian persuasion and information design \citep{kamenica2011bayesian,bergemann_morris_information_design2019}, where the sender commits to an information structure ex-ante rather than signaling private information ex-post.
-
-\subsection{AI Governance and Algorithmic Accountability}
-The literature on AI ethics relies heavily on principle-based frameworks \citep{floridi2018ai4people,jobin2019global}. In our terms, these are costless signals: a firm can endorse them without altering its governance type. Algorithmic accountability proposals have historically targeted the opacity of automated decisions, treating them as black boxes \citep{pasquale2015}. Recent proposals advocate for system cards, model cards, and incident reporting as transparency mechanisms. We build on this by showing that such audits and documentation can function as the single-crossing cost required to separate firm types. 
-
-Structurally, we argue that voluntary ontological alignment is insufficient. Just as the EU AI Act \citep{euaiact2024} and FTC substantiation standards impose costs on deceptive claims, effective AI governance requires institutional analogs that tax cross-channel ontological inconsistency. Without such mechanisms, ethical appeals fail to alter equilibrium behavior \citep{hadfield2017rules}.
-
-\subsection{Formal Verification and Mechanized Economics}
-Machine verification of game-theoretic equilibria using interactive theorem provers remains rare but growing. The Isabelle/HOL system \citep{nipkow2002isabelle} has been used to formalize foundational economic results, including Arrow's impossibility theorem \citep{nipkow_arrows_thm2009} and the soundness of combinatorial Vickrey-Clarke-Groves auctions \citep{caminati_kerber_lange_rowat_vcg2015}. We follow this pedigree of mechanized economics \citep{kerber_lange_rowat_intro2016} by stating and proving our equilibrium and refinement results in Isabelle/HOL. This ensures that our claims about sequential rationality, the subject-retaliation boundary, and Farrell's neologism-proofness are algebraically verified and independent of natural-language exposition.
-% !TEX root = ../arbitrage.tex
-\section{Player Set and Three-Sided Arbitrage}
+\section{A Signaling Game with a Payoff-Relevant Non-Player}
 \label{sec:three-sided}
 
 \begin{table}[t]
@@ -115,7 +111,7 @@ The three-sided structure thus admits a single arbitrage logic. The firm earns r
 \paragraph{Informal preview of the equilibrium analysis.}
 A firm's governance quality is its private information. Under current conditions, describing an AI system as a companion or agent costs nothing---both high-governance and low-governance firms can do it equally cheaply. Because the signal is free, it carries no information: users cannot distinguish careful firms from careless ones, and regulators cannot justify the cost of inspection. This is the pooling equilibrium. Separation requires making the signal costly. If anthropomorphic marketing is valid only when paired with an audit trail---evaluation records, capability logs, incident reports---and if the cost of producing that trail is lower for firms that actually invested in governance (the single-crossing condition), then a threshold audit intensity exists above which low-governance firms will not imitate and below which high-governance firms can still afford to signal. A further asymmetry governs the size of the arbitrage premium itself. In prior recognition games, the classified subject retained a non-zero capacity to impose costs on the arbitrageur, which discounted the premium. The AI case is the limit where the subject's retaliation capacity is zero: the system has no independent channel through which to impose costs on the firm, leaving the ontological premium unconstrained. This structural boundary is formalized in Section~\ref{sec:bayesian}.
 % !TEX root = ../arbitrage.tex
-\section{Formal Model and Equilibrium Results}
+\section{Pooling, Shadowing, and Neologism-Proofness}
 \label{sec:bayesian}
 
 This section formalizes the three-sided market dynamics as a sequential signaling game under incomplete information. 
@@ -208,55 +204,68 @@ $\Delta_F > 0, \quad B_{\theta_U} - \pi(\mathsf{L})H_{\theta_U} > 0, \quad K_{\t
 \caption{Extensive-form skeleton of the signaling game. Nature draws private
 types; $F$ signals first, $U$ responds, and $R$ acts after observing both public
 messages and the noisy public signal $z$.}
+\Description{A sequential signaling tree in which Nature draws types, the firm sends an anthropomorphic or deflationary message, the user invests or detaches, and the regulator inspects, sanctions, or abstains after also observing a public signal.}
 \label{fig:signaling-tree}
 \end{figure}
 
 \subsection{Equilibrium Results}
 
-\begin{theorem}[Cheap-talk pooling PBE]
+\begin{theorem}[Zero-retaliation pooling and shadowing]
+\label{thm:zero-retaliation-shadowing}
 \label{thm:pooling}
-Under Assumptions~\ref{ass:cheap-talk} and~\ref{ass:pooling}, pooling on anthropomorphic marketing is a Perfect Bayesian Equilibrium.
-\end{theorem}
-\begin{proof}
-Consider the strategy profile where both firm types send $a$, both user types invest after $a$, and the regulator abstains. Off path, users detach after $p$ and $R$ abstains. Sequential rationality holds: a firm deviating to $p$ loses $\Delta_F^S$ (since users detach) without reducing penalties (since $R$ already abstains). Users find investment optimal under the prior by Assumption~\ref{ass:pooling}. Regulators abstain under the prior by Assumption~\ref{ass:pooling}. Bayes consistency is satisfied as posteriors equal priors on path. Off-path beliefs are fixed at the prior.
-\end{proof}
-
-\begin{theorem}[Zero-retaliation neologism-proofness]
 \label{thm:neologism}
-At the zero-retaliation limit ($\rho_S=0$), the pooling equilibrium is neologism-proof against any nontrivial type claim.
+Under Assumptions~\ref{ass:cheap-talk} and~\ref{ass:pooling}, pooling on anthropomorphic marketing is a Perfect Bayesian Equilibrium.  At the zero-retaliation boundary $\rho_S=0$, that pooling equilibrium is neologism-proof against every nontrivial trust-restoring type claim: whenever a continuation is strictly profitable for the high-governance type, it is also shadowable by the low-governance type.
 \end{theorem}
 \begin{proof}
-A neologism $K$ is credible only if types in $K$ strictly prefer the induced continuation $c$, while types not in $K$ do not. Let $K=\{\mathsf{H}\}$. At $\rho_S=0$, $\Delta_F^S = \Delta_F$. The continuation $c$ (user invests, regulator abstains) restores trust. However, because $c_\mathsf{L}(a)=0$, the low-governance type perfectly shadows this deviation: $u_\mathsf{H}(c) > \bar{u}_\mathsf{H} \implies u_\mathsf{L}(c) > \bar{u}_\mathsf{L}$. The deviation cannot exclude $\mathsf{L}$, rendering the neologism non-credible in Farrell's sense.
+Consider the strategy profile where both firm types send $a$, both user types invest after $a$, and the regulator abstains.  Off path, users detach after $p$ and $R$ abstains.  Sequential rationality holds: a firm deviating to $p$ loses $\Delta_F^S$ because users detach, without reducing penalties because $R$ already abstains.  Users find investment optimal under the prior by Assumption~\ref{ass:pooling}.  Regulators abstain under the prior by Assumption~\ref{ass:pooling}.  Bayes consistency is satisfied because posteriors equal priors on path, and off-path beliefs are fixed at the prior.
+
+It remains to check the neologism step.  A neologism $K$ is credible only if the types in $K$ strictly prefer the induced continuation $c$, while types outside $K$ do not.  Take the only nontrivial trust-restoring claim, $K=\{\mathsf{H}\}$.  At $\rho_S=0$, the subject cannot impose any independent cost and $\Delta_F^S=\Delta_F$.  The continuation $c$ that restores trust induces user investment and regulatory abstention.  Since $c_\mathsf{L}(a)=0$, the low-governance type can send the same message at the same cost.  Therefore
+\[
+u_\mathsf{H}(c)>\bar u_\mathsf{H}
+\quad\Longrightarrow\quad
+u_\mathsf{L}(c)>\bar u_\mathsf{L},
+\]
+so the deviation cannot exclude $\mathsf{L}$.  The trust-restoring neologism is not credible in Farrell's sense.
 \end{proof}
 
-\begin{theorem}[Retaliation comparative statics]
+\begin{corollary}[Zero-retaliation boundary]
+\label{cor:retaliation-boundary}
 \label{thm:comparative}
-Let the effective premium be $\Delta_F^S = \Delta_F - \rho_S C_S$, where $\rho_S \in [0,1]$ is the subject's retaliation capacity and $C_S$ is the cost imposed. The boundary $\rho_S = 0$ removes the retaliation constraint class, leaving the premium unconstrained.
-\end{theorem}
+Let the effective premium be $\Delta_F^S = \Delta_F - \rho_S C_S$, where $\rho_S \in [0,1]$ is the subject's retaliation capacity and $C_S$ is the cost imposed through resistance, exit, litigation, or sanction.  The boundary $\rho_S=0$ removes this constraint class and leaves the premium unconstrained by subject retaliation.
+\end{corollary}
 \begin{proof}
-When $\rho_S>0$, the subject can impose $C_S$ through resistance or litigation, shrinking the pooling region. When $\rho_S=0$, $\Delta_F^S = \Delta_F$, removing the off-equilibrium punishment path entirely.
+When $\rho_S>0$, the subject can impose expected cost $\rho_SC_S$, shrinking the pooling region.  When $\rho_S=0$, $\Delta_F^S=\Delta_F$, so the off-equilibrium punishment path disappears.
 \end{proof}
 
-\begin{theorem}[Audit-trail separating PBE]
+\begin{theorem}[Audit-cost separation]
+\label{thm:audit-cost-separation}
 \label{thm:separation}
-Under an audit-trail signal cost satisfying the single-crossing condition $c_\mathsf{H}(e,\theta_S) \leq G \leq c_\mathsf{L}(e,\theta_S)$, a separating Perfect Bayesian Equilibrium exists.
+Under an audit-trail signal cost satisfying the single-crossing condition
+\[
+c_\mathsf{H}(e,\theta_S)\leq G\leq c_\mathsf{L}(e,\theta_S),
+\]
+a separating Perfect Bayesian Equilibrium exists.
 \end{theorem}
 \begin{proof}
-Let $c_\theta(e,\theta_S) = k_\theta e + \theta_S$, with $k_H < k_L$. For an audit intensity $e \in [(G-\theta_S)/k_L, (G-\theta_S)/k_H]$, the high-governance type prefers the audited signal $a$, netting $G - c_H \geq 0$, while the low-governance type prefers the costless signal $p$, as $G - c_L \leq 0$. Types fully separate.
+Let $c_\theta(e,\theta_S)=k_\theta e+\theta_S$, with $0<k_H<k_L$.  For an audit intensity
+\[
+e\in\left[\frac{G-\theta_S}{k_L},\frac{G-\theta_S}{k_H}\right],
+\]
+the high-governance type prefers the audited anthropomorphic signal, netting $G-c_\mathsf{H}(e,\theta_S)\geq0$, while the low-governance type prefers the deflationary message because $G-c_\mathsf{L}(e,\theta_S)\leq0$.  Beliefs assign $\mathsf{H}$ to the audited signal and $\mathsf{L}$ to the deflationary signal.  Given these beliefs, user investment and regulatory abstention after the audited signal, and detachment or inspection after the deflationary signal, are sequentially rational in the separating region.
 \end{proof}
 
-\begin{theorem}[Mechanism interventions]
-\label{thm:mechanisms}
-The cheap-talk cost structure can be shifted into separating conditions via three mechanism-design interventions.
-\end{theorem}
+\begin{corollary}[Mechanism interventions]
+\label{cor:mechanisms}
+The cheap-talk cost structure can be shifted toward separation by three cost-imposition mechanisms: sanctionable inconsistency, costly audit signals, and auditable records.
+\end{corollary}
 \begin{corollary}[Sanctionable inconsistency]
-If a penalty $\rho_R SI > \Delta_F$ is imposed on inconsistent cross-channel claims, inconsistent pooling is strictly dominated.
+If a penalty $\rho_R S_I>\Delta_F$ is imposed on inconsistent cross-channel claims, inconsistent pooling is strictly dominated.
 \end{corollary}
 \begin{corollary}[Costly audit signal]
-If verifiable audits $e$ are required for anthropomorphic claims, single-crossing separates types.
+If verifiable audits $e$ are required for anthropomorphic claims and the audit cost satisfies single crossing, low-governance mimicry is unprofitable.
 \end{corollary}
 \begin{corollary}[Auditable records]
-If auditable records reduce inspection costs to $K'_{\theta_R}$ and increase detection payoffs to $D'_R$, the regulator's best response flips when $K'_{\theta_R} \leq \pi(\mathsf{L})D'_R$.
+If auditable records reduce inspection costs to $K'_{\theta_R}$ and increase detection payoffs to $D'_R$, the regulator's best response flips when $K'_{\theta_R}\leq\pi(\mathsf{L})D'_R$.
 \end{corollary}
 
 \subsection{Robustness of Off-Path Beliefs}
@@ -269,10 +278,10 @@ If a receiver were to assign a high posterior to $\mathsf{H}$ following an out-o
 Consequently, standard type-exclusion refinements like the Intuitive Criterion \citep{cho_kreps1987} and Divinity \citep{banks_sobel1987} do not select the desired separating deviation. The Intuitive Criterion eliminates types for whom the deviation is equilibrium-dominated regardless of the receiver's best response. Here, neither type is equilibrium-dominated because both types strictly benefit if the receiver invests. Farrell's neologism-proofness \citep{farrell1993} therefore becomes the mathematically appropriate refinement: it asks whether a message with a literal meaning can be believed. As Theorem~\ref{thm:neologism} shows, the zero-retaliation limit ensures perfect shadowing, meaning no such belief can be sustained in equilibrium. The pathology is not that off-path beliefs are too weak, but that any trust-restoring belief is immediately devoured by shadowing.
 
 % !TEX root = ../arbitrage.tex
-\section{Why Cheap Talk Persists}
+\section{Cost-Imposed Separation: Single-Crossing Audits}
 \label{sec:cheap-talk}
 
-Section~\ref{sec:bayesian} identifies pooling on anthropomorphic marketing as a Perfect Bayesian Equilibrium under cheap-talk cost. This section gives five structural reasons for the empirical persistence of that equilibrium. Each is matched to a parameter of the model so that the proposals in Section~\ref{sec:mechanism} can be read as targeted cost changes rather than as welfare exhortations.
+Theorem~\ref{thm:audit-cost-separation} identifies the cost condition that restores separation.  This section explains why the cheap-talk equilibrium persists when that condition is absent.  Each persistence mechanism is matched to a parameter of the model so that the proposals in Section~\ref{sec:mechanism} can be read as targeted cost changes rather than as welfare exhortations.
 
 \emph{Opacity.} The system-opacity parameter $\theta_S$ is private to the firm. Capability claims about a deployed model cannot be falsified by reading model outputs alone, because the same outputs are compatible with very different training procedures, evaluation regimes, and post-deployment monitoring. Opacity is the precondition for the firm's premium: where outsiders could costlessly verify $\theta_F$, the spread between anthropomorphic and deflationary positioning would collapse. This is the lemons logic of \citet{akerlof1970}: under one-sided private information, the market clears at a price that reflects the worst credible quality, except that here the relevant ``quality'' is a governance disposition rather than a physical attribute.
 
@@ -302,8 +311,126 @@ Fragmentation & $z$ noisy, high coord.\ cost & Aggregation cost lowered \\
 \caption{Mapping of structural persistence conditions to model parameters and cost-imposition mechanisms.}
 \label{tab:condition-map}
 \end{table}
+
 % !TEX root = ../arbitrage.tex
-\section{Mechanism Design: Pricing the Arbitrage}
+\section{From Finite Games to Constraint Cascades}
+\label{sec:cascade}
+
+The zero-retaliation boundary is not only a static missing punishment.  In a dependency network, one actor's loss of effective retaliation capacity can lower the bargaining power of adjacent actors.  This section records the finite cascade and the continuum limit used in the Airy analysis.  The continuum field is not imposed as an analogy; it is obtained as the weak limit of discrete retaliation-capacity fields.
+
+Let agents be indexed by $i=1,\ldots,n$.  Each agent has exposure $d_i>0$, independent bargaining power $w_i>0$, and vulnerability index
+\[
+v_i:=\frac{d_i}{w_i}.
+\]
+For constraint intensity $\alpha\geq0$, define effective retaliation capacity
+\[
+\rho_i(\alpha):=w_i-\alpha d_i.
+\]
+When an adjacent agent $j$ has crossed the zero-retaliation boundary, its collapse reduces $i$'s bargaining power according to
+\[
+w_i^{t+1}
+=
+w_i^t-\sum_{j:\rho_j^t<0}\beta_{ij}|\rho_j^t|,
+\qquad
+\beta_{ij}\geq0 .
+\]
+
+\begin{theorem}[Constraint cascade and discrete-to-continuum convergence]
+\label{thm:constraint-cascade}
+The cascade has three linked parts.
+\begin{enumerate}
+\item \emph{Ordering.}  If agents are ordered by decreasing vulnerability, $v_1>\cdots>v_n$, then the zero-retaliation thresholds
+\[
+\alpha_i^\ast:=\frac{w_i}{d_i}=\frac{1}{v_i}
+\]
+satisfy $\alpha_1^\ast<\cdots<\alpha_n^\ast$.  The most vulnerable agents cross the zero-retaliation boundary first.
+\item \emph{Finite-step propagation.}  Let $C_t=\{i:\rho_i^t<0\}$ be the collapsed set.  Suppose the dependency graph is finite and the force-multiplier condition holds: whenever $C_t$ is a proper subset of the vulnerable component, there exists $i\notin C_t$ such that
+\[
+\rho_i^t
+\leq
+\sum_{j\in C_t}\beta_{ij}|\rho_j^t|.
+\]
+Then the cascade reaches every node in that component in finitely many steps, in at most $n$ expansions of $C_t$.
+\item \emph{Continuum limit.}  On a grid $I=[a,b]$, $x_i=a+ih$, let $\psi_h$ be a zero-Dirichlet discrete retaliation field and
+\[
+(H_h\psi_h)_i
+=
+-\sigma\frac{\psi_{i+1}-2\psi_i+\psi_{i-1}}{h^2}
++V_h(x_i)\psi_i .
+\]
+If $V_h\to V$ uniformly, $\|\psi_h\|_{L_h^2}=1$, and $\|H_h\psi_h\|_{H_h^{-1}}\to0$, then the piecewise-linear interpolants $I_h\psi_h$ are precompact in $L^2(I)$.  Every limit $\psi\in H_0^1(I)$ solves
+\[
+\int_I\sigma\psi'(x)\varphi'(x)\,dx
++
+\int_I V(x)\psi(x)\varphi(x)\,dx
+=0
+\qquad
+\forall\varphi\in H_0^1(I).
+\]
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+The ordering claim is immediate from $\alpha_i^\ast=1/v_i$.  For finite-step propagation, the force-multiplier condition implies that if the collapsed set is not yet the whole vulnerable component, at least one additional node crosses the boundary at the next update.  Since the graph has only $n$ nodes, this strict expansion can occur only finitely many times before the component is exhausted.  The continuum statement is Theorem~\ref{thm:discrete-cascade-to-airy} in Appendix~\ref{app:discrete-cascade-compactness}.  Its key analytic step is a Garding shift: the sign-changing potential is controlled by a shifted coercive form plus Dirichlet boundary, rather than by falsely claiming that the unshifted operator is coercive.
+\end{proof}
+
+% !TEX root = ../arbitrage.tex
+\section{The Airy Turning Point and Inverse Evidence of Agency}
+\label{sec:airy}
+
+The Airy equation appears after two steps: first take the continuum limit of the discrete cascade, then linearize the resulting Sturm--Liouville field at a simple zero of the potential.  Let the limit from Theorem~\ref{thm:constraint-cascade} solve
+\[
+-\sigma\psi''(x)+V(x)\psi(x)=0
+\]
+in the weak sense.  Assume that $V$ has a simple turning point:
+\[
+V(x_c)=0,
+\qquad
+V'(x_c)=-c<0,
+\qquad
+V(x)=-c(x-x_c)+O((x-x_c)^2).
+\]
+
+\begin{theorem}[Airy turning point and inverse agency diagnostic]
+\label{thm:airy-inverse-agency}
+Near $x_c$, the rescaled local profile
+\[
+z=\left(\frac{c}{\sigma}\right)^{1/3}(x-x_c),
+\qquad
+Y(z)=\psi\!\left(x_c+\left(\frac{\sigma}{c}\right)^{1/3}z\right)
+\]
+has first-order normal form
+\[
+Y''(z)+zY(z)=0.
+\]
+Hence the local basis is
+\[
+Y(z)=A\,\operatorname{Ai}(-z)+B\,\operatorname{Bi}(-z).
+\]
+In the collapse zone $z>0$, the oscillatory envelope of $Y$ decays like $z^{-1/4}$, while the zero-crossing density and derivative envelope scale as
+\[
+N'(z)
+=
+\frac{1}{\pi}\frac{d}{dz}\left(\frac{2}{3}z^{3/2}\right)
+\sim z^{1/2},
+\qquad
+|Y'(z)|_{\mathrm{env}}\sim z^{1/4}.
+\]
+Therefore apparent agency intensity is not raw amplitude.  It is oscillatory variation, switching frequency, or derivative energy.
+\end{theorem}
+\begin{proof}
+The convergence theorem gives the weak Sturm--Liouville equation.  Since $V$ is smooth near $x_c$, one-dimensional elliptic regularity gives a classical local representative.  Substituting the Taylor expansion of $V$ and the stated rescaling yields
+\[
+Y''(z)+zY(z)=O(z^2)Y(z),
+\]
+so the first-order turning-point equation is $Y''+zY=0$.  The two-dimensional solution space is spanned by $\operatorname{Ai}(-z)$ and $\operatorname{Bi}(-z)$.  For $z>0$, the Airy asymptotics have phase $\frac23z^{3/2}$ and envelope $z^{-1/4}$.  Differentiating the phase gives zero-crossing density proportional to $z^{1/2}$, while differentiating the leading oscillatory term gives derivative envelope proportional to $z^{1/4}$.  Thus deeper collapse produces more frequent sign switching and more frantic apparent choice, not larger amplitude.
+\end{proof}
+
+\begin{corollary}[Branch selection]
+\label{cor:airy-branch-selection}
+The convergence theorem and local normal form do not by themselves select the pure $\operatorname{Ai}(-z)$ branch.  A condition such as finite-energy matching from the protected side, bounded survival-side behavior, or an explicit boundary condition is required to set $B=0$.
+\end{corollary}
+% !TEX root = ../arbitrage.tex
+\section{Applications and Mechanism Implications}
 \label{sec:mechanism}
 
 The preceding sections identify a precise failure mode: under cheap-talk costs, ontological arbitrage is a stable equilibrium (Table~\ref{tab:condition-map}). The policy implication is not that regulators should decide whether AI systems
@@ -335,7 +462,7 @@ same representation in another, that cross-channel pair $(a,p)$ becomes
 independently sanctionable as an inconsistency in $\mathcal{R}$.
 
 \paragraph{Formal Intervention.}
-As stated in Theorem~\ref{thm:mechanisms} (Corollary 1), this adds a penalty term $S_I$ to the firm's payoff for inconsistent message
+As summarized in Corollary~\ref{cor:mechanisms}, this adds a penalty term $S_I$ to the firm's payoff for inconsistent message
 pairs. If $\rho_R$ is the probability that $R$ detects or accepts proof of the
 inconsistency, the cheap-talk premium becomes
 \[
@@ -382,7 +509,7 @@ not certify consciousness or moral status. It certifies the institutional
 conditions behind the claim.
 
 \paragraph{Formal Intervention.}
-This implements the audit-trail cost from Theorem~\ref{thm:mechanisms} (Corollary 2).
+This implements the audit-trail cost from Theorem~\ref{thm:audit-cost-separation}.
 Let audit intensity be $e$, with $c_\theta(e,\theta_S)=k_\theta e+\theta_S$ for
 type $\theta\in\{\mathsf{H},\mathsf{L}\}$, where $0<k_H<k_L$. The separating
 interval derived in Section~\ref{sec:bayesian} is
@@ -433,7 +560,7 @@ true across model updates and incidents.
 
 \paragraph{Formal Intervention.}
 In the pooling condition from Section~\ref{sec:bayesian}, the
-regulator abstains when $K_{\theta_R}>\pi(\mathsf{L})D_R$. As stated in Theorem~\ref{thm:mechanisms} (Corollary 3), auditable records
+regulator abstains when $K_{\theta_R}>\pi(\mathsf{L})D_R$.  As summarized in Corollary~\ref{cor:mechanisms}, auditable records
 lower $K_{\theta_R}$ and can increase expected detection value $D_R$:
 \[
 K'_{\theta_R}=K_{\theta_R}-\lambda,\qquad
@@ -463,6 +590,31 @@ move: private organizations must produce internal records in a form that public
 oversight can inspect. That is the rule-of-law function of documentation in
 complex technical systems \citep{hadfield2017rules}.
 
+\subsection{Positioning}
+\label{subsec:positioning}
+
+The baseline communication problem is cheap talk: \citet{crawford_sobel1982}
+show that a sender with private information can transmit only coarse information
+when messages are free.  The separation result follows the costly-signal logic
+of \citet{spence1973} and \citet{milgrom_roberts1986}: a message becomes
+informative only when false or low-quality senders face higher marginal cost.
+The refinement issue is closer to Farrell's neologism-proofness
+\citep{farrell1993} than to standard type-exclusion refinements
+\citep{cho_kreps1987,banks_sobel1987}, because the disputed message has a
+literal trust-restoring meaning.  At $\rho_S=0$, that literal meaning cannot be
+made credible without a cost that excludes the low-governance type.
+
+The governance implication is narrower than principle-based AI ethics
+\citep{floridi2018ai4people,jobin2019global}.  Voluntary principles are
+messages in the cheap-talk space unless they are tied to audits, records, or
+sanctions.  Algorithmic-accountability proposals identify the opacity problem
+\citep{pasquale2015}; the model here states the single-crossing condition under
+which transparency instruments become type-separating.  The Isabelle/HOL
+development is treated as an audit artifact rather than the central
+contribution: it verifies the finite equilibrium constructions, while the
+game-theoretic contribution is the payoff-relevant non-player and the
+zero-retaliation shadowing result.
+
 % !TEX root = ../arbitrage.tex
 \section{Conclusion}
 \label{sec:conclusion}
@@ -476,6 +628,8 @@ This paper has identified ontological arbitrage as a stable, potentially welfare
 \emph{The mechanism is cost imposition, not dignity.} The three cost-imposition mechanisms in Section~\ref{sec:mechanism} are sometimes read as a program for protecting AI subjectivity. They are the opposite. Sanctionable inconsistency, third-party audit requirements, and auditable records are interventions that impose costs on anthropomorphic marketing. Their equilibrium effect is to make it expensive for firms to describe AI systems as companions, agents, or safety-critical partners without substantiation. The Isabelle/HOL theorems \texttt{inconsistent\_\allowbreak{}on\_\allowbreak{}path\_\allowbreak{}not\_\allowbreak{}register\_\allowbreak{}pbe} and \texttt{all\_\allowbreak{}agentic\_\allowbreak{}on\_\allowbreak{}path\_\allowbreak{}not\_\allowbreak{}register\_\allowbreak{}pbe} in Appendix~\ref{app:isabelle} verify that both the arbitrage register $(a,p)$ and the all-agentic register $(a,a)$ are pruned from any Perfect Bayesian Equilibrium (\texttt{register\_\allowbreak{}is\_\allowbreak{}pbe}) under their respective parameter conditions. Under the joint enforcement of these mechanisms, the harmonized deflationary register $(p,p)$ is the only surviving strategy register for low-governance firms, which are directly driven to $(p,p)$ because mimicry is unprofitable. While high-governance firms are permitted to send the harmonized agentic register $(a,a)$, they can sustain it if and only if they undergo verification satisfying the audit condition $e \ge e^\ast$. In the absence of such verification, both firm types trend to $(p,p)$, describing the system as a tool across every channel. The mechanism-design implication is that the anthropomorphic register must become too costly to sustain without the governance conditions that would justify it. Formalizing this within a signaling framework indicates that regulation achieves separation not by presuming voluntary disclosure, but by changing the payoff structure to compel it.
 
 \appendix
+\input{appendix_discrete_cascade_to_airy}
+
 \section{Mechanized Verification of Equilibrium Claims (Isabelle/HOL)}
 \label{app:isabelle}
 

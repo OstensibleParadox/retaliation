@@ -115,9 +115,9 @@ Sturm--Liouville equation
   \text{for every }\eta\in H_0^1(I).
   \tag{A.3}
 \]
-Equivalently, $-\sigma\Psi''+V\Psi=0$ in $H^{-1}(I)$.  Near any simple
-turning point of $V$, this weak limit has the Airy normal form described in
-Appendix~\ref{app:airy-normal-form}.
+Equivalently, $-\sigma\Psi''+V\Psi=0$ in $H^{-1}(I)$.  If, in addition,
+$V$ is $C^2$ near a simple turning point, this weak limit has the Airy normal
+form described in Appendix~\ref{app:airy-normal-form}.
 \end{theorem}
 
 \begin{proof}
@@ -144,18 +144,17 @@ Choose $\gamma>1+\sup_{h,i}|V_{h,i}|$ and define the shifted form
   :=
   a_h(u,u)+\gamma\|u\|_{L_h^2}^2 .
 \]
-Then
+Then, with $c_\gamma:=\min\{\sigma,\gamma-\sup_{h,i}|V_{h,i}|\}>0$,
 \[
   a_h^\gamma(u,u)
   \ge
-  \sigma h\sum_{i=1}^{n+1}|(D_hu)_i|^2
+  c_\gamma h\sum_{i=1}^{n+1}|(D_hu)_i|^2
   +
-  \|u\|_{L_h^2}^2 ,
+  c_\gamma\|u\|_{L_h^2}^2 ,
   \tag{A.5}
 \]
-after decreasing the right-hand constant if necessary.  This is the Garding
-shift: the positive shift supplies coercivity without claiming that the
-sign-changing operator $H_h$ is coercive on its own.
+This is the Garding shift: the positive shift supplies coercivity without
+claiming that the sign-changing operator $H_h$ is coercive on its own.
 
 Using (A.4), the residual bound, and $\|\psi_h\|_{L_h^2}=1$,
 \[
@@ -184,8 +183,8 @@ the $L^2$ norm of the piecewise-linear interpolant differ by $o(1)$ on
 uniformly $H_h^1$-bounded sequences.  Hence $\|\Psi\|_{L^2(I)}=1$.
 
 It remains to pass to the weak equation.  Fix $\eta\in C_c^\infty(a,b)$ and
-let $\eta_h\in X_h$ be its nodal restriction, $\eta_{h,i}=\eta(x_i)$.  The
-residual assumption gives
+let $\eta_h\in X_h$ be its nodal restriction, $\eta_{h,i}=\eta(x_i)$.  Since
+$\|\eta_h\|_{H_h^1}$ is uniformly bounded, the residual assumption gives
 \[
   a_h(\psi_h,\eta_h)
   =
