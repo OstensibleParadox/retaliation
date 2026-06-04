@@ -21,6 +21,9 @@
 \newtheorem{theorem}{Theorem}
 \newtheorem{corollary}{Corollary}
 \newtheorem{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\theoremstyle{plain}
 \newcommand{\Description}[1]{}
 
 \begin{document}
@@ -331,19 +334,13 @@ c_\mathsf{L}(e,\theta_S)-G
 \]
 Only then can the audited signal support common-knowledge formation rather than another shadowable message.
 
-\begin{corollary}[Mechanism interventions]
-\label{cor:mechanisms}
-The profitable cheap-talk cost structure can be shifted toward separation by three cost-imposition mechanisms: sanctionable inconsistency, costly audit signals, and auditable records.
-\end{corollary}
-\begin{corollary}[Sanctionable inconsistency]
-If a penalty $\rho_R S_I>\Delta_F$ is imposed on inconsistent cross-channel claims, inconsistent pooling is strictly dominated.
-\end{corollary}
-\begin{corollary}[Costly audit signal]
-If verifiable audits $e$ are required for anthropomorphic claims and the audit cost satisfies single crossing, low-governance mimicry is unprofitable.
-\end{corollary}
-\begin{corollary}[Auditable records]
-If auditable records reduce inspection costs to $K'_{\theta_R}$ and increase detection payoffs to $D'_R$, the regulator's best response flips when $K'_{\theta_R}\leq\pi(\mathsf{L})D'_R$.
-\end{corollary}
+Theorem~\ref{thm:audit-cost-separation} gives the local separation condition.
+The mechanism consequences---sanctionable inconsistency, audit requirements,
+and auditable records---are stated as
+Corollaries~\ref{cor:inconsistency-pruning}--\ref{cor:verification-feasibility}
+in Section~\ref{sec:mechanism} after introducing a common pricing notation for
+the low-type arbitrage spread.  That notation is useful because the three
+interventions operate on different terms of the same net-payoff inequality.
 
 \section{Why Profitable Cheap Talk Does Not Self-Correct}
 \label{sec:persistence}
@@ -514,25 +511,153 @@ Y''(z)+zY(z)=O(z^2)Y(z),
 so the first-order turning-point equation is $Y''+zY=0$.  The two-dimensional solution space is spanned by $\operatorname{Ai}(-z)$ and $\operatorname{Bi}(-z)$.  For $z>0$, the Airy asymptotics have phase $\frac23z^{3/2}$ and envelope $z^{-1/4}$.  Differentiating the phase gives zero-crossing density proportional to $z^{1/2}$, while differentiating the leading oscillatory term gives derivative envelope proportional to $z^{1/4}$.  Thus deeper collapse produces more frequent sign switching and more frantic apparent choice, not larger amplitude.
 \end{proof}
 
-\begin{corollary}[Branch selection]
-\label{cor:airy-branch-selection}
+\begin{remark}[Branch selection]
+\label{rem:airy-branch-selection}
 The convergence theorem and local normal form do not by themselves select the pure $\operatorname{Ai}(-z)$ branch.  A condition such as finite-energy matching from the protected side, bounded survival-side behavior, or an explicit boundary condition is required to set $B=0$.
-\end{corollary}
+\end{remark}
 % !TEX root = ../arbitrage.tex
-\section{Mechanism Implications: Pricing the Ontological Spread}
+\section{Pricing the Ontological Spread: Necessity and Sufficiency Conditions}
 \label{sec:mechanism}
 
-The preceding sections identify a precise failure mode: profitable cheap talk makes ontological arbitrage a stable equilibrium (Table~\ref{tab:condition-map}). The implication is that the public signal environment should be redesigned so
-that inconsistent ontological claims no longer remain costless. In
-mechanism-design terms, the problem is to make non-arbitrage incentive
-compatible by pricing the spread, rather than to ask firms to volunteer restraint \citep{myerson1979}.
+The three interventions below are not offered as novel regulatory labels.
+Each has familiar analogues.  The contribution is instead to identify the
+parameter inequality each intervention closes.  Sanctionable inconsistency
+prices the cross-channel spread.  Audits price the anthropomorphic claim.
+Auditable records price verification by changing the regulator's inspection
+inequality.  The mechanisms therefore operate on different margins of the same
+zero-retaliation arbitrage condition.
 
-The proposals below therefore alter the game in Section~\ref{sec:bayesian} at
-three different points: the cost of inconsistent messages, the cost of
-anthropomorphic claims, and the regulator's cost of verification. Each proposal
-has the same structure. It modifies a model parameter (Formal Intervention), states the equilibrium
-shift induced by that modification (Equilibrium Shift), and points to an existing legal form that
-establishes feasibility (Legal Analog). 
+\begin{definition}[Low-type arbitrage spread]
+\label{def:arbitrage-spread}
+Define the low-type arbitrage spread from a trust-restoring register $q$ as
+\[
+\Omega_L(q)
+  := G(q)-C_L(q)-\Pi_L(q),
+\]
+where $G(q)$ is the gross continuation gain from the register,
+$C_L(q)$ is the low type's signal or compliance cost, and
+$\Pi_L(q)$ is the expected enforcement price attached to that register.
+A low-governance type profitably shadows whenever $\Omega_L(q)>0$.
+A mechanism disciplines profitable cheap talk only if it drives
+$\Omega_L(q)\le 0$ while preserving $\Omega_H(q)\ge 0$ for the desired
+high-governance signal.
+\end{definition}
+
+\begin{proposition}[Pricing the ontological spread]
+\label{prop:pricing}
+Let $q$ be a trust-restoring register or claim.  In the profitable cheap-talk
+baseline, $C_H(q)=C_L(q)=0$ and $\Pi_H(q)=\Pi_L(q)=0$, so
+\[
+\Omega_H(q)=\Omega_L(q)=G(q)>0.
+\]
+Thus $q$ cannot separate types.  A mechanism can restore separation or prune
+arbitrage only by altering at least one of three terms:
+\[
+\Omega_\theta(q)=G(q)-C_\theta(q)-\Pi_\theta(q).
+\]
+
+\emph{(i)} A sanctionable-inconsistency rule raises $\Pi_L(q)$ for inconsistent
+cross-channel registers.
+
+\emph{(ii)} An audit requirement raises $C_\theta(q)$ in a type-dependent way.
+
+\emph{(iii)} Auditable records raise the probability or payoff of enforcement by
+lowering $K_R$, increasing $D_R$, or increasing the detection probability
+embedded in $\Pi_\theta(q)$.
+
+\noindent
+For a separating trust-restoring signal to exist, it is necessary that some
+mechanism create a wedge such that
+\[
+\Omega_H(q)\ge 0 \quad \text{and} \quad \Omega_L(q)\le 0.
+\]
+Absent such a wedge, every trust-restoring message remains shadowable.
+Within the audit family $c_\theta(e,\theta_S)=k_\theta e+\theta_S$,
+the single-crossing condition
+\[
+c_H(e,\theta_S)\le G(q)\le c_L(e,\theta_S)
+\]
+is necessary and sufficient for separation by audit intensity.
+\end{proposition}
+
+\begin{corollary}[Sufficiency of sanctionable inconsistency for register pruning]
+\label{cor:inconsistency-pruning}
+For an inconsistent cross-channel register $q=(a,p)$, a
+sanctionable-inconsistency penalty prunes the register whenever
+\[
+\rho_R SI \ge \Delta_F^S.
+\]
+If $\rho_R SI=0$ and no other mechanism prices inconsistency, then $q$
+remains profitable whenever $\Delta_F^S>0$.
+\end{corollary}
+
+\begin{corollary}[Necessary and sufficient audit condition]
+\label{cor:audit-separation}
+Within the audit family $c_\theta(e,\theta_S)=k_\theta e+\theta_S$ with
+$0<k_H<k_L$, an audited anthropomorphic signal supports separation if and
+only if there exists $e\ge 0$ such that
+\[
+c_H(e,\theta_S)\le G\le c_L(e,\theta_S).
+\]
+Equivalently, when $G>\theta_S$,
+\[
+e\in
+\left[
+\frac{G-\theta_S}{k_L},\;
+\frac{G-\theta_S}{k_H}
+\right].
+\]
+\end{corollary}
+
+\begin{corollary}[Verification feasibility]
+\label{cor:verification-feasibility}
+Auditable records make active regulation sequentially rational whenever
+\[
+K_R-\lambda \le \pi(\mathsf{L})(D_R+\eta).
+\]
+If this inequality fails, recordkeeping alone does not discipline profitable
+cheap talk; it stores information without making enforcement
+incentive-compatible.
+\end{corollary}
+
+\begin{table}[t]
+\centering
+\small
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}p{3.2cm}p{3.2cm}p{3.5cm}p{3.5cm}@{}}
+\toprule
+\textbf{Mechanism} & \textbf{Prices what?} & \textbf{Sufficient for} & \textbf{Necessary when} \\
+\midrule
+Sanctionable inconsistency & cross-channel spread $(a,p)$ & pruning inconsistent register if $\rho_R SI\ge\Delta_F^S$ & no other mechanism prices inconsistency \\
+Costly audit & anthropomorphic claim $a$ & type separation if $c_H\le G\le c_L$ & separation by message requires type-dependent cost wedge \\
+Auditable records & verification / enforcement feasibility & inspection if $K_R{-}\lambda\le\pi(\mathsf{L})(D_R{+}\eta)$ & detection probability or verification payoff remains too low \\
+\bottomrule
+\end{tabular}
+\caption{Mechanism matrix: each intervention prices a different margin of the
+arbitrage spread $\Omega_\theta(q)$.}
+\label{tab:mechanism-matrix}
+\end{table}
+
+\paragraph{Complementarity.}
+The mechanisms are not substitutes.  They price different margins.
+Sanctionable inconsistency without records imposes a penalty that the regulator
+cannot verify---a paper tiger when $\rho_R$ is low.  Records without
+sanctionable inconsistency store information without attaching a price:
+an archive, not a mechanism.  Audit requirements without sanctionable
+inconsistency can support a verified $(a,a)$ claim, but cannot automatically
+prohibit the cross-channel $(a,p)$ arbitrage register.  Sanctionable
+inconsistency combined with records prunes inconsistent registers.  Audit
+requirements combined with records support credible high-governance agentic
+claims.  All three together convert profitable cheap talk into costly signaling
+with enforceable consistency: the arbitrage spread $\Omega_L(q)$ is attacked on
+the cost term by audits, on the penalty term by sanctions, and on the
+enforcement-feasibility precondition by records.
+
+The subsections below elaborate each mechanism.  Each states the formal
+intervention on model parameters, the equilibrium shift, the necessity and
+sufficiency conditions, and an existing legal form that establishes
+feasibility.
 
 \subsection{Sanctionable Inconsistency}
 \label{subsec:sanctionable-inconsistency}
@@ -554,16 +679,36 @@ same representation in another, that cross-channel pair $(a,p)$ becomes
 independently sanctionable as an inconsistency in $\mathcal{R}$.
 
 \paragraph{Formal Intervention.}
-As summarized in Corollary~\ref{cor:mechanisms}, this adds a penalty term $S_I$ to the firm's payoff for inconsistent message
-pairs. If $\rho_R$ is the probability that $R$ detects or accepts proof of the
-inconsistency, the profitable cheap-talk premium becomes
+In the notation of Proposition~\ref{prop:pricing}, sanctionable inconsistency
+raises the penalty term $\Pi_L(q)$ by adding $S_I$ to the firm's payoff for
+inconsistent message pairs.  If $\rho_R$ is the probability that $R$ detects or
+accepts proof of the inconsistency, the profitable cheap-talk premium becomes
 \[
 \Delta_F-\rho_R S_I .
 \]
 Pooling on anthropomorphic marketing is no longer profitable when
-$\rho_R S_I>\Delta_F$. The rule therefore attacks the exact term that made
+$\rho_R S_I>\Delta_F$.  The rule therefore attacks the exact term that made
 arbitrage attractive: the rent earned from pricing the system as agent in the
 user channel while pricing it as tool in the liability channel.
+
+\paragraph{Necessity and Sufficiency.}
+Sanctionable inconsistency is not a separation mechanism.  It is a
+register-pruning mechanism: its function is to delete the inconsistent
+register $q=(a,p)$ from the profitable message space, not to distinguish
+high-governance from low-governance types.
+For an inconsistent register $q=(a,p)$, sanctionable inconsistency is
+sufficient to prune $q$ whenever
+\[
+\rho_R SI \ge \Delta_F^S - [c_\theta(a,p)-c_\theta(p,p)].
+\]
+In the baseline $c_\theta(a,p)=c_\theta(p,p)=0$, this reduces to
+$\rho_R SI \ge \Delta_F^S$
+(Corollary~\ref{cor:inconsistency-pruning}).
+If inconsistency remains unpriced, i.e.\ $\rho_R SI=0$, and no audit or
+recordkeeping mechanism changes the expected payoff of $(a,p)$, then the
+inconsistent register remains profitable whenever $\Delta_F^S>0$.
+Thus some positive price on inconsistency is necessary to eliminate pure
+cross-channel arbitrage in the baseline.
 
 \paragraph{Equilibrium Shift.}
 The induced shift is not necessarily full separation. It can also operate by
@@ -607,6 +752,20 @@ the upper threshold, high-governance firms can still afford to signal. The
 regulator's task is therefore not to maximize audit burden. It is to set $e$ in
 the interval where signal cost separates types.
 
+\paragraph{Necessity and Sufficiency.}
+Costly audit signals are the type-separation mechanism proper.  Within the
+audit-augmented message space, an audit intensity $e$ supports separation if
+and only if
+\[
+c_H(e,\theta_S)\le G \le c_L(e,\theta_S)
+\]
+(Corollary~\ref{cor:audit-separation}).  The regulator's task is not to
+maximize audit burden.  It is to locate the single-crossing interval.
+In the absence of any type-dependent cost wedge---that is, if $k_H=k_L$---no
+audit-like message can be type-exclusive; it collapses back into profitable
+cheap talk.  The single-crossing condition $k_H<k_L$ is therefore necessary,
+not merely sufficient, for audit-based separation.
+
 \paragraph{Equilibrium Shift.}
 The shift is from pooling to separating. High-governance firms send audited
 anthropomorphic claims; low-governance firms either invest in governance until
@@ -635,14 +794,29 @@ true across model updates and incidents.
 
 \paragraph{Formal Intervention.}
 In the pooling condition from Section~\ref{sec:bayesian}, the
-regulator abstains when $K_{\theta_R}>\pi(\mathsf{L})D_R$.  As summarized in Corollary~\ref{cor:mechanisms}, auditable records
-lower $K_{\theta_R}$ and can increase expected detection value $D_R$:
+regulator abstains when $K_{\theta_R}>\pi(\mathsf{L})D_R$.  In the notation of
+Proposition~\ref{prop:pricing}, auditable records operate on the
+enforcement-feasibility precondition embedded in $\Pi_\theta(q)$ by
+lowering $K_{\theta_R}$ and increasing expected detection value $D_R$:
 \[
 K'_{\theta_R}=K_{\theta_R}-\lambda,\qquad
 D'_R=D_R+\eta .
 \]
 When $K'_{\theta_R}\leq \pi(\mathsf{L})D'_R$, inspection becomes sequentially
-rational.
+rational (Corollary~\ref{cor:verification-feasibility}).
+
+\paragraph{Necessity and Sufficiency.}
+Auditable records are not themselves a separation or pruning mechanism.
+They are an enforcement-feasibility condition: they make sanctions and audits
+administrable by transforming the regulator's inspection inequality from
+$K_R>\pi(\mathsf{L})D_R$ to $K_R-\lambda \le \pi(\mathsf{L})(D_R+\eta)$.
+Records are sufficient to flip the regulator's best response to inspection when
+the transformed inequality holds, but they are not sufficient by themselves to
+price the arbitrage spread unless linked to a penalty or claim obligation.
+If $K_R>\pi(\mathsf{L})D_R$ remains true after the intervention, then
+recordkeeping alone does not discipline the pooling equilibrium.  It may store
+information, but it does not make verification incentive-compatible.  Records
+without inspection incentives are archives, not mechanisms.
 
 \paragraph{Equilibrium Shift.}
 The shift is from abstention under unverifiable priors to credible inspection.
