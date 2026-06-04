@@ -4,44 +4,44 @@ The top-level auxiliary file: retaliation.aux
 The style file: elsarticle-harv.bst
 Database file #1: retaliation.bib
 Reallocated singl_function (elt_size=4) to 100 items from 50.
-You've used 14 entries,
+You've used 13 entries,
             2990 wiz_defined-function locations,
-            726 strings with 7248 characters,
-and the built_in function-call counts, 9056 in all, are:
-= -- 716
-> -- 292
-< -- 12
-+ -- 119
-- -- 99
-* -- 962
-:= -- 1313
-add.period$ -- 53
-call.type$ -- 14
-change.case$ -- 101
-chr.to.int$ -- 14
-cite$ -- 14
-duplicate$ -- 674
-empty$ -- 700
-format.name$ -- 137
-if$ -- 1686
+            719 strings with 7143 characters,
+and the built_in function-call counts, 8505 in all, are:
+= -- 669
+> -- 282
+< -- 11
++ -- 115
+- -- 96
+* -- 910
+:= -- 1232
+add.period$ -- 49
+call.type$ -- 13
+change.case$ -- 95
+chr.to.int$ -- 13
+cite$ -- 13
+duplicate$ -- 629
+empty$ -- 653
+format.name$ -- 133
+if$ -- 1581
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 131
-newline$ -- 96
-num.names$ -- 56
-pop$ -- 217
+missing$ -- 123
+newline$ -- 90
+num.names$ -- 52
+pop$ -- 205
 preamble$ -- 1
-purify$ -- 89
+purify$ -- 84
 quote$ -- 0
-skip$ -- 203
+skip$ -- 188
 stack$ -- 0
-substring$ -- 460
-swap$ -- 479
+substring$ -- 430
+swap$ -- 450
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 120
+type$ -- 111
 warning$ -- 0
-while$ -- 66
+while$ -- 61
 width$ -- 0
-write$ -- 230
+write$ -- 214

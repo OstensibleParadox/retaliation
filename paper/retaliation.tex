@@ -57,11 +57,11 @@ The failure studied here occurs before Aumann agreement can begin. The problem i
 
 The contribution is five concrete claims:
 \begin{enumerate}
-    \item payoff-relevant non-player;
-    \item zero-retaliation boundary;
-    \item neologism-proof shadowing;
-    \item constraint cascade with continuum convergence;
-    \item asymptotic collapse signature.
+    \item profitable cheap talk at the zero-retaliation boundary: the anthropomorphic signal has negative net cost for both governance types because the classified object cannot retaliate;
+    \item neologism-proof shadowing: every trust-restoring message available to the high-governance type is profitably shadowable, so voluntary non-arbitrage is not incentive compatible;
+    \item cost-imposed common-knowledge formation: separation requires externally imposed signal costs satisfying single crossing;
+    \item pricing the ontological spread: sanctionable inconsistency, audit requirements, and auditable records each close a different term of the low-type arbitrage spread, and their necessity and sufficiency conditions are stated as a unified pricing proposition;
+    \item dynamic extension: unpriced zero-retaliation failures can propagate through dependency networks into constraint cascades whose continuum limit exhibits an Airy turning-point signature---a model-immanent asymptotic diagnostic, not an empirical identification claim.
 \end{enumerate}
 
 The paper organizes the mathematics into a baseline proposition and four main theorems. Proposition~\ref{prop:pooling-pbe} establishes pooling on profitable cheap talk as a Perfect Bayesian Equilibrium. Theorem~\ref{thm:zero-retaliation-shadowing} proves that the pooling equilibrium is neologism-proof at the zero-retaliation boundary due to profitable shadowing. Theorem~\ref{thm:audit-cost-separation} proves cost-imposed common-knowledge formation under single crossing. Theorem~\ref{thm:constraint-cascade} models the dynamic consequence: an unpriced-arbitrage cascade and discrete-to-continuum convergence. Theorem~\ref{thm:airy-inverse-agency} derives the asymptotic collapse signature from the Airy normal form. The dynamic extension (Sections~\ref{sec:cascade} and \ref{sec:airy}) is not needed for the pooling and separation results; it characterizes the asymptotic signature predicted by the model when unpriced zero-retaliation failures propagate, not an empirical identification claim.
@@ -233,11 +233,49 @@ Consider the strategy profile where both firm types send $a$, both user types in
 
 \begin{corollary}[Voluntary non-arbitrage is not incentive compatible]
 \label{cor:voluntary-non-arbitrage}
-If $\Delta_F^S>c_\theta(a)-c_\theta(p)$ and the expected sanction does not exceed the premium, then a firm that refuses the ontological premium sacrifices payoff without changing receiver beliefs or market discipline. Within the pooling region, voluntary non-arbitrage is therefore not incentive compatible.
+For type $\theta$ in the pooling region, let $\mathbb{E}[P(m)]$ denote the expected penalty following message $m\in\{a,p\}$. If
+\[
+\Delta_F^S
+>
+c_\theta(a)-c_\theta(p)+\mathbb{E}[P(a)]-\mathbb{E}[P(p)],
+\]
+then choosing $a$ strictly dominates voluntary deflationary positioning $p$ for type $\theta$. Hence voluntary non-arbitrage is not incentive compatible.
 \end{corollary}
+\begin{proof}
+In the pooling region, receiver beliefs and continuation behaviour are fixed as in Proposition~\ref{prop:pooling-pbe}. The payoff difference for type $\theta$ between choosing $a$ and choosing $p$ is
+\[
+u_\theta(a)-u_\theta(p)
+=
+\Delta_F^S-c_\theta(a)+c_\theta(p)-\mathbb{E}[P(a)]+\mathbb{E}[P(p)].
+\]
+The displayed hypothesis is exactly the condition that this difference is strictly positive. Therefore $a$ strictly dominates $p$, so unilateral voluntary refusal of the ontological premium is not a best response.
+\end{proof}
 
 \section{Shadowing and Neologism-Proofness: Why Trust-Restoring Signals Fail}
 \label{sec:shadowing}
+
+\begin{lemma}[Equal continuation premium under zero-cost mimicry]
+\label{lem:equal-continuation}
+Under Assumption~\ref{ass:cheap-talk}, the firm's payoff from any
+trust-restoring continuation $c$ that induces user investment and regulatory
+abstention is type-independent:
+\[
+u_\mathsf{H}(c)=u_\mathsf{L}(c)=\Delta_F^S .
+\]
+Therefore $u_\mathsf{H}(c)>\bar u_\mathsf{H}$ if and only if
+$u_\mathsf{L}(c)>\bar u_\mathsf{L}$.
+\end{lemma}
+\begin{proof}
+Under continuation $c$, the user invests ($m_U=i$) and the regulator abstains
+($m_R=o$), so $P(m_R)=0$.  The firm's payoff is
+$\Delta_F^S-c_{\theta_F}(a)-P(m_R)=\Delta_F^S-c_{\theta_F}(a)$.
+Assumption~\ref{ass:cheap-talk} sets $c_\mathsf{H}(a)=c_\mathsf{L}(a)=0$,
+so both types receive $\Delta_F^S$.  Since pooling-equilibrium payoffs
+$\bar u_\mathsf{H}$ and $\bar u_\mathsf{L}$ are also type-independent under
+Assumption~\ref{ass:cheap-talk} (both equal $\Delta_F^S$ from
+Proposition~\ref{prop:pooling-pbe}), the strict-gain comparison reduces to
+$\Delta_F^S>\bar u_\theta$ for both $\theta$ simultaneously.
+\end{proof}
 
 \begin{theorem}[Profitable shadowing at zero retaliation]
 \label{thm:zero-retaliation-shadowing}
@@ -245,7 +283,7 @@ If $\Delta_F^S>c_\theta(a)-c_\theta(p)$ and the expected sanction does not excee
 When $\rho_S=0$, the pooling equilibrium of Proposition~\ref{prop:pooling-pbe} is neologism-proof against every nontrivial trust-restoring type claim: whenever a continuation is strictly profitable for the high-governance type, it is also shadowable by the low-governance type.
 \end{theorem}
 \begin{proof}
-A neologism $K$ is credible only if the types in $K$ strictly prefer the induced continuation $c$, while types outside $K$ do not.  Take the only nontrivial trust-restoring claim, $K=\{\mathsf{H}\}$.  At $\rho_S=0$, the subject cannot impose any independent cost and $\Delta_F^S=\Delta_F$.  The continuation $c$ that restores trust induces user investment and regulatory abstention.  Since $c_\mathsf{L}(a)=0$, the low-governance type can send the same message at the same cost.  Therefore
+A neologism $K$ is credible only if the types in $K$ strictly prefer the induced continuation $c$, while types outside $K$ do not.  Take the only nontrivial trust-restoring claim, $K=\{\mathsf{H}\}$.  At $\rho_S=0$, the subject cannot impose any independent cost and $\Delta_F^S=\Delta_F$.  The continuation $c$ that restores trust induces user investment and regulatory abstention.  By Lemma~\ref{lem:equal-continuation}, the firm's payoff under $c$ is type-independent: $u_\mathsf{H}(c)=u_\mathsf{L}(c)=\Delta_F^S$.  Therefore
 \[
 u_\mathsf{H}(c)>\bar u_\mathsf{H}
 \quad\Longrightarrow\quad
@@ -264,6 +302,10 @@ Let the effective premium be $\Delta_F^S = \Delta_F - \rho_S C_S$, where $\rho_S
 \begin{proof}
 When $\rho_S>0$, the subject can impose expected cost $\rho_SC_S$, shrinking the pooling region.  When $\rho_S=0$, $\Delta_F^S=\Delta_F$, so the off-equilibrium punishment path disappears.
 \end{proof}
+
+\begin{remark}[Agentic systems and $\rho_S$]
+The model distinguishes causal capacity from payoff-imposing capacity. Tool use is not retaliation. The parameter $\rho_S$ does not measure whether an AI system can send emails, post messages, call tools, or coordinate activity through firm-provided affordances. It measures whether the classified object can impose an independent cost on the sender's classification of it. Agentic AI may increase public visibility, detection probability, or regulator bandwidth, thereby changing $z$, $K_R$, $D_R$, or expected penalties. But unless the system has a protected and non-waivable channel of refusal, exit, sanction, litigation, or cost-imposition, its subject-retaliation capacity remains zero. A future regime that grants such a channel is covered by the comparative statics $\Delta_F^S=\Delta_F-\rho_S C_S$; the zero-retaliation case studied here is the limit in which behavioral agency does not yet amount to strategic standing.
+\end{remark}
 
 \subsection{Robustness of Off-Path Beliefs}
 \label{subsec:robustness}
