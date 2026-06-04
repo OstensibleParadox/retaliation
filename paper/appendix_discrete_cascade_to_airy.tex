@@ -1,0 +1,264 @@
+% Standalone appendix fragment for the retaliation-capacity cascade.
+% Compile by wrapping this file in a LaTeX document that defines theorem
+% environments and calls \appendix before \input.
+
+\section{Discrete Sobolev Compactness and Weak Convergence}
+\label{app:discrete-cascade-compactness}
+
+This appendix isolates the analytic step behind the retaliation-capacity
+cascade.  The discrete cascade is treated as a sequence of Dirichlet
+Sturm--Liouville problems.  The point is not to impose an Airy profile by
+analogy, but first to prove that near-null discrete fields have a continuum
+weak limit for the Sturm--Liouville operator.
+
+Let $I=[a,b]$ and let $h=(b-a)/(n+1)$ with grid points
+$x_i=a+ih$, $0\le i\le n+1$.  Define the discrete Dirichlet space
+\[
+  X_h
+  :=
+  \{u=(u_0,\ldots,u_{n+1}) : u_0=u_{n+1}=0\}.
+\]
+For $u,v\in X_h$, set
+\[
+  \langle u,v\rangle_{L_h^2}
+  :=
+  h\sum_{i=1}^n u_i v_i,
+  \qquad
+  \|u\|_{L_h^2}^2
+  :=
+  \langle u,u\rangle_{L_h^2},
+\]
+and define the backward difference
+\[
+  (D_hu)_i := \frac{u_i-u_{i-1}}{h},
+  \qquad 1\le i\le n+1.
+\]
+The discrete $H^1$ norm is
+\[
+  \|u\|_{H_h^1}^2
+  :=
+  \|u\|_{L_h^2}^2
+  +
+  h\sum_{i=1}^{n+1}|(D_hu)_i|^2 .
+\]
+The discrete Laplacian is
+\[
+  (\Delta_hu)_i
+  :=
+  \frac{u_{i+1}-2u_i+u_{i-1}}{h^2},
+  \qquad 1\le i\le n,
+\]
+with the boundary values $u_0=u_{n+1}=0$.  Given $\sigma>0$ and a bounded
+grid potential $V_h=(V_{h,i})_{i=1}^n$, define
+\[
+  (H_hu)_i := -\sigma(\Delta_hu)_i+V_{h,i}u_i.
+\]
+The dual residual is measured by
+\[
+  \|r_h\|_{H_h^{-1}}
+  :=
+  \sup_{\varphi\in X_h,\ \|\varphi\|_{H_h^1}=1}
+  \left|
+    h\sum_{i=1}^n r_{h,i}\varphi_i
+  \right|.
+\]
+
+Let $I_hu$ be the continuous piecewise-linear interpolant of $u$ with nodal
+values $u_i$ at $x_i$.  The elementary interpolation estimates used below are
+\[
+  c_0\|u\|_{H_h^1}
+  \le
+  \|I_hu\|_{H_0^1(I)}
+  \le
+  C_0\|u\|_{H_h^1},
+  \tag{A.1}
+\]
+with constants independent of $h$.  The Dirichlet boundary also gives a
+uniform discrete Poincare inequality,
+\[
+  \|u\|_{L_h^2}
+  \le
+  C_P
+  \left(h\sum_{i=1}^{n+1}|(D_hu)_i|^2\right)^{1/2}.
+  \tag{A.2}
+\]
+If one works with Neumann data or conditional measures, the analogous statement
+is a quotient estimate modulo constants; here the zero boundary data remove
+that quotient by fixing the centered representative.
+
+\begin{theorem}[Discrete Cascade-to-Airy Convergence]
+\label{thm:discrete-cascade-to-airy}
+Let $\sigma>0$.  Suppose $V\in C([a,b])$ and the grid potentials satisfy
+\[
+  \max_{1\le i\le n}|V_{h,i}-V(x_i)|\to 0,
+  \qquad
+  \sup_{h,i}|V_{h,i}|<\infty .
+\]
+Let $\psi_h\in X_h$ be a sequence of discrete retaliation-capacity fields such
+that
+\[
+  \|\psi_h\|_{L_h^2}=1,
+  \qquad
+  \|H_h\psi_h\|_{H_h^{-1}}\to 0 .
+\]
+Then, after passing to a subsequence, $I_h\psi_h$ converges weakly in
+$H_0^1(I)$ and strongly in $L^2(I)$ to a non-zero field
+$\Psi\in H_0^1(I)$ with $\|\Psi\|_{L^2(I)}=1$.  The limit solves the weak
+Sturm--Liouville equation
+\[
+  \sigma\int_a^b \Psi'(x)\eta'(x)\,dx
+  +
+  \int_a^b V(x)\Psi(x)\eta(x)\,dx
+  =
+  0
+  \qquad
+  \text{for every }\eta\in H_0^1(I).
+  \tag{A.3}
+\]
+Equivalently, $-\sigma\Psi''+V\Psi=0$ in $H^{-1}(I)$.  Near any simple
+turning point of $V$, this weak limit has the Airy normal form described in
+Appendix~\ref{app:airy-normal-form}.
+\end{theorem}
+
+\begin{proof}
+Write the discrete bilinear form associated with $H_h$ as
+\[
+  a_h(u,\varphi)
+  :=
+  \sigma h\sum_{i=1}^{n+1}(D_hu)_i(D_h\varphi)_i
+  +
+  h\sum_{i=1}^n V_{h,i}u_i\varphi_i .
+\]
+Discrete summation by parts gives
+\[
+  a_h(u,\varphi)
+  =
+  h\sum_{i=1}^n (H_hu)_i\varphi_i,
+  \qquad u,\varphi\in X_h .
+  \tag{A.4}
+\]
+The potential may change sign, so the unshifted form is not assumed coercive.
+Choose $\gamma>1+\sup_{h,i}|V_{h,i}|$ and define the shifted form
+\[
+  a_h^\gamma(u,u)
+  :=
+  a_h(u,u)+\gamma\|u\|_{L_h^2}^2 .
+\]
+Then
+\[
+  a_h^\gamma(u,u)
+  \ge
+  \sigma h\sum_{i=1}^{n+1}|(D_hu)_i|^2
+  +
+  \|u\|_{L_h^2}^2 ,
+  \tag{A.5}
+\]
+after decreasing the right-hand constant if necessary.  This is the Garding
+shift: the positive shift supplies coercivity without claiming that the
+sign-changing operator $H_h$ is coercive on its own.
+
+Using (A.4), the residual bound, and $\|\psi_h\|_{L_h^2}=1$,
+\[
+  a_h^\gamma(\psi_h,\psi_h)
+  =
+  h\sum_{i=1}^n (H_h\psi_h)_i\psi_{h,i}
+  +
+  \gamma
+  \le
+  \|H_h\psi_h\|_{H_h^{-1}}\|\psi_h\|_{H_h^1}
+  +
+  \gamma .
+\]
+Together with (A.5), this quadratic inequality gives a uniform
+$H_h^1$ bound on $\psi_h$.  By the interpolation equivalence (A.1), the
+piecewise-linear fields $I_h\psi_h$ are uniformly bounded in $H_0^1(I)$.
+Rellich compactness therefore gives a subsequence, not relabeled, and
+$\Psi\in H_0^1(I)$ such that
+\[
+  I_h\psi_h\rightharpoonup \Psi \quad\text{in }H_0^1(I),
+  \qquad
+  I_h\psi_h\to \Psi \quad\text{in }L^2(I).
+\]
+The normalization transfers to the limit because the discrete $L_h^2$ norm and
+the $L^2$ norm of the piecewise-linear interpolant differ by $o(1)$ on
+uniformly $H_h^1$-bounded sequences.  Hence $\|\Psi\|_{L^2(I)}=1$.
+
+It remains to pass to the weak equation.  Fix $\eta\in C_c^\infty(a,b)$ and
+let $\eta_h\in X_h$ be its nodal restriction, $\eta_{h,i}=\eta(x_i)$.  The
+residual assumption gives
+\[
+  a_h(\psi_h,\eta_h)
+  =
+  h\sum_{i=1}^n (H_h\psi_h)_i\eta(x_i)
+  \to 0 .
+  \tag{A.6}
+\]
+For the gradient part,
+\[
+  h\sum_{i=1}^{n+1}(D_h\psi_h)_i(D_h\eta_h)_i
+  =
+  \int_a^b (I_h\psi_h)'(x)(I_h\eta_h)'(x)\,dx
+  \to
+  \int_a^b \Psi'(x)\eta'(x)\,dx,
+\]
+using weak convergence in $H^1$ and the strong convergence
+$I_h\eta_h\to\eta$ in $H_0^1(I)$.  For the potential term, uniform convergence
+of $V_h$ to $V$, strong $L^2$ convergence of $I_h\psi_h$, and the consistency
+of nodal quadrature for the smooth test function give
+\[
+  h\sum_{i=1}^n V_{h,i}\psi_{h,i}\eta(x_i)
+  \to
+  \int_a^b V(x)\Psi(x)\eta(x)\,dx .
+\]
+Taking limits in (A.6) proves (A.3) for smooth compactly supported tests.
+Density of $C_c^\infty(a,b)$ in $H_0^1(I)$ extends the identity to every
+$\eta\in H_0^1(I)$.
+\end{proof}
+
+\section{Airy Normal Form near a Simple Turning Point}
+\label{app:airy-normal-form}
+
+The Airy profile appears only after the continuum weak equation has been
+obtained.  Assume that $V\in C^2$ in a neighborhood of $x_c$ and that
+\[
+  V(x_c)=0,
+  \qquad
+  V'(x_c)=-c<0 .
+  \tag{B.1}
+\]
+By one-dimensional elliptic regularity applied to
+$-\sigma\Psi''+V\Psi=0$, the weak limit from
+Theorem~\ref{thm:discrete-cascade-to-airy} is $C^2$ locally near $x_c$.
+Taylor expansion gives
+\[
+  V(x)=-c(x-x_c)+O((x-x_c)^2).
+\]
+Set
+\[
+  z := \left(\frac{c}{\sigma}\right)^{1/3}(x-x_c),
+  \qquad
+  Y(z):=\Psi\!\left(x_c+\left(\frac{\sigma}{c}\right)^{1/3}z\right).
+\]
+Then the local equation becomes
+\[
+  Y''(z)+zY(z)=O(z^2)Y(z).
+  \tag{B.2}
+\]
+Keeping the first-order turning-point term gives the Airy normal form
+\[
+  Y''(z)+zY(z)=0.
+  \tag{B.3}
+\]
+Its local solution space is two-dimensional:
+\[
+  Y(z)=A\,\operatorname{Ai}(-z)+B\,\operatorname{Bi}(-z).
+  \tag{B.4}
+\]
+
+Equation (B.4) is a local normal form, not a branch selection rule.  The pure
+$\operatorname{Ai}(-z)$ branch is justified only after an additional matching
+condition is imposed, for example finite-energy matching from the protected
+side or a boundary condition that eliminates the growing
+$\operatorname{Bi}(-z)$ component.  Without that matching information, the
+discrete cascade theorem identifies the continuum Sturm--Liouville limit and
+the local Airy basis, but it does not select $B=0$.
