@@ -1,4 +1,4 @@
-\begin{thebibliography}{20}
+\begin{thebibliography}{13}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 \providecommand{\url}[1]{\texttt{#1}}
 \providecommand{\href}[2]{#2}
@@ -20,29 +20,19 @@
   \bibinfo{volume}{84}, \bibinfo{pages}{488--500}.
 \newblock \DOIprefix\doi{10.2307/1879431}.
 %Type = Article
+\bibitem[{Aumann(1976)}]{aumann1976agreeing}
+\bibinfo{author}{Aumann, R.J.}, \bibinfo{year}{1976}.
+\newblock \bibinfo{title}{Agreeing to disagree}.
+\newblock \bibinfo{journal}{The Annals of Statistics} \bibinfo{volume}{4},
+  \bibinfo{pages}{1236--1239}.
+\newblock \DOIprefix\doi{10.1214/aos/1176343654}.
+%Type = Article
 \bibitem[{Banks and Sobel(1987)}]{banks_sobel1987}
 \bibinfo{author}{Banks, J.S.}, \bibinfo{author}{Sobel, J.},
   \bibinfo{year}{1987}.
 \newblock \bibinfo{title}{Equilibrium selection in signaling games}.
 \newblock \bibinfo{journal}{Econometrica: Journal of the Econometric Society}
   \bibinfo{volume}{55}, \bibinfo{pages}{647--661}.
-%Type = Article
-\bibitem[{Bergemann and Morris(2019)}]{bergemann_morris_information_design2019}
-\bibinfo{author}{Bergemann, D.}, \bibinfo{author}{Morris, S.},
-  \bibinfo{year}{2019}.
-\newblock \bibinfo{title}{Information design: A unified perspective}.
-\newblock \bibinfo{journal}{Journal of Economic Literature}
-  \bibinfo{volume}{57}, \bibinfo{pages}{44--95}.
-%Type = Article
-\bibitem[{Caminati et~al.(2015)Caminati, Kerber, Lange and
-  Rowat}]{caminati_kerber_lange_rowat_vcg2015}
-\bibinfo{author}{Caminati, M.B.}, \bibinfo{author}{Kerber, M.},
-  \bibinfo{author}{Lange, C.}, \bibinfo{author}{Rowat, C.},
-  \bibinfo{year}{2015}.
-\newblock \bibinfo{title}{Proving soundness of combinatorial
-  vickrey-clarke-groves auctions}.
-\newblock \bibinfo{journal}{Journal of Automated Reasoning}
-  \bibinfo{volume}{55}, \bibinfo{pages}{257--291}.
 %Type = Article
 \bibitem[{Cho and Kreps(1987)}]{cho_kreps1987}
 \bibinfo{author}{Cho, I.K.}, \bibinfo{author}{Kreps, D.M.},
@@ -59,15 +49,6 @@
 \newblock \bibinfo{journal}{Econometrica} \bibinfo{volume}{50},
   \bibinfo{pages}{1431--1451}.
 \newblock \DOIprefix\doi{10.2307/1913390}.
-%Type = Misc
-\bibitem[{{European Parliament and Council}(2024)}]{euaiact2024}
-\bibinfo{author}{{European Parliament and Council}}, \bibinfo{year}{2024}.
-\newblock \bibinfo{title}{Regulation ({EU}) 2024/1689 of the {European
-  Parliament} and of the {Council} laying down harmonised rules on artificial
-  intelligence}.
-\newblock \bibinfo{howpublished}{Official Journal of the European Union, L
-  Series}.
-\newblock \bibinfo{note}{AI Act}.
 %Type = Article
 \bibitem[{Farrell(1993)}]{farrell1993}
 \bibinfo{author}{Farrell, J.}, \bibinfo{year}{1993}.
@@ -107,22 +88,6 @@
   \bibinfo{pages}{389--399}.
 \newblock \DOIprefix\doi{10.1038/s42256-019-0088-2}.
 %Type = Article
-\bibitem[{Kamenica and Gentzkow(2011)}]{kamenica2011bayesian}
-\bibinfo{author}{Kamenica, E.}, \bibinfo{author}{Gentzkow, M.},
-  \bibinfo{year}{2011}.
-\newblock \bibinfo{title}{Bayesian persuasion}.
-\newblock \bibinfo{journal}{American Economic Review} \bibinfo{volume}{101},
-  \bibinfo{pages}{2590--2615}.
-\newblock \DOIprefix\doi{10.1257/aer.101.6.2590}.
-%Type = Article
-\bibitem[{Kerber et~al.(2016)Kerber, Lange and
-  Rowat}]{kerber_lange_rowat_intro2016}
-\bibinfo{author}{Kerber, M.}, \bibinfo{author}{Lange, C.},
-  \bibinfo{author}{Rowat, C.}, \bibinfo{year}{2016}.
-\newblock \bibinfo{title}{An introduction to mechanized reasoning}.
-\newblock \bibinfo{journal}{Journal of Mathematical Economics}
-  \bibinfo{volume}{66}, \bibinfo{pages}{26--39}.
-%Type = Article
 \bibitem[{Kreps and Wilson(1982)}]{kreps_wilson1982}
 \bibinfo{author}{Kreps, D.M.}, \bibinfo{author}{Wilson, R.},
   \bibinfo{year}{1982}.
@@ -138,29 +103,6 @@
 \newblock \bibinfo{journal}{The RAND Journal of Economics}
   \bibinfo{volume}{17}, \bibinfo{pages}{18--32}.
 \newblock \DOIprefix\doi{10.2307/2555625}.
-%Type = Article
-\bibitem[{Myerson(1979)}]{myerson1979}
-\bibinfo{author}{Myerson, R.B.}, \bibinfo{year}{1979}.
-\newblock \bibinfo{title}{Incentive compatibility and the bargaining problem}.
-\newblock \bibinfo{journal}{Econometrica} \bibinfo{volume}{47},
-  \bibinfo{pages}{61--73}.
-\newblock \DOIprefix\doi{10.2307/1912346}.
-%Type = Article
-\bibitem[{Nipkow(2009)}]{nipkow_arrows_thm2009}
-\bibinfo{author}{Nipkow, T.}, \bibinfo{year}{2009}.
-\newblock \bibinfo{title}{Social choice theory in {HOL}: Arrow and
-  gibbard-satterthwaite}.
-\newblock \bibinfo{journal}{Journal of Automated Reasoning}
-  \bibinfo{volume}{43}, \bibinfo{pages}{289--304}.
-%Type = Book
-\bibitem[{Nipkow et~al.(2002)Nipkow, Paulson and Wenzel}]{nipkow2002isabelle}
-\bibinfo{author}{Nipkow, T.}, \bibinfo{author}{Paulson, L.C.},
-  \bibinfo{author}{Wenzel, M.}, \bibinfo{year}{2002}.
-\newblock \bibinfo{title}{Isabelle/{HOL}: A Proof Assistant for Higher-Order
-  Logic}. volume \bibinfo{volume}{2283} of \textit{\bibinfo{series}{Lecture
-  Notes in Computer Science}}.
-\newblock \bibinfo{publisher}{Springer}.
-\newblock \DOIprefix\doi{10.1007/3-540-45949-9}.
 %Type = Book
 \bibitem[{Pasquale(2015)}]{pasquale2015}
 \bibinfo{author}{Pasquale, F.}, \bibinfo{year}{2015}.
