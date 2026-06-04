@@ -1,57 +1,47 @@
 This is BibTeX, Version 0.99e (TeX Live 2026)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: retaliation.aux
-The style file: ACM-Reference-Format.bst
-Reallocated singl_function (elt_size=4) to 100 items from 50.
-Reallocated singl_function (elt_size=4) to 100 items from 50.
-Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+The style file: elsarticle-harv.bst
 Database file #1: retaliation.bib
 Reallocated singl_function (elt_size=4) to 100 items from 50.
-Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
-Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
-Reallocated global_strs (elt_size=200001) to 20 items from 10.
-Reallocated glb_str_end (elt_size=4) to 20 items from 10.
-Reallocated singl_function (elt_size=4) to 100 items from 50.
-Warning--empty address in nipkow2002isabelle
-You've used 20 entries,
-            6273 wiz_defined-function locations,
-            1654 strings with 21434 characters,
-and the built_in function-call counts, 23080 in all, are:
-= -- 3598
-> -- 596
-< -- 0
-+ -- 200
-- -- 232
-* -- 1508
-:= -- 2121
-add.period$ -- 105
-call.type$ -- 20
-change.case$ -- 128
-chr.to.int$ -- 20
-cite$ -- 21
-duplicate$ -- 1919
-empty$ -- 1357
-format.name$ -- 280
-if$ -- 5941
-int.to.chr$ -- 2
+You've used 14 entries,
+            2990 wiz_defined-function locations,
+            726 strings with 7248 characters,
+and the built_in function-call counts, 9056 in all, are:
+= -- 716
+> -- 292
+< -- 12
++ -- 119
+- -- 99
+* -- 962
+:= -- 1313
+add.period$ -- 53
+call.type$ -- 14
+change.case$ -- 101
+chr.to.int$ -- 14
+cite$ -- 14
+duplicate$ -- 674
+empty$ -- 700
+format.name$ -- 137
+if$ -- 1686
+int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 70
-newline$ -- 213
-num.names$ -- 140
-pop$ -- 624
+missing$ -- 131
+newline$ -- 96
+num.names$ -- 56
+pop$ -- 217
 preamble$ -- 1
-purify$ -- 288
+purify$ -- 89
 quote$ -- 0
-skip$ -- 676
+skip$ -- 203
 stack$ -- 0
-substring$ -- 1873
-swap$ -- 212
+substring$ -- 460
+swap$ -- 479
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 331
-warning$ -- 1
-while$ -- 168
+type$ -- 120
+warning$ -- 0
+while$ -- 66
 width$ -- 0
-write$ -- 434
-(There was 1 warning)
+write$ -- 230

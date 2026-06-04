@@ -1,0 +1,47 @@
+This is BibTeX, Version 0.99e (TeX Live 2026)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: retaliation_ssrn.aux
+The style file: elsarticle-harv.bst
+Database file #1: retaliation.bib
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+You've used 20 entries,
+            2990 wiz_defined-function locations,
+            768 strings with 8408 characters,
+and the built_in function-call counts, 12819 in all, are:
+= -- 1006
+> -- 424
+< -- 16
++ -- 172
+- -- 144
+* -- 1374
+:= -- 1853
+add.period$ -- 73
+call.type$ -- 20
+change.case$ -- 146
+chr.to.int$ -- 20
+cite$ -- 20
+duplicate$ -- 966
+empty$ -- 984
+format.name$ -- 202
+if$ -- 2381
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 187
+newline$ -- 128
+num.names$ -- 80
+pop$ -- 321
+preamble$ -- 1
+purify$ -- 128
+quote$ -- 0
+skip$ -- 284
+stack$ -- 0
+substring$ -- 618
+swap$ -- 688
+text.length$ -- 1
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 171
+warning$ -- 0
+while$ -- 92
+width$ -- 0
+write$ -- 317

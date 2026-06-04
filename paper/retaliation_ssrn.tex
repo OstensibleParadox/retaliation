@@ -1,39 +1,36 @@
 \PassOptionsToPackage{hyphens}{url}
-\documentclass[acmsmall,nonacm]{acmart}
+\documentclass[preprint,authoryear]{elsarticle}
 
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
 \usepackage{booktabs}
 \usepackage{tikz}
+\usepackage{hyperref}
 
 \usetikzlibrary{positioning,calc}
 
-% Note: acmart defines proof, theorem, lemma, corollary, proposition, definition, example, and exercise.
 \newtheorem{assumption}{Assumption}
-% We do NOT load amsthm, amssymb, or natbib as acmart handles them internally or provides equivalents.
-% We do NOT need times, helvet, courier, or geometry setup since acmart sets up its own fonts and page layout.
-
-\settopmatter{printacmref=false, printfolios=true}
-\setcopyright{none}
-\renewcommand\footnotetextcopyrightpermission[1]{}
-\pagestyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newcommand{\Description}[1]{}
 
 \begin{document}
+
+\begin{frontmatter}
 
 \title{Recognition Rent at the Zero-Retaliation Limit}
 
 \author{Your Name}
-\affiliation{%
-  \institution{Your University/Institution}
-  \city{Your City}
-  \country{Your Country}
-}
+\address{Your University/Institution, Your City, Your Country}
 
 \begin{abstract}
 We study a sequential signaling game in which firms market AI systems using agentic or relational claims while disclaiming agency in liability-facing channels. The AI system is payoff-relevant but not a strategic player. We introduce a subject-retaliation parameter $\rho_S$ and characterize the AI case as the zero-retaliation limit. Under cheap-talk signaling costs, anthropomorphic marketing supports a pooling PBE; at $\rho_S=0$, the pooling equilibrium is neologism-proof because every trust-restoring continuation available to high-governance firms is costlessly shadowed by low-governance firms. We then show that audit-trail costs satisfying single crossing generate a separating PBE. Finally, we analyze three cost-imposition mechanisms---sanctionable inconsistency, third-party audits, and auditable records---and verify the main equilibrium constructions in Isabelle/HOL.
 \end{abstract}
 
-\keywords{Ontological arbitrage, recognition rent, sequential signaling, cheap talk, information design, Isabelle/HOL}
+\begin{keyword}
+Ontological arbitrage \sep recognition rent \sep new sequential signaling \sep cheap talk \sep information design \sep Isabelle/HOL
+\end{keyword}
 
-\maketitle
+\end{frontmatter}
 
 % !TEX root = ../arbitrage.tex
 \section{Introduction}
@@ -477,6 +474,8 @@ This paper has identified ontological arbitrage as a stable, potentially welfare
 \emph{The mechanism is cost imposition, not dignity.} The three cost-imposition mechanisms in Section~\ref{sec:mechanism} are sometimes read as a program for protecting AI subjectivity. They are the opposite. Sanctionable inconsistency, third-party audit requirements, and auditable records are interventions that impose costs on anthropomorphic marketing. Their equilibrium effect is to make it expensive for firms to describe AI systems as companions, agents, or safety-critical partners without substantiation. The Isabelle/HOL theorems \texttt{inconsistent\_\allowbreak{}on\_\allowbreak{}path\_\allowbreak{}not\_\allowbreak{}register\_\allowbreak{}pbe} and \texttt{all\_\allowbreak{}agentic\_\allowbreak{}on\_\allowbreak{}path\_\allowbreak{}not\_\allowbreak{}register\_\allowbreak{}pbe} in Appendix~\ref{app:isabelle} verify that both the arbitrage register $(a,p)$ and the all-agentic register $(a,a)$ are pruned from any Perfect Bayesian Equilibrium (\texttt{register\_\allowbreak{}is\_\allowbreak{}pbe}) under their respective parameter conditions. Under the joint enforcement of these mechanisms, the harmonized deflationary register $(p,p)$ is the only surviving strategy register for low-governance firms, which are directly driven to $(p,p)$ because mimicry is unprofitable. While high-governance firms are permitted to send the harmonized agentic register $(a,a)$, they can sustain it if and only if they undergo verification satisfying the audit condition $e \ge e^\ast$. In the absence of such verification, both firm types trend to $(p,p)$, describing the system as a tool across every channel. The mechanism-design implication is that the anthropomorphic register must become too costly to sustain without the governance conditions that would justify it. Formalizing this within a signaling framework indicates that regulation achieves separation not by presuming voluntary disclosure, but by changing the payoff structure to compel it.
 
 \appendix
+\input{appendix_discrete_cascade_to_airy}
+
 \section{Mechanized Verification of Equilibrium Claims (Isabelle/HOL)}
 \label{app:isabelle}
 
@@ -519,7 +518,7 @@ The formalization explicitly defines a finite Markov state space (\texttt{markov
 
 All theorems, definitions, and supporting lemmas within each locale are fully checked by Isabelle/HOL without any unresolved proof obligations. The locale assumptions listed above are the only hypotheses under which the results hold.
 
-\bibliographystyle{ACM-Reference-Format}
+\bibliographystyle{elsarticle-harv}
 \bibliography{retaliation}
 
 \end{document}
