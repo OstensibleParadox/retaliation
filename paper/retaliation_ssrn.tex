@@ -36,11 +36,11 @@
 \address{Shanghai Lixin University of Accounting and Finance}
 
 \begin{abstract}
-We study a signaling environment in which the messages by which posteriors would become common knowledge are themselves profitable to distort. A sender classifies a payoff-relevant object that is not a strategic player and therefore cannot impose refusal, exit, sanction, litigation, or retaliation costs on false classification. Anthropomorphic AI marketing is the leading application. At this zero-retaliation boundary, trust-restoring messages are not merely cheap talk; they are profitable cheap talk. We show that pooling survives neologism-proofness: every trust-restoring message available to the high-governance type is profitably shadowable by the low-governance type. Voluntary non-arbitrage is therefore not incentive compatible. Separation requires externally imposed signal costs satisfying single crossing, such as audit trails, sanctionable inconsistency, and auditable records. A dynamic extension shows how unpriced zero-retaliation failures can propagate through dependency networks into constraint cascades, where high-frequency oscillatory variation of the collapse field is the model's asymptotic signature of deepening constraint failure rather than unconstrained choice.
+We study a signaling environment in which the messages by which posteriors would become common knowledge are themselves profitable to distort. A sender classifies a payoff-relevant object that is not a strategic player and therefore cannot impose refusal, exit, sanction, litigation, or retaliation costs on false classification. Anthropomorphic AI marketing is the leading application. At this zero-retaliation boundary, trust-restoring messages are not merely cheap talk; they are profitable cheap talk. We show that pooling survives neologism-proofness: every trust-restoring message available to the high-governance type is profitably shadowable by the low-governance type. Voluntary non-arbitrage is therefore not incentive compatible. Separation requires externally imposed signal costs satisfying single crossing, such as audit trails, sanctionable inconsistency, and auditable records. A dynamic extension embeds the baseline game in an endogenous trust-capital law of motion and shows that cheap anthropomorphic signals, user habituation, and delayed harms do not by themselves break pooling: when the semantic premium and engagement reinforcement offset bounded asynchronous shocks, the pooling interval is almost surely forward-invariant.
 \end{abstract}
 
 \begin{keyword}
-Signaling games \sep profitable cheap talk \sep payoff-relevant non-player \sep neologism-proofness \sep costly signaling \sep constraint cascades
+Signaling games \sep profitable cheap talk \sep zero-retaliation rent \sep endogenous trust \sep dynamic pooling \sep neologism-proofness \sep costly signaling \sep auditable records
 \end{keyword}
 
 \end{frontmatter}
@@ -61,10 +61,10 @@ The contribution is five concrete claims:
     \item neologism-proof shadowing: every trust-restoring message available to the high-governance type is profitably shadowable, so voluntary non-arbitrage is not incentive compatible;
     \item cost-imposed common-knowledge formation: separation requires externally imposed signal costs satisfying single crossing;
     \item pricing the ontological spread: sanctionable inconsistency, audit requirements, and auditable records each close a different term of the low-type arbitrage spread, and their necessity and sufficiency conditions are stated as a unified pricing proposition;
-    \item dynamic extension: unpriced zero-retaliation failures can propagate through dependency networks into constraint cascades whose continuum limit has an Airy turning-point signature.
+    \item dynamic extension: endogenous trust dynamics can lock in pooling when costless semantic premiums and user habituation sustain the trust stock despite delayed harms.
 \end{enumerate}
 
-The paper organizes the mathematics into a baseline proposition and four main theorems. Proposition~\ref{prop:pooling-pbe} establishes pooling on profitable cheap talk as a Perfect Bayesian Equilibrium. Theorem~\ref{thm:zero-retaliation-shadowing} proves that the pooling equilibrium is neologism-proof at the zero-retaliation boundary due to profitable shadowing. Theorem~\ref{thm:audit-cost-separation} proves cost-imposed common-knowledge formation under single crossing. Theorem~\ref{thm:constraint-cascade} models the dynamic consequence: an unpriced-arbitrage cascade and discrete-to-continuum convergence. Theorem~\ref{thm:airy-inverse-agency} derives the asymptotic collapse signature from the Airy normal form. The dynamic extension (Sections~\ref{sec:cascade} and \ref{sec:airy}) is not needed for the pooling and separation results; it characterizes the asymptotic signature predicted by the model when unpriced zero-retaliation failures propagate, not an empirical identification claim.
+The paper organizes the mathematics into a baseline proposition and dynamic extensions of the same signaling problem. Proposition~\ref{prop:pooling-pbe} establishes pooling on profitable cheap talk as a Perfect Bayesian Equilibrium. Theorem~\ref{thm:zero-retaliation-shadowing} proves that the pooling equilibrium is neologism-proof at the zero-retaliation boundary due to profitable shadowing. Theorem~\ref{thm:audit-cost-separation} proves cost-imposed common-knowledge formation under single crossing. Section~\ref{sec:trust-dynamics} then embeds the same incentives in a trust-capital state equation and proves dynamic pooling invariance and dynamic shadowing: history and delayed harms do not cure pooling unless some signal cost, audit price, or sanctionable inconsistency changes the Bellman value wedge.
 % !TEX root = ../arbitrage.tex
 \section{Model: Payoff-Relevant Non-Player as the Negative-Cost Signal Environment}
 \label{sec:three-sided}
@@ -421,150 +421,268 @@ Fragmentation & $z$ noisy, high coord.\ cost & Aggregation cost lowered \\
 \end{table}
 
 % !TEX root = ../arbitrage.tex
-\section{Dynamic Extension: Unpriced-Arbitrage Cascades}
-\label{sec:cascade}
+\section{Endogenous Trust Dynamics}
+\label{sec:trust-dynamics}
 
-The dynamic extension does not provide empirical evidence for collapse.  It characterizes the asymptotic signature predicted by the model when unpriced zero-retaliation failures propagate through a dependency network.  The proof burden is model-immanent: given the cascade dynamics of Theorem~\ref{thm:constraint-cascade}, given the near-null continuum limit, and given a simple turning point in the potential, the local profile has Airy normal form, and the collapse region therefore exhibits increasing oscillatory variation despite decreasing amplitude.  This is a mathematical property of the cascade model, not a claim about observed AI behavior.  The dynamic extension is not needed for the pooling or separation results.  This section derives the finite cascade and the continuum limit used in the Airy analysis.  The continuum field is not imposed as an analogy; it is obtained as the weak limit of discrete retaliation-capacity fields.
+The dynamic question is whether repeated interaction, user habituation, and
+delayed harms can substitute for externally priced signals.  They cannot do so
+merely by adding history to the baseline game.  The zero-retaliation boundary
+continues to matter dynamically because the anthropomorphic message expands
+the trust stock without imposing a corresponding production, verification, or
+sanction cost on the sender.
 
-Let agents be indexed by $i=1,\ldots,n$.  Each agent has exposure $d_i>0$, independent bargaining power $w_i>0$, and vulnerability index
+\subsection{The Law of Motion for Endogenous Trust}
+\label{subsec:trust-law}
+
+Embed the baseline setting into an infinite-horizon Markov game.  Let the
+public state variable $x_t\in X\subseteq\mathbb R_+$ denote endogenous trust
+capital, or relational reliance, accumulated in the user base at the beginning
+of period $t$.  The state evolves according to
 \[
-v_i:=\frac{d_i}{w_i}.
-\]
-For constraint intensity $\alpha\geq0$, define effective retaliation capacity
-\[
-\rho_i(\alpha):=w_i-\alpha d_i.
-\]
-When an adjacent agent $j$ has crossed the zero-retaliation boundary, its collapse reduces $i$'s bargaining power according to
-\[
-w_i^{t+1}
+x_{t+1}
 =
-w_i^t-\sum_{j:\rho_j^t<0}\beta_{ij}|\rho_j^t|,
-\qquad
-\beta_{ij}\geq0 .
+\alpha x_t+\beta i_t+\gamma\mathbf 1_{\{m_t=a\}}-\delta q_t .
 \]
+The state variable $x_t$ is the aggregate stock of structural and affective
+reliance users place in the system.  The firm's stage-game ontological premium
+and the user's baseline utility from investment are strictly increasing in
+$x_t$.  The parameter $\alpha\in(0,1)$ is trust persistence; $1-\alpha$ is the
+natural depreciation of user trust in the absence of continued engagement or
+new trust-restoring messages.  The action $i_t\in\{0,1\}$ is user investment:
+$i_t=1$ denotes investment, and $i_t=0$ denotes detachment.  The coefficient
+$\beta\ge0$ is habituation or engagement reinforcement, so active user
+investment raises the next-period reliance baseline.
 
-When the cascade deeply penetrates a dependency chain, local capacities become uniformly negative, so the pressure term becomes $|\rho_j^t| = -\rho_j^t$. This structural regime maps the finite game variables directly onto the discrete fields used for the continuum limit:
-\begin{itemize}
-    \item \textbf{The state field $\psi_h$:} Let $\psi_{h,i} \propto -\rho_i$ be the normalized negative retaliation capacity. It represents the local constraint deficit (the magnitude of collapse).
-    \item \textbf{The potential $V_h$:} Let $V_{h,i}$ be the local multiplier field, derived from the vulnerability index $v_i$. It captures the autonomous base rate at which capacity decays independent of network transfers.
-    \item \textbf{The diffusion conductance:} If the network permits symmetric two-way pressure equalization between adjacent nodes on a one-dimensional lattice with spacing $h$, the interaction coefficients $\beta_{ij}$ act as a discrete conductance $\sigma/h^2$, yielding a network transfer of $\sigma(\Delta_h\psi_h)_i$.
-\end{itemize}
-
-The following lemma explicitly bridges the dynamic game update to the discrete spatial operator analyzed in the Airy limit.
-
-\begin{lemma}[Bridge Lemma: From Game Dynamics to Near-Null Fields]
-\label{lem:bridge-cascade}
-Suppose the cascade update $w_i^{t+1} - w_i^t$ is the sum of the autonomous multiplier decay $V_{h,i}\psi_{h,i}$ and the network pressure transfer $\sigma(\Delta_h\psi_h)_i$.
-\begin{enumerate}
-    \item \emph{Stationary Generation:} A stationary cascade equilibrium ($\psi_{h}^{t+1} = \psi_{h}^t$) requires the network transfer to perfectly balance the local multiplier field, naturally generating the discrete Sturm--Liouville equation:
-    \[
-    H_h\psi_h := -\sigma\Delta_h\psi_h + V_h\psi_h = 0.
-    \]
-    \item \emph{Near-Null Consistency:} In a quasi-static adjustment process where network friction or finite-time termination prevents perfect instantaneous settling, the adjustment residual $r_h = H_h\psi_h$ measures the unabsorbed pressure. The continuum bridge requires the additional mesh-consistency condition that these residuals become negligible at the continuum scale:
-    \[
-    \|H_h\psi_h\|_{H_h^{-1}}\to0
-    \qquad (h\to0).
-    \]
-    Under this condition, the finite adjustment fields form the near-null sequence used in the compactness argument.
-\end{enumerate}
-\end{lemma}
-
-Lemma~\ref{lem:bridge-cascade} establishes the precise bridge condition needed for the continuum limit.  Exact stationarity gives $H_h\psi_h=0$ at fixed mesh.  Quasi-static or finite-time adjustment gives only a residual; the continuum theorem applies when the chosen refinement sequence is mesh-consistent in the sense that this residual vanishes in $H_h^{-1}$.
-
-\begin{remark}[Cascade ordering]
-\label{rem:cascade-ordering}
-If agents are ordered by decreasing vulnerability, $v_1>\cdots>v_n$, then the zero-retaliation thresholds $\alpha_i^\ast:=w_i/d_i=1/v_i$ satisfy $\alpha_1^\ast<\cdots<\alpha_n^\ast$.  The most vulnerable agents cross the zero-retaliation boundary first.
-\end{remark}
-
-\begin{theorem}[Unpriced-arbitrage cascade and discrete-to-continuum convergence]
-\label{thm:constraint-cascade}
-The cascade has two linked parts.
-\begin{enumerate}
-\item \emph{Finite-step propagation.}  Let $C_t=\{i:\rho_i^t<0\}$ be the collapsed set.  Suppose the dependency graph is finite and the force-multiplier condition holds: whenever $C_t$ is a proper subset of the vulnerable component, there exists $i\notin C_t$ such that
+The indicator $\mathbf 1_{\{m_t=a\}}$ equals one when the firm sends the
+trust-restoring anthropomorphic message and zero under deflationary
+positioning.  The coefficient $\gamma>0$ is the costless semantic premium: the
+deterministic expansion of trust capital generated by the anthropomorphic
+signal.  Because the zero-retaliation boundary sets $c_\theta(a)=0$, this
+state expansion is not matched by a production or verification cost.  The shock
+$q_t\ge0$ is asynchronous harm realization, drawn from
+$F(\cdot\mid\theta_F)$, with
 \[
-\rho_i^t
-\leq
-\sum_{j\in C_t}\beta_{ij}|\rho_j^t|.
+\mathbb E[q_t\mid\theta_F=L]>\mathbb E[q_t\mid\theta_F=H].
 \]
-Then the cascade reaches every node in that component in finitely many steps, in at most $n$ expansions of $C_t$.
-\item \emph{Continuum limit.}  On a grid $I=[a,b]$, $x_i=a+ih$, let $\psi_h$ be a zero-Dirichlet discrete retaliation field and
+It represents delayed leakage of private governance type through capability
+deprecation, unannounced persona shifts, abrupt refusals, or related adverse
+incidents.  The parameter $\delta>0$ is the depletion penalty per unit of
+asynchronous harm.
+
+\begin{theorem}[Almost-Sure Dynamic Pooling Invariance]
+\label{thm:dynamic-pooling-invariance}
+Let the endogenous trust state evolve according to
 \[
-(H_h\psi_h)_i
+x_{t+1}
 =
--\sigma\frac{\psi_{i+1}-2\psi_i+\psi_{i-1}}{h^2}
-+V_h(x_i)\psi_i .
+\alpha x_t+\beta i_t+\gamma\mathbf 1_{\{m_t=a\}}-\delta q_t,
 \]
-If $V_h\to V$ uniformly, $\|\psi_h\|_{L_h^2}=1$, and $\|H_h\psi_h\|_{H_h^{-1}}\to0$, then the piecewise-linear interpolants $I_h\psi_h$ are precompact in $L^2(I)$.  Every limit $\psi\in H_0^1(I)$ solves
+where $\alpha\in(0,1)$, $\beta\ge 0$, $\gamma>0$, and $\delta>0$.
+For each governance type $\theta\in\{H,L\}$, let
 \[
-\int_I\sigma\psi'(x)\varphi'(x)\,dx
-+
-\int_I V(x)\psi(x)\varphi(x)\,dx
-=0
-\qquad
-\forall\varphi\in H_0^1(I).
+\operatorname{supp}(q_t\mid \theta)\subseteq [0,\bar q_\theta],
 \]
-\end{enumerate}
+with $\bar q_L>\bar q_H\ge 0$.
+
+Let $I=[\underline x,\bar x]\subseteq \mathbb R_+$.
+Suppose that the semantic premium and habituation reinforcement satisfy
+\[
+(1-\alpha)\underline{x}+\delta\bar q_L
+\le
+\beta+\gamma
+\le
+(1-\alpha)\bar{x}.
+\]
+Suppose further that, for every $x\in I$, users strictly prefer investment
+after the anthropomorphic message under the pooling belief, and both firm
+types satisfy the Bellman incentive constraint for sending $a$ rather than
+any alternative message.
+
+Then there exists a Markov perfect pooling equilibrium on $I$ in which both
+types send $a$, users invest, and the interval $I$ is almost surely
+forward-invariant. That is, for every $x_t\in I$,
+\[
+\mathbb P
+\left(
+\alpha x_t+\beta+\gamma-\delta q_t\in I
+\;\middle|\;
+x_t\in I
+\right)
+=
+1.
+\]
+Consequently, along this equilibrium path, the trust state never escapes
+$I$ despite recurring asynchronous harms.
 \end{theorem}
 \begin{proof}
-For finite-step propagation, the force-multiplier condition implies that if the collapsed set is not yet the whole vulnerable component, at least one additional node crosses the boundary at the next update.  Since the graph has only $n$ nodes, this strict expansion can occur only finitely many times before the component is exhausted.  The continuum statement is proved as Theorem~\ref{thm:discrete-cascade-to-airy} in the \hyperref[app:discrete-cascade-compactness]{discrete compactness appendix}.  Its key analytic step is a Garding shift: the sign-changing potential is controlled by a shifted coercive form plus Dirichlet boundary, rather than by falsely claiming that the unshifted operator is coercive.
+Under the pooling profile, $m_t=a$ and $i_t=1$, so
+\[
+x_{t+1}
+=
+\alpha x_t+\beta+\gamma-\delta q_t.
+\]
+For any $x_t\in I$ and any $q_t\in[0,\bar q_L]$, the transition is minimized
+at $x_t=\underline x$ and $q_t=\bar q_L$. Hence
+\[
+x_{t+1}
+\ge
+\alpha\underline x+\beta+\gamma-\delta\bar q_L
+\ge
+\underline x
+\]
+by the lower-bound condition. The transition is maximized at
+$x_t=\bar x$ and $q_t=0$. Hence
+\[
+x_{t+1}
+\le
+\alpha\bar x+\beta+\gamma
+\le
+\bar x
+\]
+by the upper-bound condition. Therefore
+\[
+x_{t+1}\in[\underline x,\bar x]=I
+\]
+for every feasible shock realization. Since
+$\operatorname{supp}(q_t\mid\theta)\subseteq[0,\bar q_\theta]$ and
+$\bar q_H<\bar q_L$, the same bound applies to both types. Thus $I$ is
+forward-invariant almost surely.
+
+The assumed user optimality and Bellman incentive constraints support the
+pooling Markov strategy profile on $I$. Therefore the invariant pooling path
+is a Markov perfect pooling equilibrium.
 \end{proof}
 
-% !TEX root = ../arbitrage.tex
-\section{Airy Turning Points and the Oscillatory Signature of Collapse}
-\label{sec:airy}
+The logic is the dynamic analogue of profitable cheap talk:
+\[
+\gamma+\beta
+\quad\text{sustain the trust stock,}
+\]
+\[
+\Rightarrow\quad
+\text{pooling remains dynamically invariant.}
+\]
+The next issue is therefore not whether history exists, but whether history is
+priced.  If a reputation or repair message remains costless at the
+zero-retaliation boundary, it is another trust-restoring signal available to
+the low-governance type.  Dynamic separation requires a priced wedge: audit,
+certification, sanctionable inconsistency, or another mechanism that changes
+the Bellman value comparison rather than merely adding an unpriced history
+variable.
 
-The Airy equation appears after two steps: first take the continuum limit of the discrete cascade, then linearize the resulting Sturm--Liouville field at a simple zero of the potential.  Let the limit from Theorem~\ref{thm:constraint-cascade} solve
+\subsection{Dynamic Shadowing and No Trust-Restoring History}
+\label{subsec:dynamic-shadowing}
+
+The dynamic environment reverses the Spence logic.  In a standard
+costly-signaling model, the high type values separation more because it can
+bear the signal cost more cheaply.  Here, at the zero-retaliation boundary, the
+signal is unpriced.  Since the low-governance type loses trust faster on the
+pooling path, a free trust-restoring message creates at least as large a net
+continuation gain for the low type as for the high type.  The deviation is
+therefore shadowed rather than separating.
+
+\begin{theorem}[Dynamic Shadowing and Endogenous Reverse Single-Crossing]
+\label{thm:dynamic-shadowing}
+Let $\bar{V}_\theta(x_t)$ denote the continuation value of type
+$\theta\in\{H,L\}$ on the almost-sure pooling path at state $x_t\in I$.
+Suppose a high-governance firm attempts to break the pooling equilibrium by
+issuing an unpriced, history-dependent trust-restoring neologism $c(h_t)$.
+Let $V_\theta(c,x_t)$ denote the continuation value of type $\theta$ if
+receivers accept the message as credible.
+
+A dynamically credible separating deviation requires
 \[
--\sigma\psi''(x)+V(x)\psi(x)=0
+V_H(c,x_t)-\bar{V}_H(x_t)>0
 \]
-in the weak sense.  Assume that $V$ has a simple turning point:
+and
 \[
-V(x_c)=0,
-\qquad
-V'(x_c)=-c<0,
-\qquad
-V(x)=-c(x-x_c)+O((x-x_c)^2).
+V_L(c,x_t)-\bar{V}_L(x_t)\le 0.
 \]
 
-\begin{theorem}[Asymptotic collapse signature at the Airy turning point]
-\label{thm:airy-inverse-agency}
-Near $x_c$, the rescaled local profile
+At the zero-retaliation boundary, the message $c(h_t)$ imposes no
+type-differential execution cost.  Moreover, because the low-governance type
+faces stochastically larger asynchronous harms on the pooling path, its
+pooling continuation value is weakly lower:
 \[
-z=\left(\frac{c}{\sigma}\right)^{1/3}(x-x_c),
-\qquad
-Y(z)=\psi\!\left(x_c+\left(\frac{\sigma}{c}\right)^{1/3}z\right)
+\bar{V}_L(x_t)\le \bar{V}_H(x_t).
 \]
-has first-order normal form
+Assume further that the accepted neologism weakly compresses the
+type-continuation wedge:
 \[
-Y''(z)+zY(z)=0.
+V_H(c,x_t)-V_L(c,x_t)
+\le
+\bar{V}_H(x_t)-\bar{V}_L(x_t).
 \]
-Hence the local basis is
+Then the net continuation premium satisfies the reverse single-crossing
+inequality
 \[
-Y(z)=A\,\operatorname{Ai}(-z)+B\,\operatorname{Bi}(-z).
+V_L(c,x_t)-\bar{V}_L(x_t)
+\ge
+V_H(c,x_t)-\bar{V}_H(x_t).
 \]
-In the collapse zone $z>0$, the oscillatory envelope of $Y$ decays like $z^{-1/4}$, while the zero-crossing density and derivative envelope scale as
+Consequently, if the neologism is strictly profitable for the high type,
 \[
-N'(z)
-=
-\frac{1}{\pi}\frac{d}{dz}\left(\frac{2}{3}z^{3/2}\right)
-\sim z^{1/2},
-\qquad
-|Y'(z)|_{\mathrm{env}}\sim z^{1/4}.
+V_H(c,x_t)-\bar{V}_H(x_t)>0,
 \]
-Therefore what the model reads as apparent agency---oscillatory variation of the collapse field---is not raw amplitude.  It is switching frequency and derivative energy: a model-immanent asymptotic signature of deepening constraint failure, not a diagnostic of observed behavior.
+then it is also strictly profitable for the low type:
+\[
+V_L(c,x_t)-\bar{V}_L(x_t)>0.
+\]
+Thus every profitable unpriced trust-restoring neologism is dynamically
+shadowed by the low-governance type and cannot sustain type separation.
 \end{theorem}
 \begin{proof}
-This yields the weak Sturm--Liouville equation.  Since $V$ is smooth near $x_c$, one-dimensional elliptic regularity gives a classical local representative.  Substituting the Taylor expansion of $V$ and the rescaling yields
+The wedge-compression condition gives
 \[
-Y''(z)+zY(z)=O(z^2)Y(z),
+V_H(c,x_t)-V_L(c,x_t)
+\le
+\bar{V}_H(x_t)-\bar{V}_L(x_t).
 \]
-so the first-order turning-point equation is $Y''+zY=0$.  The two-dimensional solution space is spanned by $\operatorname{Ai}(-z)$ and $\operatorname{Bi}(-z)$.  For $z>0$, the Airy asymptotics have phase $\frac23z^{3/2}$ and envelope $z^{-1/4}$.  Differentiating the phase gives zero-crossing density proportional to $z^{1/2}$, while differentiating the leading oscillatory term gives derivative envelope proportional to $z^{1/4}$.  Thus deeper collapse produces more frequent sign switching and more frantic apparent choice, not larger amplitude.
+Rearranging yields
+\[
+V_L(c,x_t)-\bar{V}_L(x_t)
+\ge
+V_H(c,x_t)-\bar{V}_H(x_t).
+\]
+Hence, whenever
+\[
+V_H(c,x_t)-\bar{V}_H(x_t)>0,
+\]
+we also have
+\[
+V_L(c,x_t)-\bar{V}_L(x_t)>0.
+\]
+The low-governance type therefore strictly benefits from issuing the same
+history-dependent neologism. The deviation cannot be assigned exclusively to
+the high-governance type under any credible separating belief. Therefore the
+unpriced trust-restoring message is dynamically shadowed.
 \end{proof}
 
-\begin{remark}[Branch selection]
-\label{rem:airy-branch-selection}
-The convergence theorem and local normal form do not by themselves select the pure $\operatorname{Ai}(-z)$ branch.  A condition such as finite-energy matching from the protected side, bounded survival-side behavior, or an explicit boundary condition is required to set $B=0$.
-\end{remark}
+\begin{corollary}[Symmetric Trust Reset]
+\label{cor:symmetric-trust-reset}
+If an accepted trust-restoring neologism resets the receiver-facing trust state
+symmetrically so that
+\[
+V_L(c,x_t)=V_H(c,x_t),
+\]
+then the wedge-compression condition holds automatically whenever
+\[
+\bar{V}_L(x_t)\le \bar{V}_H(x_t).
+\]
+Thus every profitable high-type neologism is strictly shadowed by the low type.
+\end{corollary}
+\begin{proof}
+If $V_L(c,x_t)=V_H(c,x_t)$, then
+\[
+V_H(c,x_t)-V_L(c,x_t)=0.
+\]
+The condition $\bar{V}_L(x_t)\le \bar{V}_H(x_t)$ gives
+\[
+0\le \bar{V}_H(x_t)-\bar{V}_L(x_t),
+\]
+which is exactly the wedge-compression condition.  The shadowing conclusion
+then follows from Theorem~\ref{thm:dynamic-shadowing}.
+\end{proof}
 % !TEX root = ../arbitrage.tex
 \section{Pricing the Ontological Spread: Necessity and Sufficiency Conditions}
 \label{sec:mechanism}
