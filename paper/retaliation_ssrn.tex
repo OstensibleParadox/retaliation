@@ -61,10 +61,10 @@ The contribution is five concrete claims:
     \item neologism-proof shadowing: every trust-restoring message available to the high-governance type is profitably shadowable, so voluntary non-arbitrage is not incentive compatible;
     \item cost-imposed common-knowledge formation: separation requires externally imposed signal costs satisfying single crossing;
     \item pricing the ontological spread: sanctionable inconsistency, audit requirements, and auditable records each close a different term of the low-type arbitrage spread, and their necessity and sufficiency conditions are stated as a unified pricing proposition;
-    \item dynamic extension: endogenous trust dynamics can lock in pooling when costless semantic premiums and user habituation sustain the trust stock despite delayed harms.
+    \item dynamic extension: endogenous trust dynamics can lock in pooling, history-dependent trust-restoring messages remain shadowable, and dynamic separation requires an externally priced single-crossing wedge.
 \end{enumerate}
 
-The paper organizes the mathematics into a baseline proposition and dynamic extensions of the same signaling problem. Proposition~\ref{prop:pooling-pbe} establishes pooling on profitable cheap talk as a Perfect Bayesian Equilibrium. Theorem~\ref{thm:zero-retaliation-shadowing} proves that the pooling equilibrium is neologism-proof at the zero-retaliation boundary due to profitable shadowing. Theorem~\ref{thm:audit-cost-separation} proves cost-imposed common-knowledge formation under single crossing. Section~\ref{sec:trust-dynamics} then embeds the same incentives in a trust-capital state equation and proves dynamic pooling invariance and dynamic shadowing: history and delayed harms do not cure pooling unless some signal cost, audit price, or sanctionable inconsistency changes the Bellman value wedge.
+The paper organizes the mathematics into a baseline proposition and dynamic extensions of the same signaling problem. Proposition~\ref{prop:pooling-pbe} establishes pooling on profitable cheap talk as a Perfect Bayesian Equilibrium. Theorem~\ref{thm:zero-retaliation-shadowing} proves that the pooling equilibrium is neologism-proof at the zero-retaliation boundary due to profitable shadowing. Theorem~\ref{thm:audit-cost-separation} proves cost-imposed common-knowledge formation under single crossing. Section~\ref{sec:trust-dynamics} then embeds the same incentives in a trust-capital state equation and proves dynamic pooling invariance, dynamic shadowing, and externally priced dynamic separation: history and delayed harms do not cure pooling unless some signal cost, audit price, or sanctionable inconsistency changes the Bellman value wedge.
 % !TEX root = ../arbitrage.tex
 \section{Model: Payoff-Relevant Non-Player as the Negative-Cost Signal Environment}
 \label{sec:three-sided}
@@ -391,7 +391,7 @@ Theorem~\ref{thm:audit-cost-separation} identifies the cost condition that resto
 
 \emph{Opacity.} The system-opacity parameter $\theta_S$ is private to the firm. Capability claims about a deployed model cannot be falsified by reading model outputs alone, because the same outputs are compatible with very different training procedures, evaluation regimes, and post-deployment monitoring. Opacity is the precondition for the firm's premium: where outsiders could costlessly verify $\theta_F$, the spread between anthropomorphic and deflationary positioning would collapse. This is the lemons logic of \citet{akerlof1970}: under one-sided private information, the market clears at a price that reflects the worst credible quality, except that here the relevant ``quality'' is a governance disposition rather than a physical attribute.
 
-\emph{Verification bandwidth.} The third inequality of the pooling region, $K_{\theta_R}>\pi(\mathsf{L})D_R$, encodes the regulator's inspection cost relative to expected gain. A low-bandwidth regulator faces an absolute cost so high that abstention is dominant under the prior; even a high-bandwidth regulator may be priced out across the full product population. The condition that produces this state is not unique to AI. \citet{pasquale2015} documents an analogous structure in algorithmic finance and consumer scoring: the opacity of the regulated object combines with the bandwidth of the regulator to make inspection a scarce resource allocated by triage rather than by uniform application.
+\emph{Verification bandwidth.} The third inequality of the pooling region, $K_{\theta_R}>\pi(\mathsf{L})D_R$, encodes the regulator's inspection cost relative to expected gain. A low-bandwidth regulator faces an absolute cost so high that abstention is dominant under the prior; even a high-bandwidth regulator may be priced out across the full product population. The condition that produces this state is not unique to AI. \citet{pasquale2015} documents the same inspection-cost architecture in algorithmic finance and consumer scoring: the opacity of the regulated object combines with the bandwidth of the regulator to make inspection a scarce resource allocated by triage rather than by uniform application.
 
 \emph{Asynchronous harms.} The user's payoff term $H_{\theta_U}$ enters discounted. The episodes in which a relational reading proves costly---deprecation, persona shifts, crisis-handling failures---are temporally separated from the initial attribution by intervals over which the user has already accrued $B_{\theta_U}$. Under standard hyperbolic or even exponential discounting, the inequality $B_{\theta_U}-\pi(\mathsf{L})H_{\theta_U}>0$ holds for a wider class of users than the time-zero risk calculation would suggest. Asynchrony is not a behavioural bug; it is the timing structure of the harm itself.
 
@@ -553,7 +553,7 @@ pooling Markov strategy profile on $I$. Therefore the invariant pooling path
 is a Markov perfect pooling equilibrium.
 \end{proof}
 
-The logic is the dynamic analogue of profitable cheap talk:
+The logic is the dynamic counterpart of profitable cheap talk:
 \[
 \gamma+\beta
 \quad\text{sustain the trust stock,}
@@ -683,17 +683,227 @@ The condition $\bar{V}_L(x_t)\le \bar{V}_H(x_t)$ gives
 which is exactly the wedge-compression condition.  The shadowing conclusion
 then follows from Theorem~\ref{thm:dynamic-shadowing}.
 \end{proof}
+
+\subsection{Externally Priced Dynamic Separation}
+\label{subsec:dynamic-separation}
+
+The dynamic Spence ratio shows why the standard costly-signaling intuition is
+incomplete in endogenous trust environments.  It is not enough that the
+low-governance type faces a higher marginal audit cost.  Because the low type
+also receives a larger dynamic premium from escaping the deteriorating pooling
+path, the audit technology must discriminate faster than the endogenous
+continuation premium grows.  Separation requires not merely $c_L>c_H$, but
+\[
+\frac{c_L}{c_H}>
+\frac{\Delta V_L}{\Delta V_H}.
+\]
+
+\begin{theorem}[Externally Priced Separation via Dynamic Single-Crossing]
+\label{thm:externally-priced-dynamic-separation}
+Consider the almost-sure pooling regime supported on the invariant trust
+interval $I$. Let an external mechanism make available a verifiable signal
+$s$ with type- and state-dependent cost $k_\theta(s,x)$, where
+$\theta\in\{H,L\}$.
+
+Let $V_\theta^S(x)$ denote the before-cost expected continuation value of
+successfully separating and securing the relational premium, and let
+$V_\theta^P(x)$ denote the continuation value of remaining on the unverified
+pooling path. Define
+\[
+\Delta V_\theta(x)
+:=
+V_\theta^S(x)-V_\theta^P(x).
+\]
+
+Within the class of audit-supported Markov equilibria, the signal $s$
+supports a separating Markov perfect equilibrium on $I$ if and only if, for
+every $x\in I$,
+\[
+k_L(s,x)>\Delta V_L(x)
+\]
+and
+\[
+k_H(s,x)\le \Delta V_H(x).
+\]
+The first inequality deters the low-governance type from mimicking the
+separating signal; the second gives the high-governance type a weakly
+profitable incentive to separate.
+\end{theorem}
+\begin{proof}
+At state $x$, the low-governance type's net gain from mimicking the
+separating signal is
+\[
+\Delta V_L(x)-k_L(s,x).
+\]
+The low type is deterred precisely when this quantity is strictly negative,
+equivalently $k_L(s,x)>\Delta V_L(x)$.  The high-governance type's net gain
+from sending the separating signal is
+\[
+\Delta V_H(x)-k_H(s,x).
+\]
+The high type weakly prefers separation precisely when this quantity is
+nonnegative, equivalently $k_H(s,x)\le\Delta V_H(x)$.  These two incentive
+constraints are necessary for a separating Markov equilibrium supported by
+the audit signal, and, within the stated class of audit-supported Markov
+equilibria, they are sufficient: assign $s$ to the high type, assign the
+unverified pooling action to the low type, and let receivers treat the
+verified signal as credible.
+\end{proof}
+
+\begin{remark}[Structural wedge]
+\label{rem:dynamic-structural-wedge}
+Recall from Theorem~\ref{thm:dynamic-shadowing} that unpriced semantic claims
+yield an endogenous reverse single-crossing: $\Delta V_L(x)\ge\Delta V_H(x)$.
+A necessary implication of the two inequalities in
+Theorem~\ref{thm:externally-priced-dynamic-separation} is
+\[
+k_L(s,x)-k_H(s,x)
+>
+\Delta V_L(x)-\Delta V_H(x)\ge 0.
+\]
+Thus the external mechanism must generate a cost wedge large enough to
+overpower the low type's endogenous trust-reset advantage.
+\end{remark}
+
+\begin{corollary}[Separating Audit Intensity and the Dynamic Spence Ratio]
+\label{cor:dynamic-spence-ratio}
+Suppose the external mechanism is parameterized by a scalar audit intensity
+$e\ge 0$, with linear type-dependent costs
+\[
+k_\theta(e,x)=c_\theta(x)e,
+\]
+where
+\[
+c_L(x)>c_H(x)>0.
+\]
+Assume further that
+\[
+\Delta V_L(x)\ge \Delta V_H(x)>0.
+\]
+
+A state-contingent audit intensity $e^*(x)$ supporting separation at state
+$x$ exists if and only if
+\[
+\frac{c_L(x)}{c_H(x)}
+>
+\frac{\Delta V_L(x)}{\Delta V_H(x)}
+\ge 1.
+\]
+When this ratio condition holds, any audit intensity satisfying
+\[
+e^*(x)\in
+\left(
+\frac{\Delta V_L(x)}{c_L(x)},
+\frac{\Delta V_H(x)}{c_H(x)}
+\right]
+\]
+supports separation at state $x$. If the ratio condition fails, the
+separating interval is empty, and every audit intensity affordable to the
+high-governance type is also profitably shadowed by the low-governance type.
+\end{corollary}
+\begin{proof}
+By Theorem~\ref{thm:externally-priced-dynamic-separation}, separation at
+state $x$ requires
+\[
+c_L(x)e>\Delta V_L(x)
+\qquad\text{and}\qquad
+c_H(x)e\le\Delta V_H(x).
+\]
+Since $c_L(x)>c_H(x)>0$, this is equivalent to
+\[
+e>
+\frac{\Delta V_L(x)}{c_L(x)}
+\qquad\text{and}\qquad
+e\le
+\frac{\Delta V_H(x)}{c_H(x)}.
+\]
+The feasible interval is nonempty if and only if
+\[
+\frac{\Delta V_L(x)}{c_L(x)}
+<
+\frac{\Delta V_H(x)}{c_H(x)},
+\]
+which, because $\Delta V_H(x)>0$ and $c_H(x)>0$, is equivalent to
+\[
+\frac{c_L(x)}{c_H(x)}
+>
+\frac{\Delta V_L(x)}{\Delta V_H(x)}.
+\]
+The lower bound $\Delta V_L(x)/\Delta V_H(x)\ge1$ follows from the assumed
+reverse dynamic premium.
+\end{proof}
+
+\begin{corollary}[Uniform Audit Intensity]
+\label{cor:uniform-audit-intensity}
+A single audit intensity $e$ supports separation throughout the interval $I$
+if and only if
+\[
+\sup_{x\in I}
+\frac{\Delta V_L(x)}{c_L(x)}
+<
+\inf_{x\in I}
+\frac{\Delta V_H(x)}{c_H(x)}.
+\]
+In that case, any
+\[
+e\in
+\left(
+\sup_{x\in I}\frac{\Delta V_L(x)}{c_L(x)},
+\inf_{x\in I}\frac{\Delta V_H(x)}{c_H(x)}
+\right]
+\]
+supports a separating Markov equilibrium on $I$.
+\end{corollary}
+\begin{proof}
+For a fixed $e$ to support separation at every $x\in I$, it must satisfy
+\[
+e>
+\frac{\Delta V_L(x)}{c_L(x)}
+\qquad\text{and}\qquad
+e\le
+\frac{\Delta V_H(x)}{c_H(x)}
+\]
+for every $x\in I$.  This is equivalent to
+\[
+e>
+\sup_{x\in I}
+\frac{\Delta V_L(x)}{c_L(x)}
+\qquad\text{and}\qquad
+e\le
+\inf_{x\in I}
+\frac{\Delta V_H(x)}{c_H(x)}.
+\]
+Such an $e$ exists if and only if the displayed strict inequality between the
+supremum and infimum holds.
+\end{proof}
+
+This corollary separates pointwise mechanism design from institutional design:
+\[
+\text{local audit feasibility}
+\neq
+\text{uniform institutional feasibility}.
+\]
+An audit technology can separate types at each isolated state while still
+failing to provide a single administrable intensity that works across the
+entire trust interval.
 % !TEX root = ../arbitrage.tex
 \section{Pricing the Ontological Spread: Necessity and Sufficiency Conditions}
 \label{sec:mechanism}
 
-The three interventions below are not offered as novel regulatory labels.
-Each has familiar analogues.  The contribution is instead to identify the
-parameter inequality each intervention closes.  Sanctionable inconsistency
-prices the cross-channel spread.  Audits price the anthropomorphic claim.
-Auditable records price verification by changing the regulator's inspection
-inequality.  The mechanisms therefore operate on different margins of the same
-zero-retaliation arbitrage condition.
+The three interventions below are an external pricing architecture.  The
+section moves from formal model to mechanism implication to institutional
+implementation:
+\[
+\text{formal model}
+\to
+\text{mechanism implication}
+\to
+\text{institutional implementation}.
+\]
+Sanctionable inconsistency prices the cross-channel spread.  Audits price the
+anthropomorphic claim.  Auditable records price verification by changing the
+regulator's inspection inequality.  The mechanisms therefore operate on
+different margins of the same zero-retaliation arbitrage condition.
 
 \begin{definition}[Low-type arbitrage spread]
 \label{def:arbitrage-spread}
@@ -807,6 +1017,24 @@ arbitrage spread $\Omega_\theta(q)$.}
 \label{tab:mechanism-matrix}
 \end{table}
 
+\begin{table}[t]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{@{}p{3.0cm}p{3.0cm}p{4.3cm}@{}}
+\toprule
+Mechanism & Model term priced & Institutional form \\
+\midrule
+Sanctionable inconsistency & $(a,p)$ register spread & net-impression / substantiation review \\
+Costly audit & $k_\theta(s,x)$ & substantiation-before-reliance \\
+Auditable records & $K_R, D_R$ & record-backed oversight \\
+\bottomrule
+\end{tabular}
+\caption{Institutional forms of external pricing.}
+\label{tab:institutional-pricing}
+\end{table}
+
 \paragraph{Complementarity.}
 The mechanisms are not substitutes.  They price different margins.
 Sanctionable inconsistency without records imposes a penalty that the regulator
@@ -824,8 +1052,8 @@ enforcement-feasibility precondition by records.
 
 The subsections below elaborate each mechanism.  Each states the formal
 intervention on model parameters, the equilibrium shift, the necessity and
-sufficiency conditions, and an existing legal form that establishes
-feasibility.
+sufficiency conditions, and the institutional form through which the relevant
+model term is externally priced.
 
 \subsection{Sanctionable Inconsistency}
 \label{subsec:sanctionable-inconsistency}
@@ -888,9 +1116,6 @@ the profitable cheap-talk pooling equilibrium loses its most valuable deviation:
 no longer take the marketing upside of $a$ while preserving the liability
 downside of $p$. The \hyperref[app:isabelle]{Isabelle/HOL appendix} mechanizes the corresponding pruning claims: under the stated parameter conditions, neither inconsistent nor all-agentic registers can be supported in any Perfect Bayesian Equilibrium.
 
-\paragraph{Legal Analog.}
-The legal analogy is advertising substantiation and antifraud net-impression review, not a new dignity doctrine.  Existing systems already ask whether a seller's public-facing claims become misleading in context.  The proposed rule uses that form only to price cross-channel inconsistency: a firm should not be able to produce one ontology for users and an incompatible ontology for adjudicators without paying a regulatory price.
-
 \subsection{Costly Signaling Through Third-Party Audits}
 \label{subsec:costly-signaling-audits}
 
@@ -945,9 +1170,6 @@ applied to AI governance claims \citep{spence1973}; it also follows the
 advertising-as-signal insight that market messages become informative only when
 false messages are sufficiently expensive \citep{milgrom_roberts1986}. The \hyperref[app:isabelle]{Isabelle/HOL appendix} mechanizes the corresponding opacity condition: when system opacity is high enough, even a high-governance firm cannot profitably send the audited signal.
 
-\paragraph{Legal Analog.}
-The analog is substantiation-before-reliance.  In several product domains, public-facing claims that predictably change consumer reliance must be supported before they can be marketed at scale.  The mechanism-design point is the same: the audit prices the anthropomorphic signal before users rely on it.
-
 \subsection{Auditable Records for Regulator-Readable Verification}
 \label{subsec:auditable-records}
 
@@ -994,9 +1216,6 @@ case. This complements the first two proposals. Sanctionable inconsistency tells
 firms which cross-channel contradictions will be penalized; costly signaling
 tells firms what evidence is required before making anthropomorphic claims;
 auditable records make both rules administrable over time. The \hyperref[app:isabelle]{Isabelle/HOL appendix} mechanizes this best-response flip from abstention to active intervention under the record-keeping parameter condition.
-
-\paragraph{Legal Analog.}
-The analog is record-backed oversight in complex regulated systems.  Documentation duties in privacy, financial reporting, and AI regulation differ in detail, but they share the same institutional move: private organizations must produce internal records in a form that public oversight can inspect \citep{hadfield2017rules}.  In the model, that lowers $K_{\theta_R}$ and makes inspection a feasible best response.
 
 \subsection{Positioning}
 \label{subsec:positioning}
