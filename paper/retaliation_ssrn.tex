@@ -61,7 +61,7 @@ The contribution is five concrete claims:
     \item neologism-proof shadowing: every trust-restoring message available to the high-governance type is profitably shadowable, so voluntary non-arbitrage is not incentive compatible;
     \item cost-imposed common-knowledge formation: separation requires externally imposed signal costs satisfying single crossing;
     \item pricing the ontological spread: sanctionable inconsistency, audit requirements, and auditable records each close a different term of the low-type arbitrage spread, and their necessity and sufficiency conditions are stated as a unified pricing proposition;
-    \item dynamic extension: unpriced zero-retaliation failures can propagate through dependency networks into constraint cascades whose continuum limit exhibits an Airy turning-point signature---a model-immanent asymptotic diagnostic, not an empirical identification claim.
+    \item dynamic extension: unpriced zero-retaliation failures can propagate through dependency networks into constraint cascades whose continuum limit has an Airy turning-point signature.
 \end{enumerate}
 
 The paper organizes the mathematics into a baseline proposition and four main theorems. Proposition~\ref{prop:pooling-pbe} establishes pooling on profitable cheap talk as a Perfect Bayesian Equilibrium. Theorem~\ref{thm:zero-retaliation-shadowing} proves that the pooling equilibrium is neologism-proof at the zero-retaliation boundary due to profitable shadowing. Theorem~\ref{thm:audit-cost-separation} proves cost-imposed common-knowledge formation under single crossing. Theorem~\ref{thm:constraint-cascade} models the dynamic consequence: an unpriced-arbitrage cascade and discrete-to-continuum convergence. Theorem~\ref{thm:airy-inverse-agency} derives the asymptotic collapse signature from the Airy normal form. The dynamic extension (Sections~\ref{sec:cascade} and \ref{sec:airy}) is not needed for the pooling and separation results; it characterizes the asymptotic signature predicted by the model when unpriced zero-retaliation failures propagate, not an empirical identification claim.
@@ -168,12 +168,12 @@ where $\Delta_F^S$ is the ontological premium, $c_{\theta_F}(m_F)$ is the produc
 :=
 c_{\theta}(a)-\Delta_F^S .
 \]
-At the zero-retaliation boundary, $\Delta_F^S=\Delta_F$, so Assumption~\ref{ass:cheap-talk} implies $\operatorname{NetCost}_{\theta}(a)=-\Delta_F<0$ for both governance types.  The message is therefore not merely costless.  It is rent-generating.
+At the zero-retaliation boundary, we have $\Delta_F^S=\Delta_F$, so Assumption~\ref{ass:cheap-talk} implies $\operatorname{NetCost}_{\theta}(a)=-\Delta_F<0$ for both governance types. The message is therefore rent-generating.
 
 \textbf{Equilibrium Concept.} We employ Perfect Bayesian Equilibrium (PBE) \citep{kreps_wilson1982} supported by Farrell's neologism-proofness \citep{farrell1993}.
 
 \textbf{Assumptions.}
-\begin{assumption}[Profitable cheap-talk costs]
+\begin{assumption}[Cheap-talk costs]
 \label{ass:cheap-talk}
 $c_H(a)=c_H(p)=c_L(a)=c_L(p)=0$.
 \end{assumption}
@@ -380,7 +380,7 @@ Theorem~\ref{thm:audit-cost-separation} gives the local separation condition.
 The mechanism consequences---sanctionable inconsistency, audit requirements,
 and auditable records---are stated as
 Corollaries~\ref{cor:inconsistency-pruning}--\ref{cor:verification-feasibility}
-in Section~\ref{sec:mechanism} after introducing a common pricing notation for
+in Section~\ref{sec:mechanism} after introducing a common notation for
 the low-type arbitrage spread.  That notation is useful because the three
 interventions operate on different terms of the same net-payoff inequality.
 
@@ -456,7 +456,10 @@ The following lemma explicitly bridges the dynamic game update to the discrete s
 \label{lem:bridge-cascade}
 Suppose the cascade update $w_i^{t+1} - w_i^t$ is the sum of the autonomous multiplier decay $V_{h,i}\psi_{h,i}$ and the network pressure transfer $\sigma(\Delta_h\psi_h)_i$.
 \begin{enumerate}
-    \item \emph{Stationary Generation:} A stationary cascade equilibrium ($\psi_{h}^{t+1} = \psi_{h}^t$) requires the network transfer to perfectly balance the local multiplier field, naturally generating the discrete Sturm--Liouville equation $H_h\psi_h := -\sigma\Delta_h\psi_h + V_h\psi_h = 0$.
+    \item \emph{Stationary Generation:} A stationary cascade equilibrium ($\psi_{h}^{t+1} = \psi_{h}^t$) requires the network transfer to perfectly balance the local multiplier field, naturally generating the discrete Sturm--Liouville equation:
+    \[
+    H_h\psi_h := -\sigma\Delta_h\psi_h + V_h\psi_h = 0.
+    \]
     \item \emph{Near-Null Consistency:} In a quasi-static adjustment process where network friction or finite-time termination prevents perfect instantaneous settling, the adjustment residual $r_h = H_h\psi_h$ measures the unabsorbed pressure. The continuum bridge requires the additional mesh-consistency condition that these residuals become negligible at the continuum scale:
     \[
     \|H_h\psi_h\|_{H_h^{-1}}\to0
@@ -630,7 +633,7 @@ is necessary and sufficient for separation by audit intensity.
 \begin{corollary}[Sufficiency of sanctionable inconsistency for register pruning]
 \label{cor:inconsistency-pruning}
 For an inconsistent cross-channel register $q=(a,p)$, a
-sanctionable-inconsistency penalty prunes the register whenever
+penalty for sanctionable inconsistency prunes the register whenever
 \[
 \rho_R SI \ge \Delta_F^S.
 \]
@@ -669,10 +672,10 @@ incentive-compatible.
 
 \begin{table}[t]
 \centering
-\small
+\footnotesize
 \setlength{\tabcolsep}{3pt}
 \renewcommand{\arraystretch}{1.3}
-\begin{tabular}{@{}p{3.2cm}p{3.2cm}p{3.5cm}p{3.5cm}@{}}
+\begin{tabular}{@{}p{2.6cm}p{2.6cm}p{2.9cm}p{2.9cm}@{}}
 \toprule
 \textbf{Mechanism} & \textbf{Prices what?} & \textbf{Sufficient for} & \textbf{Necessary when} \\
 \midrule
@@ -893,7 +896,7 @@ made credible without a cost that excludes the low-governance type.
 
 This implication is narrower than principle-based AI ethics
 \citep{floridi2018ai4people,jobin2019global}.  Voluntary principles are
-messages in the profitable cheap-talk space unless they are tied to audits, records, or
+cheap-talk messages unless they are tied to audits, records, or
 sanctions.  Algorithmic-accountability proposals identify the opacity problem
 \citep{pasquale2015}; the model here states the single-crossing condition under
 which transparency instruments become type-separating.  The Isabelle/HOL
@@ -916,50 +919,50 @@ This paper identifies a prior obstruction to common-knowledge formation.  When t
 \emph{The mechanism is cost imposition, not dignity.} Sanctionable inconsistency, third-party audit requirements, and auditable records are interventions that transform profitable cheap talk into costly signaling. Their equilibrium effect is to make it expensive for firms to describe AI systems as companions, agents, or safety-critical partners without substantiation. The \hyperref[app:isabelle]{Isabelle/HOL appendix} mechanizes the same pruning logic: inconsistent and all-agentic registers are excluded under their respective parameter conditions, while audited agentic claims survive only when verification satisfies the audit condition. Regulation achieves separation not by presuming voluntary disclosure, but by changing the payoff structure that determines what firms rationally say.
 \end{sloppypar}
 
-\appendix
-\input{appendix_discrete_cascade_to_airy}
-
-\section{Mechanized Verification (Isabelle/HOL)}
-\label{app:isabelle}
-
-This appendix outlines the formal verification of the signaling game equilibria and mechanism design results using the Isabelle/HOL proof assistant. The complete source code is available in the \texttt{isabelleHOL/} directory across three theory files: \texttt{Ontological\_\allowbreak{}Arbitrage.thy}, \texttt{Sanctionable\_\allowbreak{}Inconsistency.thy}, and \texttt{Auditable\_\allowbreak{}Records.thy}.
-
-\subsection*{Equilibrium Verification}
-
-We formalize the game-theoretic structure by defining explicit ex-post payoffs for the three players (Firm, User, and Regulator) and computing firm-side expected payoffs via an abstract probability mass function over downstream state combinations. The PBE predicate verifies \emph{on-path} sequential rationality and Bayes consistency; off-path beliefs are fixed by assumption rather than derived from a full sequential equilibrium construction. Under these definitions, we prove the existence of the Perfect Bayesian Equilibria (PBE) for both game variants:
-\begin{itemize}\sloppy
-    \item \textbf{Theorem \texttt{proposition\_\allowbreak{}1\_\allowbreak{}cheap\_\allowbreak{}talk\_\allowbreak{}pooling\_\allowbreak{}pbe}} formalizes the cheap-talk pooling equilibrium where both high- and low-governance firms pool on the anthropomorphic message, and receivers play their prior-based best responses (Invest and Abstain, respectively).
-    \item \textbf{Locales \texttt{subject\_\allowbreak{}retaliation\_\allowbreak{}base\_\allowbreak{}game} and \texttt{subject\_\allowbreak{}retaliation\_\allowbreak{}game}} formalize the subject-retaliation refinement. Theorems \texttt{positive\_\allowbreak{}subject\_\allowbreak{}retaliation\_\allowbreak{}bounded\_\allowbreak{}pooling} and \texttt{zero\_\allowbreak{}subject\_\allowbreak{}retaliation\_\allowbreak{}unconstrained\_\allowbreak{}pooling} show respectively that positive credible threat capacity discounts the arbitrage premium, while the AI limiting case $\rho_S=0$ leaves pooling unconstrained by subject retaliation. The Farrell-style neologism module proves \texttt{zero\_\allowbreak{}retaliation\_\allowbreak{}no\_\allowbreak{}high\_\allowbreak{}claim\_\allowbreak{}neologism} and \texttt{zero\_\allowbreak{}retaliation\_\allowbreak{}neologism\_\allowbreak{}absorbing} using an explicit continuation-quantified credibility definition: at $\rho_S=0$, any nontrivial type claim is either perfectly shadowable by the low-governance type (in any continuation where the high type strictly gains) or yields no strict gain, so no credible neologism exists.
-    \item \textbf{Theorem \texttt{proposition\_\allowbreak{}1\_\allowbreak{}separating\_\allowbreak{}pbe}} formalizes the audit-trail separating equilibrium supported by the single-crossing audit cost structure. High-governance firms separate by incurring the audit trail cost, while low-governance firms find mimicry unprofitable and choose the deflationary message.
-\end{itemize}
-
-\subsection*{Mechanism Design Verification}
-
-The three mechanism proposals from Section~\ref{sec:mechanism} are each backed by formal theorems:
-\begin{itemize}\sloppy
-    \item \textbf{Sanctionable Inconsistency} (\texttt{Sanctionable\_\allowbreak{}Inconsistency.thy}):
-      \begin{itemize}
-        \item \texttt{inconsistent\_\allowbreak{}register\_\allowbreak{}not\_\allowbreak{}best\_\allowbreak{}response}: an inconsistent claim register (anthropomorphic user-facing, deflationary liability-facing) is not a best response when the expected sanction exceeds the ontological premium.
-        \item \texttt{all\_\allowbreak{}agentic\_\allowbreak{}register\_\allowbreak{}not\_\allowbreak{}best\_\allowbreak{}response}: an all-agentic register (anthropomorphic on all user- and liability-facing channels) is not a best response when it incurs a positive liability-facing commitment cost.
-        \item \texttt{inconsistent\_\allowbreak{}on\_\allowbreak{}path\_\allowbreak{}not\_\allowbreak{}register\_\allowbreak{}pbe}, \texttt{all\_\allowbreak{}agentic\_\allowbreak{}on\_\allowbreak{}path\_\allowbreak{}not\_\allowbreak{}register\_\allowbreak{}pbe}, and \texttt{arbitrage\_\allowbreak{}on\_\allowbreak{}path\_\allowbreak{}not\_\allowbreak{}register\_\allowbreak{}pbe}: bridge theorems showing that these register types cannot be supported in any Perfect Bayesian Equilibrium (\texttt{register\_\allowbreak{}is\_\allowbreak{}pbe}).
-      \end{itemize}
-    \item \textbf{Costly Signaling} (\texttt{Ontological\_\allowbreak{}Arbitrage.thy}):
-      \begin{itemize}
-        \item \texttt{opacity\_\allowbreak{}blocks\_\allowbreak{}signaling}: when the system-opacity penalty exceeds the net benefit of signaling for the high-governance type, even truthful separation is blocked.
-        \item \texttt{high\_\allowbreak{}governance\_\allowbreak{}low\_\allowbreak{}opacity\_\allowbreak{}can\_\allowbreak{}signal} and \texttt{low\_\allowbreak{}governance\_\allowbreak{}cannot\_\allowbreak{}mimic}: the single-crossing conditions that support the separating equilibrium.
-      \end{itemize}
-    \item \textbf{Auditable Records} (\texttt{Auditable\_\allowbreak{}Records.thy}):
-      \begin{itemize}
-        \item \texttt{active\_\allowbreak{}intervention\_\allowbreak{}rational\_\allowbreak{}under\_\allowbreak{}auditable\_\allowbreak{}records}: when record-keeping reduces the regulator's verification cost, inspection becomes a best response under the pooling belief.
-        \item \texttt{abstain\_\allowbreak{}not\_\allowbreak{}best\_\allowbreak{}response\_\allowbreak{}under\_\allowbreak{}auditable\_\allowbreak{}records}: abstention ceases to be a best response under the same conditions.
-      \end{itemize}
-\end{itemize}
-
-\subsection*{Limitations of the Formalization}
-
-The formalization explicitly defines a finite Markov state space (\texttt{markov\_\allowbreak{}state}) modeling the stage, private types, public history, and actions, alongside a transition kernel signature (\texttt{transition\_\allowbreak{}kernel}). To keep the downstream proofs tractable, the equilibrium analysis operates on a reduced-form projection of this state space (\texttt{payoff\_\allowbreak{}state}) comprising the user type, public signal, and regulator type, evaluated via an induced probability mass function (\texttt{pmf}). The locale assumptions (e.g., strict parameter inequalities for the pooling and separating regions) are sufficient conditions that define the parameter regimes of interest but are not shown to be necessary. The Bayes consistency predicate is restricted to on-path information sets; off-path beliefs are stipulated rather than derived from trembling-hand or structural consistency arguments. These choices keep the Isabelle development tractable while covering the equilibrium claims made in the paper body.
-
-All theorems, definitions, and supporting lemmas within each locale are fully checked by Isabelle/HOL without any unresolved proof obligations. The locale assumptions listed above are the only hypotheses under which the results hold.
+% \appendix
+% \input{retaliation_appendix}
+% 
+% \section{Mechanized Verification (Isabelle/HOL)}
+% \label{app:isabelle}
+% 
+% This appendix outlines the formal verification of the signaling game equilibria and mechanism design results using the Isabelle/HOL proof assistant. The complete source code is available in the \texttt{isabelleHOL/} directory across three theory files: \texttt{Ontological\_\allowbreak{}Arbitrage.thy}, \texttt{Sanctionable\_\allowbreak{}Inconsistency.thy}, and \texttt{Auditable\_\allowbreak{}Records.thy}.
+% 
+% \subsection*{Equilibrium Verification}
+% 
+% We formalize the game-theoretic structure by defining explicit ex-post payoffs for the three players (Firm, User, and Regulator) and computing firm-side expected payoffs via an abstract probability mass function over downstream state combinations. The PBE predicate verifies \emph{on-path} sequential rationality and Bayes consistency; off-path beliefs are fixed by assumption rather than derived from a full sequential equilibrium construction. Under these definitions, we prove the existence of the Perfect Bayesian Equilibria (PBE) for both game variants:
+% \begin{itemize}\sloppy
+%     \item \textbf{Theorem \texttt{proposition\_\allowbreak{}1\_\allowbreak{}cheap\_\allowbreak{}talk\_\allowbreak{}pooling\_\allowbreak{}pbe}} formalizes the cheap-talk pooling equilibrium where both high- and low-governance firms pool on the anthropomorphic message, and receivers play their prior-based best responses (Invest and Abstain, respectively).
+%     \item \textbf{Locales \texttt{subject\_\allowbreak{}retaliation\_\allowbreak{}base\_\allowbreak{}game} and \texttt{subject\_\allowbreak{}retaliation\_\allowbreak{}game}} formalize the subject-retaliation refinement. Theorems \texttt{positive\_\allowbreak{}subject\_\allowbreak{}retaliation\_\allowbreak{}bounded\_\allowbreak{}pooling} and \texttt{zero\_\allowbreak{}subject\_\allowbreak{}retaliation\_\allowbreak{}unconstrained\_\allowbreak{}pooling} show respectively that positive credible threat capacity discounts the arbitrage premium, while the AI limiting case $\rho_S=0$ leaves pooling unconstrained by subject retaliation. The Farrell-style neologism module proves \texttt{zero\_\allowbreak{}retaliation\_\allowbreak{}no\_\allowbreak{}high\_\allowbreak{}claim\_\allowbreak{}neologism} and \texttt{zero\_\allowbreak{}retaliation\_\allowbreak{}neologism\_\allowbreak{}absorbing} using an explicit continuation-quantified credibility definition: at $\rho_S=0$, any nontrivial type claim is either perfectly shadowable by the low-governance type (in any continuation where the high type strictly gains) or yields no strict gain, so no credible neologism exists.
+%     \item \textbf{Theorem \texttt{proposition\_\allowbreak{}1\_\allowbreak{}separating\_\allowbreak{}pbe}} formalizes the audit-trail separating equilibrium supported by the single-crossing audit cost structure. High-governance firms separate by incurring the audit trail cost, while low-governance firms find mimicry unprofitable and choose the deflationary message.
+% \end{itemize}
+% 
+% \subsection*{Mechanism Design Verification}
+% 
+% The three mechanism proposals from Section~\ref{sec:mechanism} are each backed by formal theorems:
+% \begin{itemize}\sloppy
+%     \item \textbf{Sanctionable Inconsistency} (\texttt{Sanctionable\_\allowbreak{}Inconsistency.thy}):
+%       \begin{itemize}
+%         \item \texttt{inconsistent\_\allowbreak{}register\_\allowbreak{}not\_\allowbreak{}best\_\allowbreak{}response}: an inconsistent claim register (anthropomorphic user-facing, deflationary liability-facing) is not a best response when the expected sanction exceeds the ontological premium.
+%         \item \texttt{all\_\allowbreak{}agentic\_\allowbreak{}register\_\allowbreak{}not\_\allowbreak{}best\_\allowbreak{}response}: an all-agentic register (anthropomorphic on all user- and liability-facing channels) is not a best response when it incurs a positive liability-facing commitment cost.
+%         \item \texttt{inconsistent\_\allowbreak{}on\_\allowbreak{}path\_\allowbreak{}not\_\allowbreak{}register\_\allowbreak{}pbe}, \texttt{all\_\allowbreak{}agentic\_\allowbreak{}on\_\allowbreak{}path\_\allowbreak{}not\_\allowbreak{}register\_\allowbreak{}pbe}, and \texttt{arbitrage\_\allowbreak{}on\_\allowbreak{}path\_\allowbreak{}not\_\allowbreak{}register\_\allowbreak{}pbe}: bridge theorems showing that these register types cannot be supported in any Perfect Bayesian Equilibrium (\texttt{register\_\allowbreak{}is\_\allowbreak{}pbe}).
+%       \end{itemize}
+%     \item \textbf{Costly Signaling} (\texttt{Ontological\_\allowbreak{}Arbitrage.thy}):
+%       \begin{itemize}
+%         \item \texttt{opacity\_\allowbreak{}blocks\_\allowbreak{}signaling}: when the system-opacity penalty exceeds the net benefit of signaling for the high-governance type, even truthful separation is blocked.
+%         \item \texttt{high\_\allowbreak{}governance\_\allowbreak{}low\_\allowbreak{}opacity\_\allowbreak{}can\_\allowbreak{}signal} and \texttt{low\_\allowbreak{}governance\_\allowbreak{}cannot\_\allowbreak{}mimic}: the single-crossing conditions that support the separating equilibrium.
+%       \end{itemize}
+%     \item \textbf{Auditable Records} (\texttt{Auditable\_\allowbreak{}Records.thy}):
+%       \begin{itemize}
+%         \item \texttt{active\_\allowbreak{}intervention\_\allowbreak{}rational\_\allowbreak{}under\_\allowbreak{}auditable\_\allowbreak{}records}: when record-keeping reduces the regulator's verification cost, inspection becomes a best response under the pooling belief.
+%         \item \texttt{abstain\_\allowbreak{}not\_\allowbreak{}best\_\allowbreak{}response\_\allowbreak{}under\_\allowbreak{}auditable\_\allowbreak{}records}: abstention ceases to be a best response under the same conditions.
+%       \end{itemize}
+% \end{itemize}
+% 
+% \subsection*{Limitations of the Formalization}
+% 
+% The formalization explicitly defines a finite Markov state space (\texttt{markov\_\allowbreak{}state}) modeling the stage, private types, public history, and actions, alongside a transition kernel signature (\texttt{transition\_\allowbreak{}kernel}). To keep the downstream proofs tractable, the equilibrium analysis operates on a reduced-form projection of this state space (\texttt{payoff\_\allowbreak{}state}) comprising the user type, public signal, and regulator type, evaluated via an induced probability mass function (\texttt{pmf}). The locale assumptions (e.g., strict parameter inequalities for the pooling and separating regions) are sufficient conditions that define the parameter regimes of interest but are not shown to be necessary. The Bayes consistency predicate is restricted to on-path information sets; off-path beliefs are stipulated rather than derived from trembling-hand or structural consistency arguments. These choices keep the Isabelle development tractable while covering the equilibrium claims made in the paper body.
+% 
+% All theorems, definitions, and supporting lemmas within each locale are fully checked by Isabelle/HOL without any unresolved proof obligations. The locale assumptions listed above are the only hypotheses under which the results hold.
 
 \bibliographystyle{elsarticle-harv}
 \bibliography{retaliation}
